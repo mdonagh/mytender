@@ -5,6 +5,7 @@ import {
   Text,
   Dimensions,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 
 import MapView, {Marker} from 'react-native-maps';
@@ -37,11 +38,42 @@ function kMToLongitudes(km, atLatitude) {
 }
 
 const ASPECT_RATIO = width / height;
-const LATITUDE = 47.61105551203619;
-const LONGITUDE = -122.19606607828442;
+const LATITUDE = 32.71146432849882;
+const LONGITUDE = -117.15467612584527;
 const LATITUDE_DELTA = 0.0000001;
 const LONGITUDE_DELTA = kMToLongitudes(1.0, 47.61105551203619);
 let id = 0;
+
+const markerStyles = StyleSheet.create({
+  container: {
+    paddingTop: 50,
+  },
+  stretch: {
+    width: 50,
+    height: 200,
+    resizeMode: 'stretch',
+  },
+});
+
+class MarkerDisplay extends React.Component{
+render(){
+return(
+  <Marker
+    title="Woof"
+    key="WOof"
+    coordinate={{latitude: 32.71146432849884, longitude: -117.15467612584527}}
+  >
+    <View style={{padding: 10}}>
+      <Image
+        style={markerStyles.stretch}
+        source={{uri: 'https://reactjs.org/logo-og.png'}}
+      />
+      <Text>SF</Text>
+    </View>
+  </Marker>
+  );
+}
+}
 
 class MyMap extends React.Component{
   constructor(props: any) {
@@ -66,11 +98,12 @@ class MyMap extends React.Component{
           style={styles.map}
           initialRegion={this.state.region}
           >
-          <Marker
-              title="Woof"
-              key="WOof"
-              coordinate={{latitude: 47.61037746816593, longitude: -122.19574457168427}}
-            />
+          <MarkerDisplay/>
+          {/* <Marker */}
+          {/*     title="Woof" */}
+          {/*     key="WOof" */}
+          {/*     coordinate={{latitude: 32.71146432849882, longitude: -117.15467612584527}} */}
+          {/*   /> */}
         </MapView>
       </View>
     );
