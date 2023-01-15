@@ -5,19 +5,19 @@ const Login = () => {
   const [email, onChangeEmail] = React.useState('hello@bartender.com');
   const [password, onChangePassword] = React.useState('');
 
-  const [number, onChangeNumber] = React.useState('');
-
   return (
     <SafeAreaView>
       <TextInput
         style={styles.input}
         onChangeText={onChangeText}
+        placeholder="email"
         value={email}
       />
 
       <TextInput
         style={styles.input}
         onChangeText={onChangePassword}
+        placeholder="password"
         value={password}
       />
       <Button
