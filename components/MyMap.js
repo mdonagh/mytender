@@ -50,25 +50,42 @@ const markerStyles = StyleSheet.create({
   },
   stretch: {
     width: 50,
-    height: 200,
+    height: 50,
     resizeMode: 'stretch',
+    borderRadius: 40,
+          zIndex: 3, // works on ios
+        elevation: 3, // works on android
+      backgroundColor: 'green',
+      flex: 2,
+
   },
+
+triangle: {
+  height: 30,
+  width: 30,
+  zIndex: 99,
+  elevation: -1,
+  marginTop: -5,
+  marginRight: -60,
+  backgroundColor: 'blue',
+  flex: 1,
+},
 });
 
 class MarkerDisplay extends React.Component{
 render(){
 return(
   <Marker
-    title="Woof"
-    key="WOof"
+    title="Tender"
+    key="Tender"
     coordinate={{latitude: 32.71146432849884, longitude: -117.15467612584527}}
+    style={{ backgroundColor: 'red'}}
   >
-    <View style={{padding: 10}}>
+  <View style={{ height: 50, width: 50}} >
       <Image
         style={markerStyles.stretch}
-        source={{uri: 'https://reactjs.org/logo-og.png'}}
+        source={{uri: 'https://avatars.githubusercontent.com/u/7103655?v=4'}}
       />
-      <Text>SF</Text>
     </View>
   </Marker>
   );
@@ -99,11 +116,6 @@ class MyMap extends React.Component{
           initialRegion={this.state.region}
           >
           <MarkerDisplay/>
-          {/* <Marker */}
-          {/*     title="Woof" */}
-          {/*     key="WOof" */}
-          {/*     coordinate={{latitude: 32.71146432849882, longitude: -117.15467612584527}} */}
-          {/*   /> */}
         </MapView>
       </View>
     );
@@ -118,27 +130,6 @@ const styles = StyleSheet.create({
   },
   map: {
     ...StyleSheet.absoluteFillObject,
-  },
-  bubble: {
-    backgroundColor: 'rgba(255,255,255,0.7)',
-    paddingHorizontal: 18,
-    paddingVertical: 12,
-    borderRadius: 20,
-  },
-  latlng: {
-    width: 200,
-    alignItems: 'stretch',
-  },
-  button: {
-    width: 80,
-    paddingHorizontal: 12,
-    alignItems: 'center',
-    marginHorizontal: 10,
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    marginVertical: 20,
-    backgroundColor: 'transparent',
   },
 });
 
