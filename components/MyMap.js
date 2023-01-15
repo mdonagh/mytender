@@ -8,7 +8,7 @@ import {
   Image,
 } from 'react-native';
 
-import MapView, {Marker} from 'react-native-maps';
+import MapView, {Marker, Callout} from 'react-native-maps';
 // @ts-ignore
 
 const {width, height} = Dimensions.get('window');
@@ -41,7 +41,7 @@ const ASPECT_RATIO = width / height;
 const LATITUDE = 32.71146432849882;
 const LONGITUDE = -117.15467612584527;
 const LATITUDE_DELTA = 0.0000001;
-const LONGITUDE_DELTA = kMToLongitudes(1.0, 47.61105551203619);
+const LONGITUDE_DELTA = kMToLongitudes(1.5, 47.61105551203619);
 let id = 0;
 
 const markerStyles = StyleSheet.create({
@@ -73,13 +73,17 @@ triangle: {
 });
 
 class MarkerDisplay extends React.Component{
+  constructor(props) {
+    console.log(props)
+    super(props);
+  }
+
 render(){
 return(
   <Marker
-    title="Tender"
     key="Tender"
     coordinate={{latitude: 32.71146432849884, longitude: -117.15467612584527}}
-    style={{ backgroundColor: 'red'}}
+    onPress={() => this.props.navigation.navigate('Details')}
   >
   <View style={{ height: 50, width: 50}} >
       <Image
@@ -93,7 +97,7 @@ return(
 }
 
 class MyMap extends React.Component{
-  constructor(props: any) {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -115,7 +119,7 @@ class MyMap extends React.Component{
           style={styles.map}
           initialRegion={this.state.region}
           >
-          <MarkerDisplay/>
+          <MarkerDisplay navigation={this.props.navigation} />
         </MapView>
       </View>
     );
