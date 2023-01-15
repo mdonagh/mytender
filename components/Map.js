@@ -53,23 +53,7 @@ const markerStyles = StyleSheet.create({
     height: 50,
     resizeMode: 'stretch',
     borderRadius: 40,
-          zIndex: 3, // works on ios
-        elevation: 3, // works on android
-      backgroundColor: 'green',
-      flex: 2,
-
   },
-
-triangle: {
-  height: 30,
-  width: 30,
-  zIndex: 99,
-  elevation: -1,
-  marginTop: -5,
-  marginRight: -60,
-  backgroundColor: 'blue',
-  flex: 1,
-},
 });
 
 class MarkerDisplay extends React.Component{
@@ -83,7 +67,7 @@ return(
   <Marker
     key="Tender"
     coordinate={{latitude: 32.71146432849884, longitude: -117.15467612584527}}
-    onPress={() => this.props.navigation.navigate('Details')}
+    onPress={() => this.props.navigation.navigate('ShowBartender')}
   >
   <View style={{ height: 50, width: 50}} >
       <Image
@@ -96,7 +80,7 @@ return(
 }
 }
 
-class MyMap extends React.Component{
+class ShowMap extends React.Component{
   constructor(props) {
     super(props);
 
@@ -137,4 +121,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MyMap;
+export default ShowMap;
