@@ -1,15 +1,16 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet, TextInput, Button} from 'react-native';
 
-const Login = () => {
-  const [email, onChangeEmail] = React.useState('hello@bartender.com');
+const Login = (props) => {
+  console.log(props)
+  const [email, onChangeEmail] = React.useState('');
   const [password, onChangePassword] = React.useState('');
 
   return (
     <SafeAreaView>
       <TextInput
         style={styles.input}
-        onChangeText={onChangeText}
+        onChangeText={onChangeEmail}
         placeholder="email"
         value={email}
       />
@@ -17,12 +18,13 @@ const Login = () => {
       <TextInput
         style={styles.input}
         onChangeText={onChangePassword}
+        secureTextEntry={true}
         placeholder="password"
         value={password}
       />
       <Button
         title="Login"
-        onPress={() => navigation.navigate('Map')}
+        onPress={() => props.navigation.navigate('Map')}
       />
     </SafeAreaView>
   );
