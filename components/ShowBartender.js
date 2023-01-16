@@ -28,18 +28,18 @@ function ShowBartender() {
                       fontWeight: 'bold',
                     }}
       >
-        Bridget
+        Bridget DeLandi
       </Text>
       <Text style={{ flex: 1,
                       alignItems: 'center',
                       justifyContent: 'center',
                       borderBottomColor: 'black',
                       borderBottomWidth: StyleSheet.hairlineWidth, 
-                      fontSize: 14,
+                      fontSize: 18,
                       fontWeight: 'bold',
                     }}
       >
-        Noble Experiment
+        My name is Bridget and this is a bio I composed for my followers on MyTender!
       </Text>
       <Text style={{ flex: 1,
                       alignItems: 'center',
