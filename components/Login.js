@@ -3,6 +3,7 @@ import {SafeAreaView, StyleSheet, TextInput, Button} from 'react-native';
 
 const Login = (props) => {
   console.log(props)
+  console.log(props.selected)
   const [email, onChangeEmail] = React.useState('');
   const [password, onChangePassword] = React.useState('');
 

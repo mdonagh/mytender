@@ -1,12 +1,22 @@
+import React, { useState } from 'react'
+
 import { View,
          Text,
          Image,
          StyleSheet,
-         Dimensions} from "react-native";
+         Dimensions,
+         Button,
+         Pressable,
+       } from "react-native";
+
+import Content from './bartender/Content.js'
 
 function ShowBartender() {
 
   const {width, height} = Dimensions.get('window');
+
+  const [selected, setSelected] = useState('description')
+  const [liked, setLiked] = useState(false)
 
   const styles = StyleSheet.create({
     image: {
@@ -34,52 +44,24 @@ function ShowBartender() {
                      flexWrap: 'wrap',
                      padding: 10
                     }}>
-        <View style={{flex: 1}}>
-          <Image source={require('../assets/question-mark.png')} style={styles.image} />
-        </View>
-        <View style={{flex: 1}}>
+        <Pressable style={{flex: 1}} onPress={() => setSelected('description')}>
+          <Image source={require('../assets/question-mark.png')} style={styles.image}  />
+        </Pressable>
+        <Pressable style={{flex: 1}} onPress={() => setLiked('payment')}>
           <Image source={require('../assets/money.png')} style={styles.image}  />
-        </View>
-        <View style={{flex: 1}}>
+        </Pressable>
+        <Pressable style={{flex: 1}} onPress={() => setLiked(!liked)}>
+        {liked ? 
           <Image source={require('../assets/full-heart.png')} style={styles.image}  />
-        </View>
-        <View style={{flex: 1}}>
+          :
+          <Image source={require('../assets/empty-heart.png')} style={styles.image}  />
+        }
+        </Pressable>
+        <Pressable style={{flex: 1}} onPress={() => setSelected('rideshare')}>
           <Image source={require('../assets/taxi.png')} style={styles.image}  />
-        </View>
+        </Pressable>
       </View>
-      <Text style={{ flex: 1,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      borderBottomColor: 'black',
-                      borderBottomWidth: StyleSheet.hairlineWidth, 
-                      fontSize: 20,
-                      fontWeight: 'bold',
-                      padding: 20
-                    }}
-      >
-        Bridget
-      </Text>
-      <Text style={{ flex: 3,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      borderBottomColor: 'black',
-                      borderBottomWidth: StyleSheet.hairlineWidth, 
-                      fontSize: 14,
-                      fontWeight: 'bold',
-                    }}
-      >
-        Noble Experiment
-      </Text>
-      <Text style={{ flex: 3,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      borderBottomColor: 'black',
-                      borderBottomWidth: StyleSheet.hairlineWidth, 
-                      fontWeight: 'bold',
-                    }}
-      >
-        Half off hot wings!
-      </Text>
+      <Content selected={selected} />
     </View>
   );
 }
