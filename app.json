@@ -4,10 +4,10 @@
     "slug": "mytender",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/martini.png",
+    "icon": "./assets/martini.jpg",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/martini.jpg",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

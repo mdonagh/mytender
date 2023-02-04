@@ -4,9 +4,11 @@ import {
   View,
   Text,
   Dimensions,
-  TouchableOpacity,
   Image,
+  Pressable
 } from 'react-native';
+
+import Martini from '../assets/martini.jpg'
 
 import MapView, {Marker, Callout} from 'react-native-maps';
 // @ts-ignore
@@ -105,12 +107,26 @@ class ShowMap extends React.Component{
           >
           <MarkerDisplay navigation={this.props.navigation} />
         </MapView>
+        <Pressable 
+          style={{alignSelf: 'flex-start'}}
+          onPress={() => this.props.navigation.navigate('Menu')}
+        >
+        <Image
+          source={Martini}
+          style={styles.image}
+        />
+        </Pressable>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  image: {
+    width: 64,
+    height: 64,
+    margin: 20,
+  },
   container: {
     ...StyleSheet.absoluteFillObject,
     justifyContent: 'flex-end',
