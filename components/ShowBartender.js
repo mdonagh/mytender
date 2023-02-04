@@ -47,7 +47,7 @@ function ShowBartender() {
         <Pressable style={{flex: 1}} onPress={() => setSelected('description')}>
           <Image source={require('../assets/question-mark.png')} style={styles.image}  />
         </Pressable>
-        <Pressable style={{flex: 1}} onPress={() => setLiked('payment')}>
+        <Pressable style={{flex: 1}} onPress={() => setSelected('payment')}>
           <Image source={require('../assets/money.png')} style={styles.image}  />
         </Pressable>
         <Pressable style={{flex: 1}} onPress={() => setLiked(!liked)}>
