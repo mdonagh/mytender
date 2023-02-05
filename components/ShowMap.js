@@ -8,6 +8,8 @@ import {
   Pressable
 } from 'react-native';
 
+import { Avatar } from '@rneui/themed';
+
 import Martini from '../assets/martini.jpg'
 
 import MapView, {Marker, Callout} from 'react-native-maps';
@@ -111,8 +113,9 @@ class ShowMap extends React.Component{
           onPress={() => this.props.navigation.navigate('Menu')}
         >
         <Image
+          rounded
           source={Martini}
-          style={styles.image}
+          style={styles.martini}
         />
         </Pressable>
       </View>
@@ -121,11 +124,6 @@ class ShowMap extends React.Component{
 }
 
 const styles = StyleSheet.create({
-  image: {
-    width: 64,
-    height: 64,
-    margin: 20,
-  },
   container: {
     ...StyleSheet.absoluteFillObject,
     justifyContent: 'flex-end',
@@ -133,6 +131,13 @@ const styles = StyleSheet.create({
   },
   map: {
     ...StyleSheet.absoluteFillObject,
+  },
+  martini: {
+    resizeMode: 'stretch',
+    borderRadius: 40,
+    width: 64,
+    height: 64,
+    margin: 20,
   },
 });
 
