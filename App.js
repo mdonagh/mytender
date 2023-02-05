@@ -15,10 +15,10 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="ShowBartender" component={ShowBartender} />
+        <Stack.Screen name="Show Bartender" component={ShowBartender} />
         <Stack.Screen name="Menu" component={Menu} />
         <Stack.Screen name="Schedule" component={Schedule} />
-        <Stack.Screen name="ListBartender" component={ListBartender} />
+        <Stack.Screen name="List Bartenders" component={ListBartender} />
         <Stack.Screen
           name="Map" 
           options={{headerBackVisible:false }}

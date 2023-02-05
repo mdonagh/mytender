@@ -67,18 +67,32 @@ class MarkerDisplay extends React.Component{
 
 render(){
 return(
+  <>
   <Marker
     key="Tender"
     coordinate={{latitude: 32.71146432849884, longitude: -117.15467612584527}}
-    onPress={() => this.props.navigation.navigate('ShowBartender')}
+    onPress={() => this.props.navigation.navigate('Show Bartender')}
   >
-  <View style={{ height: 50, width: 50}} >
+  <View style={{ height: 64, width: 64}} >
       <Image
         style={markerStyles.stretch}
         source={{uri: 'https://avatars.githubusercontent.com/u/7103655?v=4'}}
       />
     </View>
   </Marker>
+  <Marker
+    key="Tender2"
+    coordinate={{latitude: 32.70756699800065, longitude: -117.15705293106377}}
+    onPress={() => this.props.navigation.navigate('Show Bartender')}
+  >
+  <View style={{ height: 64, width: 64}} >
+      <Image
+        style={markerStyles.stretch}
+        source={{uri: 'https://randomuser.me/api/portraits/men/30.jpg'}}
+      />
+    </View>
+  </Marker>
+  </>
   );
 }
 }
@@ -135,8 +149,8 @@ const styles = StyleSheet.create({
   martini: {
     resizeMode: 'stretch',
     borderRadius: 40,
-    width: 64,
-    height: 64,
+    width: 70,
+    height: 70,
     margin: 20,
   },
 });
