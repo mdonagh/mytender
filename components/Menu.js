@@ -1,73 +1,41 @@
-import React, { useState } from 'react'
+import React from 'react';
 
-import { View,
-         Text,
-         Image,
-         StyleSheet,
-         Dimensions,
-         Button,
+import { 
          Pressable,
        } from "react-native";
 
+import { ListItem } from '@rneui/themed';
 
-function Menu() {
-  const {width, height} = Dimensions.get('window');
+class Menu extends React.Component{
+  constructor(props) {
+    super(props);
+  }
 
-  const styles = StyleSheet.create({
-    image: {
-        flex: 1,
-        width: null,
-        height: null,
-        resizeMode: 'contain'
-    },
-  });
-
-  return (
-  <View style={{ flex: 1,
-                 alignItems: 'center',
-                 justifyContent: 'flex-start',
-                 flexDirection: 'row',
-                 flexWrap: 'wrap',
-                 padding: 10
-                }}>
-    <View style={{flex: 6}}>
-      <Text style={{ flex: 1,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      borderBottomColor: 'black',
-                      borderBottomWidth: StyleSheet.hairlineWidth, 
-                      fontSize: 20,
-                      fontWeight: 'bold',
-                      padding: 20
-                    }}
-      >
-        ON MENU
-      </Text>
-        
-      <Text style={{ flex: 3,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      borderBottomColor: 'black',
-                      borderBottomWidth: StyleSheet.hairlineWidth, 
-                      fontSize: 14,
-                      fontWeight: 'bold',
-                    }}
-      >
-         ON MENU
-      </Text>
-      <Text style={{ flex: 3,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      borderBottomColor: 'black',
-                      borderBottomWidth: StyleSheet.hairlineWidth, 
-                      fontWeight: 'bold',
-                    }}
-      >
-         ON MENU
-      </Text>
-      </View>
-    </View>
-  );
+  render() {
+    return (
+    <>
+      <ListItem bottomDivider>
+        <ListItem.Content>
+          <Pressable onPress={() => this.props.navigation.navigate('Schedule')} >
+          <ListItem.Title>Share Work Schedule</ListItem.Title>
+        </Pressable>
+        </ListItem.Content>
+      </ListItem>
+      <ListItem bottomDivider>
+        <ListItem.Content>
+          <Pressable onPress={() => this.props.navigation.navigate('ListBartender')} >
+            <ListItem.Title>List Nearby Bartenders</ListItem.Title>
+          </Pressable>
+        </ListItem.Content>
+      </ListItem>
+      <ListItem>
+        <ListItem.Content>
+          <ListItem.Title>Edit Profile</ListItem.Title>
+        </ListItem.Content>
+      </ListItem>
+    </>
+    );
+}
 }
 
 export default Menu;

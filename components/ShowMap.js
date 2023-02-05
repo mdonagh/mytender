@@ -60,7 +60,6 @@ const markerStyles = StyleSheet.create({
 
 class MarkerDisplay extends React.Component{
   constructor(props) {
-    console.log(props)
     super(props);
   }
 
