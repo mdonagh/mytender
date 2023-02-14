@@ -35,7 +35,7 @@ function ShowBartender() {
                       borderBottomColor: 'black',
                       borderBottomWidth: StyleSheet.hairlineWidth, 
                       width: width }}
-        source={{uri: 'https://i1.wp.com/www.curiositymag.com/wp-content/uploads/2019/03/Maria-Varamo_Curiosity-1.jpeg'}}
+        source={require('../assets/bartender.jpeg')}
       />
       <View style={{ flex: 1,
                      alignItems: 'center',
