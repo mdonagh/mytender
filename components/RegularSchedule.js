@@ -1,28 +1,35 @@
 import React, { useState } from "react";
-import { View, Picker, StyleSheet } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
+import {Picker} from '@react-native-picker/picker';
 
 const RegularSchedule = () => {
-  const [selectedValue, setSelectedValue] = useState("java");
+const [selectedDay, setSelectedDay] = useState();
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      paddingTop: 40,
+      alignItems: "center"
+    }
+  });
+
   return (
-    <View style={styles.container}>
+    <View>
       <Picker
-        selectedValue={selectedValue}
-        style={{ height: 50, width: 150 }}
-        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-      >
-        <Picker.Item label="Java" value="java" />
-        <Picker.Item label="JavaScript" value="js" />
+        selectedValue={selectedDay}
+        onValueChange={(itemValue, itemIndex) =>
+          setSelectedDay(itemValue)
+        }>
+        <Picker.Item label="Sunday" value="sunday" />
+        <Picker.Item label="Monday" value="monday" />
+        <Picker.Item label="Tuesday" value="tuesday" />
+        <Picker.Item label="Wednesday" value="wednesday" />
+        <Picker.Item label="Thursday" value="thursday" />
+        <Picker.Item label="Friday" value="friday" />
+        <Picker.Item label="Saturday" value="saturday" />
       </Picker>
     </View>
   )
 }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     paddingTop: 40,
-//     alignItems: "center"
-//   }
-// });
 
 export default RegularSchedule;
