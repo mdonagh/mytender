@@ -1,41 +1,28 @@
-import React from 'react';
-import {SafeAreaView, StyleSheet, TextInput, Button} from 'react-native';
+import React, { useState } from "react";
+import { View, Picker, StyleSheet } from "react-native";
 
-const RegularSchedule = (props) => {
-  const [email, onChangeEmail] = React.useState('');
-  const [password, onChangePassword] = React.useState('');
-
+const RegularSchedule = () => {
+  const [selectedValue, setSelectedValue] = useState("java");
   return (
-    <SafeAreaView>
-      <TextInput
-        style={styles.input}
-        onChangeText={onChangeEmail}
-        placeholder="email"
-        value={email}
-      />
+    <View style={styles.container}>
+      <Picker
+        selectedValue={selectedValue}
+        style={{ height: 50, width: 150 }}
+        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+      >
+        <Picker.Item label="Java" value="java" />
+        <Picker.Item label="JavaScript" value="js" />
+      </Picker>
+    </View>
+  )
+}
 
-      <TextInput
-        style={styles.input}
-        onChangeText={onChangePassword}
-        secureTextEntry={true}
-        placeholder="password"
-        value={password}
-      />
-      <Button
-        title="Login"
-        onPress={() => props.navigation.navigate('Map')}
-      />
-    </SafeAreaView>
-  );
-};
-
-const styles = StyleSheet.create({
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     paddingTop: 40,
+//     alignItems: "center"
+//   }
+// });
 
 export default RegularSchedule;
