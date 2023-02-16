@@ -22,7 +22,7 @@ class Schedule extends React.Component{
         <View style={{flex: 1}} ></View>
         <View style={{flex: 1}} >
         <Button
-          onPress={() => this.props.navigation.navigate('List Bartenders')}
+          onPress={() => this.props.navigation.navigate('One Time Schedule')}
           title={'This is a one-time shift'}
           containerStyle={{
             marginHorizontal: 10,
@@ -30,6 +30,7 @@ class Schedule extends React.Component{
           }}
         />
         <Button
+          onPress={() => this.props.navigation.navigate('Regular Schedule')}
           title="This is my regular shift"
           buttonStyle={{ backgroundColor: 'rgba(214, 61, 57, 1)' }}
           containerStyle={{
