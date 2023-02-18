@@ -14,9 +14,14 @@ class Menu extends React.Component{
   render() {
     return (
     <>
-      <ListItem onPress={() => this.props.navigation.navigate('Schedule')} bottomDivider>
+      <ListItem onPress={() => this.props.navigation.navigate('Enter Shift')} bottomDivider>
         <ListItem.Content>
-          <ListItem.Title>Share Work Schedule</ListItem.Title>
+          <ListItem.Title>Enter Work Schedule</ListItem.Title>
+        </ListItem.Content>
+      </ListItem>
+      <ListItem bottomDivider onPress={() => this.props.navigation.navigate('List Shifts')}>
+        <ListItem.Content >
+            <ListItem.Title>List Shifts</ListItem.Title>
         </ListItem.Content>
       </ListItem>
       <ListItem bottomDivider onPress={() => this.props.navigation.navigate('List Bartenders')}>
