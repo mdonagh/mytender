@@ -4,6 +4,8 @@ import { Text } from '@rneui/themed';
 import { CheckBox, Separator } from "react-native-btr";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
+import GooglePlacesInput from "./GooglePlacesInput";
+
 const EnterShift = (props) => {
   // Date Picker
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -47,7 +49,9 @@ const EnterShift = (props) => {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', }}>
-      <Text h2={true}>Enter Shift</Text>
+    <View style={{flex: 1}}>
+      <GooglePlacesInput />
+    </View>
       <View style={{flex: 1}}>
       <TextInput
         style={styles.input}
