@@ -15,7 +15,9 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Login" component={Login}           
+        options={{headerShown: false}}
+         />
         <Stack.Screen name="Show Bartender" component={ShowBartender} />
         <Stack.Screen name="Menu" component={Menu} />
         <Stack.Screen name="List Bartenders" component={ListBartender} />
@@ -23,8 +25,8 @@ function App() {
         <Stack.Screen name="List Shifts" component={ListShift} />
         <Stack.Screen
           name="Map" 
-          options={{headerBackVisible:false }}
-          component={ShowMap} 
+          options={{headerShown: false}}
+          component={ShowMap}
         />
       </Stack.Navigator>
     </NavigationContainer>
