@@ -15,9 +15,9 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={Login}           
-        options={{headerShown: false}}
-         />
+        <Stack.Screen name="Login" component={Login}
+          options={{headerShown: false}}
+        />
         <Stack.Screen name="Show Bartender" component={ShowBartender} />
         <Stack.Screen name="Menu" component={Menu} />
         <Stack.Screen name="List Bartenders" component={ListBartender} />
