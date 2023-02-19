@@ -9,29 +9,15 @@ import {Picker} from '@react-native-picker/picker';
 
 import { RadioGroup } from "react-native-btr";
 
+import { Button as ThemeButton } from '@rneui/themed';
+
 
 class EnterShift extends React.Component {
   constructor(props) {
     super(props);
     this.state = {currentForm: 0,
                   selectedValue: '8',
-                  sameShift: false,
-                  radioButtonsVertical: [
-                    {
-                      id: "1",
-                      label: "Default",
-                    },
-                    {
-                      id: "2",
-                      label: "In-Progress",
-                      selected: true,
-                      color: "#f84",
-                    },
-                    {
-                      id: "3",
-                      label: "Completed",
-                      color: "#484",
-                    }]
+                  sameShift: false
                };
 
   }
@@ -72,28 +58,29 @@ class EnterShift extends React.Component {
 render(){
   let form;
 
+let radioButtonsVertical = [
+                    {
+                      id: "1",
+                      label: "I don't normally work at this time",
+                      layout: "column",
+                    },
+                    {
+                      id: "2",
+                      label: "This is when I normally work",
+                      selected: true,
+                      color: "#f84",
+                      layout: "column",
+                    }]
   if(this.state.currentForm == 0){
     form = (
           <>
           <Text style={styles.text}>Where are you bartending?</Text>
-            <View style={{backgroundColor: 'white', height: 200, width: "100%", padding: 30}}>
-            <RadioGroup
-              radioButtons={this.state.radioButtonsVertical}
-              onPress={this.setRadioButtonsVertical}
-            />
+            <View style={{backgroundColor: 'grey', height: 200, width: "100%", padding: 30}}>
+              {/* need to pass method as props to this component to pass state up */}
+              <GooglePlacesInput />
             </View>
           </>
           )
-
-    // form = (
-    //       <>
-    //       <Text style={styles.text}>Where are you bartending?</Text>
-    //         <View style={{backgroundColor: 'grey', height: 200, width: "100%", padding: 30}}>
-    //           {/* need to pass method as props to this component to pass state up */}
-    //           <GooglePlacesInput />
-    //         </View>
-    //       </>
-    //       )
     }
     else if(this.state.currentForm == 1) {
       form = (
@@ -139,17 +126,26 @@ render(){
           </>
         )
   }
-//     else if(this.state.currentForm == 4) {
-//       form = (
-//           <>
-//           <Text style={styles.text}>Same shift next week?</Text>
-//             <View style={{backgroundColor: 'grey', height: 200, width: "100%", padding: 30}}>
-//             <Button
-// 
-//           </View>
-//           </>
-//         )
-//   }
+  if(this.state.currentForm == 4){
+    form = (
+          <>
+          <Text style={styles.text}>Is this your regular shift?</Text>
+            <View style={{backgroundColor: 'white', height: 200, width: "100%", padding: 30}}>
+            <RadioGroup
+              radioButtons={radioButtonsVertical}
+              onPress={this.setRadioButtonsVertical}
+            />
+            </View>
+          </>
+          )
+    }
+  if(this.state.currentForm == 5){
+      return this.props.navigation.reset({
+        index: 2,
+        routes: [{ name: 'Map' }, { name: 'Menu' }, { name: 'List Shifts' }],
+      });
+    }
+
   return (
     <View style={styles.container}>
       <ImageBackground
