@@ -1,35 +1,93 @@
 import React from 'react';
-import {SafeAreaView,
+import {
   StyleSheet,
   TextInput,
   Button,
   View,} from 'react-native';
 
-import { ListItem, Avatar } from '@rneui/themed';
-import Ionicons from '@expo/vector-icons/Ionicons';
-
-import { AntDesign } from '@expo/vector-icons'; 
-import { Feather } from '@expo/vector-icons'; 
 
 const EditProfile = (props) => {
-  const [firstName, onChangeEmail] = React.useState('');
-  const [lastName, onChangePassword] = React.useState('');
+  const [firstName, onChangeFirstName] = React.useState('');
+  const [lastName, onChangeLastName] = React.useState('');
+  const [email, onChangeEmail] = React.useState('');
+  const [phone, onChangePhone] = React.useState('');
+  const [streetAddress1, onChangeStreetAddress1] = React.useState('');
+  const [streetAddress2, onChangeStreetAddress2] = React.useState('');
+  const [city, onChangeCity] = React.useState('');
+  const [state, onChangeState] = React.useState('');
+  const [zipCode, onChangeZipCode] = React.useState('');
+  const [birthDate, onChangeBirthDate] = React.useState('');
 
   return (
     <View style={styles.container}>
-
-      <TextInput
+    <TextInput
         style={styles.input}
-        onChangeText={onChangeEmail}
-        placeholder="firstName"
+        onChangeText={onChangeFirstName}
+        placeholder="First Name"
         value={firstName}
       />
       <TextInput
         style={styles.input}
-        onChangeText={onChangePassword}
+        onChangeText={onChangeLastName}
         secureTextEntry={true}
-        placeholder="lastName"
+        placeholder="Last Name"
         value={lastName}
+      />
+      <TextInput
+        style={styles.input}
+        onChangeText={onChangeEmail}
+        secureTextEntry={true}
+        placeholder="Email"
+        value={email}
+      />
+      <TextInput
+        style={styles.input}
+        onChangeText={onChangePhone}
+        secureTextEntry={true}
+        placeholder="Phone"
+        value={phone}
+      />
+      <TextInput
+        style={styles.input}
+        onChangeText={onChangeStreetAddress1}
+        secureTextEntry={true}
+        placeholder="Street Address 1"
+        value={streetAddress1}
+      />
+      <TextInput
+        style={styles.input}
+        onChangeText={onChangeStreetAddress2}
+        secureTextEntry={true}
+        placeholder="Street Address 2"
+        value={streetAddress2}
+      />
+      <TextInput
+        style={styles.input}
+        onChangeText={onChangeCity}
+        secureTextEntry={true}
+        placeholder="City"
+        value={city}
+      />
+      <TextInput
+        style={styles.input}
+        onChangeText={onChangeState}
+        secureTextEntry={true}
+        placeholder="State"
+        value={state}
+      />
+      <TextInput
+        style={styles.input}
+        onChangeText={onChangeZipCode}
+        secureTextEntry={true}
+        placeholder="Zip Code"
+        value={zipCode}
+      />
+      <TextInput
+        style={styles.input}
+        onChangeText={onChangeBirthDate}
+        secureTextEntry={true}
+        placeholder="Birthdate"
+        value={birthDate}
       />
       <View style={styles.button} >
       <Button
