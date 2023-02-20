@@ -8,6 +8,7 @@ import Menu from './components/Menu';
 import ListBartender from './components/ListBartender';
 import EnterShift from './components/EnterShift';
 import ListShift from './components/ListShift';
+import EditProfile from './components/EditProfile';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +24,7 @@ function App() {
         <Stack.Screen name="List Bartenders" component={ListBartender} />
         <Stack.Screen name="Enter Shift" component={EnterShift} />
         <Stack.Screen name="List Shifts" component={ListShift} />
+        <Stack.Screen name="Edit Profile" component={EditProfile} />
         <Stack.Screen
           name="Map" 
           options={{headerShown: false}}

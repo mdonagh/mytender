@@ -29,7 +29,7 @@ class Menu extends React.Component{
             <ListItem.Title>List Nearby Bartenders</ListItem.Title>
         </ListItem.Content>
       </ListItem>
-      <ListItem>
+      <ListItem bottomDivider onPress={() => this.props.navigation.navigate('Edit Profile')}>
         <ListItem.Content>
           <ListItem.Title>Edit Profile</ListItem.Title>
         </ListItem.Content>
