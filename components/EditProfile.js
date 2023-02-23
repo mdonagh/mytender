@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  ScrollView,
   StyleSheet,
   TextInput,
   Button,
@@ -20,6 +21,7 @@ const EditProfile = (props) => {
 
   return (
     <View style={styles.container}>
+    <ScrollView>
     <TextInput
         style={styles.input}
         onChangeText={onChangeFirstName}
@@ -95,6 +97,7 @@ const EditProfile = (props) => {
         onPress={() => props.navigation.navigate('Map')}
       />
       </View>
+    </ScrollView>  
     </View>
   );
 };
