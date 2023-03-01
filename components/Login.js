@@ -5,14 +5,40 @@ import {SafeAreaView,
         Button,
         View,
         Image,
+        FlatList,
+        Pressable,
+        Text,
         ImageBackground} from 'react-native';
 import Bartender from '../assets/bartender2.png'
 import Logo from '../assets/logo.png'
 
+import { useQuery } from "@apollo/client";
+import { CONTINENT_QUERY } from "../gql/continents";
+// https://www.apollographql.com/docs/react/data/mutations/
 const Login = (props) => {
   const [email, onChangeEmail] = React.useState('');
   const [password, onChangePassword] = React.useState('');
 
+  const { data, loading } = useQuery(CONTINENT_QUERY);
+
+  const ContinentItem = ({ continent }) => {
+    const { name, code } = continent; 
+    return (
+      <Pressable>
+        <Text>{name}</Text>
+      </Pressable>
+    );
+  };
+
+  if(!loading){
+    return (
+      <FlatList
+        data={data.continents}
+        renderItem={({ item }) => <ContinentItem continent={item} />}
+        keyExtractor={(item, index) => index}
+      />
+      )
+  }
   return (
     <View style={styles.container}>
       <ImageBackground

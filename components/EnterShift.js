@@ -3,14 +3,9 @@ import { Button, View, TextInput, StyleSheet, ImageBackground } from "react-nati
 import { Text } from '@rneui/themed';
 import { CheckBox, Separator } from "react-native-btr";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-
 import GooglePlacesInput from "./GooglePlacesInput";
 import {Picker} from '@react-native-picker/picker';
-
 import { RadioGroup } from "react-native-btr";
-
-import { Button as ThemeButton } from '@rneui/themed';
-
 
 class EnterShift extends React.Component {
   constructor(props) {
@@ -174,36 +169,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
-  textInput: {
-    // color: 'white',
-    fontSize: 42,
-    lineHeight: 42,
-    // fontWeight: 'bold',
-    textAlign: 'center',
-    backgroundColor: 'white',
-  },
   text: {
-    // color: 'white',
     fontSize: 24,
     lineHeight: 42,
     fontWeight: 'bold',
     textAlign: 'center',
     backgroundColor: 'white',
-  },
-  input: {
-    height: 60,
-    margin: 12,
-    width: 300,
-    borderWidth: 1,
-    padding: 10,
-  },
-  row: {
-    flexDirection: "row",
-  },
-  label: {
-    flex: 1,
-    paddingRight: 150,
-    paddingLeft: 20,
   },
 });
 

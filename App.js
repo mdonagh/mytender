@@ -11,8 +11,17 @@ import ListShift from './components/ListShift';
 
 const Stack = createNativeStackNavigator();
 
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+
+// Initialize Apollo Client
+const client = new ApolloClient({
+  uri: 'https://countries.trevorblades.com/graphql',
+  cache: new InMemoryCache()
+});
+
 function App() {
   return (
+    <ApolloProvider client={client}>
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Login" component={Login}
@@ -30,6 +39,7 @@ function App() {
         />
       </Stack.Navigator>
     </NavigationContainer>
+    </ApolloProvider>
   );
 }
 
