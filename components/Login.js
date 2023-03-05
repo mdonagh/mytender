@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {SafeAreaView,
         StyleSheet,
         TextInput,
@@ -12,33 +12,33 @@ import {SafeAreaView,
 import Bartender from '../assets/bartender2.png'
 import Logo from '../assets/logo.png'
 
-import { useQuery } from "@apollo/client";
-import { CONTINENT_QUERY } from "../gql/continents";
-// https://www.apollographql.com/docs/react/data/mutations/
+import * as SecureStore from 'expo-secure-store';
+
+import { useMutation } from "@apollo/client";
+import { SIGN_IN } from "../gql/signIn";
+
 const Login = (props) => {
   const [email, onChangeEmail] = React.useState('');
   const [password, onChangePassword] = React.useState('');
 
-  const { data, loading } = useQuery(CONTINENT_QUERY);
+  const [signIn, { data, loading, error }] = useMutation(SIGN_IN);
 
-  const ContinentItem = ({ continent }) => {
-    const { name, code } = continent; 
-    return (
-      <Pressable>
-        <Text>{name}</Text>
-      </Pressable>
-    );
-  };
+const loginUser = () => {
+  signIn({variables: {email: email, password: password}}).catch(error => console.log("An error", error));;
+ }
 
-  if(!loading){
-    return (
-      <FlatList
-        data={data.continents}
-        renderItem={({ item }) => <ContinentItem continent={item} />}
-        keyExtractor={(item, index) => index}
-      />
-      )
+useEffect(() => {
+  if (data){
+    SecureStore.setItemAsync('token', data["signInUser"]["token"]);
+    props.navigation.navigate('Map')
   }
+})
+
+if (loading) return <Text>'Loading...'</Text>;
+if (error){
+  console.log(error)
+}
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -62,7 +62,7 @@ const Login = (props) => {
       <View style={styles.button} >
       <Button
         title="Login"
-        onPress={() => props.navigation.navigate('Map')}
+        onPress={() => loginUser()}
       />
       </View>
       </ImageBackground>
