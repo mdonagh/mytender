@@ -10,24 +10,26 @@ import { RadioGroup } from "react-native-btr";
 class EnterShift extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {currentForm: 0,
-                  selectedValue: '8',
-                  sameShift: false
-               };
+    this.state = { currentForm: 0,
+                   hours: "8" };
 
   }
-  handleDateConfirm = (date) => {
-    console.log("A date has been picked: ", date);
+
+  regularShift = () => {
+    this.setState({ regularShift: true })
     this.pageForward();
   };
 
-  setRadioButtonsVertical = (data) => {
-    console.log(data);
+  specialShift = () => {
+    this.setState({ regularShift: false })
+    this.pageForward();
   };
 
-
-  handleTimeConfirm = (time) => {
-    console.log("A Time has been picked: ", time);
+  handleDateConfirm = (date) => {
+    this.pageForward();
+  };
+  handleDateTimeConfirm = (time) => {
+    this.setState({ time: time })
     this.pageForward();
   };
 
@@ -37,7 +39,14 @@ class EnterShift extends React.Component {
   }
 
   selectHours = (hours) => {
-    this.setState({ selectedValue: hours })
+    console.log('hours')
+    console.log(hours)
+
+    this.setState({ hours: hours })
+  }
+
+  selectLocation = (location) => {
+    this.setState({ location: location })
   }
 
   pageForward = () => {
@@ -51,8 +60,9 @@ class EnterShift extends React.Component {
   }
 
 render(){
-  let form;
+let form;
 
+console.log(this.state)
 let radioButtonsVertical = [
                     {
                       id: "1",
@@ -72,7 +82,7 @@ let radioButtonsVertical = [
           <Text style={styles.text}>Where are you bartending?</Text>
             <View style={{backgroundColor: 'grey', height: 200, width: "100%", padding: 30}}>
               {/* need to pass method as props to this component to pass state up */}
-              <GooglePlacesInput />
+              <GooglePlacesInput selectLocation={this.selectLocation} />
             </View>
           </>
           )
@@ -92,7 +102,7 @@ let radioButtonsVertical = [
           <DateTimePickerModal
             isVisible={this.state.currentForm == 2}
             mode="time"
-            onConfirm={this.handleTimeConfirm}
+            onConfirm={this.handleDateTimeConfirm}
             onCancel={this.pageBack}
           />
         )
@@ -102,7 +112,7 @@ let radioButtonsVertical = [
           <>
           <Text style={styles.text}>How many hours is your shift?</Text>
           <Picker
-            selectedValue={this.state.selectedValue}
+            selectedValue={this.state.hours}
             style={{ height: 300, width: "100%" }}
             onValueChange={(itemValue, itemIndex) => this.selectHours(itemValue)}
           >
@@ -126,15 +136,20 @@ let radioButtonsVertical = [
           <>
           <Text style={styles.text}>Is this your regular shift?</Text>
             <View style={{backgroundColor: 'white', height: 200, width: "100%", padding: 30}}>
-            <RadioGroup
-              radioButtons={radioButtonsVertical}
-              onPress={this.setRadioButtonsVertical}
+            <Button
+              title="I don't normally work at this time"
+              onPress={this.specialShift}
+            />
+           <Button
+              title="This is when I normally work"
+              onPress={this.regularShift}
             />
             </View>
           </>
           )
     }
   if(this.state.currentForm == 5){
+      console.log(this.state)
       return this.props.navigation.reset({
         index: 2,
         routes: [{ name: 'Map' }, { name: 'Menu' }, { name: 'List Shifts' }],

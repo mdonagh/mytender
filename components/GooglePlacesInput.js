@@ -2,7 +2,12 @@ import React from 'react';
 import { View, Image, Text } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
-const GooglePlacesInput = () => {
+class GooglePlacesInput extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+render(){
   return (
     <GooglePlacesAutocomplete
       placeholder='Search'
@@ -14,9 +19,9 @@ const GooglePlacesInput = () => {
       renderDescription={row => row.description} // custom description render
       onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
         console.log(data, details);
-        let lat = details['geometry']['location']['lat']
-        let lng = details['geometry']['location']['lng']
-        console.log(lat, lng)
+        this.props.selectLocation({address: details['formatted_address'],
+                                   lat: details['geometry']['location']['lat'],
+                                   lng: details['geometry']['location']['lng']})
       }}
 
       getDefaultValue={() => ''}
@@ -62,6 +67,7 @@ const GooglePlacesInput = () => {
       // renderRightButton={() => <Text>Custom text after the input</Text>}
     />
   );
+}
 }
 
 export default GooglePlacesInput;

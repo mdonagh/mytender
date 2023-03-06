@@ -16,7 +16,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 // Initialize Apollo Client
 // use Ngrok with rails for dev
 const client = new ApolloClient({
-  uri: 'https://d5e5-98-237-187-98.ngrok.io/graphql',
+  uri: 'https://0fd1-98-237-187-98.ngrok.io/graphql',
   cache: new InMemoryCache()
 });
 
