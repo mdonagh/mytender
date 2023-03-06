@@ -11,14 +11,30 @@ import ListShift from './components/ListShift';
 
 const Stack = createNativeStackNavigator();
 
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import * as SecureStore from 'expo-secure-store';
 
-// Initialize Apollo Client
-// use Ngrok with rails for dev
+const httpLink = createHttpLink({
+  uri: 'https://4ceb-98-237-187-98.ngrok.io/graphql',
+});
+
+const authLink = setContext(async (_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  token = await SecureStore.getItemAsync('token');
+  return {
+    headers: {
+      ...headers,
+      Authorization: token ? `Basic ${token}` : ""
+    }
+  }
+});
+
 const client = new ApolloClient({
-  uri: 'https://0fd1-98-237-187-98.ngrok.io/graphql',
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache()
 });
+
 
 function App() {
   return (

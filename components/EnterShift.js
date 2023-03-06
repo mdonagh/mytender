@@ -7,10 +7,15 @@ import GooglePlacesInput from "./GooglePlacesInput";
 import {Picker} from '@react-native-picker/picker';
 import { RadioGroup } from "react-native-btr";
 
+import { CREATE_SHIFT } from "../gql/createShift";
+
+import { withApollo } from '@apollo/client/react/hoc';
+
 class EnterShift extends React.Component {
   constructor(props) {
     super(props);
     this.state = { currentForm: 0,
+                   notes: "",
                    hours: "8" };
 
   }
@@ -29,14 +34,9 @@ class EnterShift extends React.Component {
     this.pageForward();
   };
   handleDateTimeConfirm = (time) => {
-    this.setState({ time: time })
+    this.setState({ startTime: time })
     this.pageForward();
   };
-
-  toggleSameShift() {
-    const newState = !this.state.sameShift;
-    this.setState({ sameShift: newState })
-  }
 
   selectHours = (hours) => {
     console.log('hours')
@@ -131,10 +131,27 @@ let radioButtonsVertical = [
           </>
         )
   }
-  if(this.state.currentForm == 4){
+    else if(this.state.currentForm == 4) {
+      form = (
+          <>
+          <Text style={styles.text}>Any specials or events?</Text>
+          <View style={{backgroundColor: 'grey', height: 200, width: "100%", padding: 30}}>
+            <TextInput
+              multiline={true}
+              style={{backgroundColor: 'white', height: 100, width: "100%", padding: 8}}
+              numberOfLines={4}
+              placeholder="Beer Pong out back! Half off hot wings!"
+              onChangeText={(text) => this.setState({notes: text})}
+              value={this.state.notes}
+            />
+          </View>
+          </>
+        )
+  }
+  if(this.state.currentForm == 5){
     form = (
           <>
-          <Text style={styles.text}>Is this your regular shift?</Text>
+          <Text style={styles.text}>Will you have the same shift each week?</Text>
             <View style={{backgroundColor: 'white', height: 200, width: "100%", padding: 30}}>
             <Button
               title="I don't normally work at this time"
@@ -148,8 +165,22 @@ let radioButtonsVertical = [
           </>
           )
     }
-  if(this.state.currentForm == 5){
+  if(this.state.currentForm == 6){
       console.log(this.state)
+      this.props.client.mutate({
+        mutation: CREATE_SHIFT,
+        variables: {
+          notes: this.state.notes,
+          address: this.state.location['address'],
+          duration: parseInt(this.state.hours),
+          latitude: this.state.location['latitude'],
+          longitude: this.state.location['longitude'],
+          startTime: this.state.startTime,
+          recurring: this.state.regularShift
+
+        },
+      }).catch(error => console.log("An error", error));
+
       return this.props.navigation.reset({
         index: 2,
         routes: [{ name: 'Map' }, { name: 'Menu' }, { name: 'List Shifts' }],
@@ -193,4 +224,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default EnterShift;
+export default withApollo(EnterShift);

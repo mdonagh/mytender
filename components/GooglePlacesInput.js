@@ -20,8 +20,8 @@ render(){
       onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
         console.log(data, details);
         this.props.selectLocation({address: details['formatted_address'],
-                                   lat: details['geometry']['location']['lat'],
-                                   lng: details['geometry']['location']['lng']})
+                                   latitude: details['geometry']['location']['lat'],
+                                   longitude: details['geometry']['location']['lng']})
       }}
 
       getDefaultValue={() => ''}
