@@ -9,6 +9,7 @@ import ListBartender from './components/ListBartender';
 import EnterShift from './components/EnterShift';
 import ListShift from './components/ListShift';
 import EditProfile from './components/EditProfile';
+import SignUp from './components/SignUp';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,7 @@ function App() {
         <Stack.Screen name="Login" component={Login}
           options={{headerShown: false}}
         />
+        <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="Show Bartender" component={ShowBartender} />
         <Stack.Screen name="Menu" component={Menu} />
         <Stack.Screen name="List Bartenders" component={ListBartender} />

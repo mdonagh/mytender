@@ -38,6 +38,10 @@ const Login = (props) => {
         title="Login"
         onPress={() => props.navigation.navigate('Map')}
       />
+      <Button
+        title="SignUp"
+        onPress={() => props.navigation.navigate('SignUp')}
+      />
       </View>
       </ImageBackground>
     </View>
