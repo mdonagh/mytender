@@ -33,11 +33,13 @@ const Login = (props) => {
         placeholder="password"
         value={password}
       />
-      <View style={styles.button} >
+      <View style={styles.loginButton} >
       <Button
         title="Login"
         onPress={() => props.navigation.navigate('Map')}
       />
+      </View>
+      <View style={styles.signupButton} >
       <Button
         title="SignUp"
         onPress={() => props.navigation.navigate('SignUp')}
@@ -56,10 +58,15 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: 'white'
   },
-  button: {
+  loginButton: {
     marginHorizontal: 50,
     marginTop: 20,
     backgroundColor: 'white'
+  },
+  signupButton: {
+    marginHorizontal: 50,
+    marginTop: 20,
+    backgroundColor: 'white',
   },
   container: {
     flex: 1,
