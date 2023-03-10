@@ -1,16 +1,8 @@
 import React, { useState } from "react";
 import { Button, View, TextInput, StyleSheet, ImageBackground } from "react-native";
 import { Text } from '@rneui/themed';
-import { CheckBox, Separator } from "react-native-btr";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
-
-import GooglePlacesInput from "./GooglePlacesInput";
-import {Picker} from '@react-native-picker/picker';
 
 import { RadioGroup } from "react-native-btr";
-
-import { Button as ThemeButton } from '@rneui/themed';
-
 
 class SignUp extends React.Component {
   constructor(props) {

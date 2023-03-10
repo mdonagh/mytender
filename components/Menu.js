@@ -1,9 +1,5 @@
 import React from 'react';
 
-import { 
-         Pressable,
-       } from "react-native";
-
 import { ListItem } from '@rneui/themed';
 
 class Menu extends React.Component{

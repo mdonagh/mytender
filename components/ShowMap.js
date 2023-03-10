@@ -8,8 +8,6 @@ import {
   Pressable
 } from 'react-native';
 
-import { Avatar } from '@rneui/themed';
-
 import Martini from '../assets/martini.jpg'
 
 import MapView, {Marker, Callout} from 'react-native-maps';
