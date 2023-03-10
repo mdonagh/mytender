@@ -33,6 +33,10 @@ class SignUp extends React.Component {
     this.setState({ currentForm: newState })
   }
 
+  setRadioButtonsVertical = (data) => {
+    console.log(data);
+  };
+
 render(){
   let form;
 
@@ -54,7 +58,12 @@ render(){
     form = (
       <>
         <Text style={styles.text}>Who are you?</Text>
-        <View style={{backgroundColor: 'white', height: 200, width: "100%", padding: 30}}>
+        <View style={{
+                      backgroundColor: 'white', 
+                      height: 200, 
+                      width: "100%", 
+                      padding: 30,
+                      }}>
           <RadioGroup
             radioButtons={radioButtonsVertical}
             onPress={this.setRadioButtonsVertical}
@@ -66,8 +75,13 @@ render(){
     else if(this.state.currentForm == 1) {
       form = (
         <>
-        <Text style={styles.text}>First Time User? Please Register</Text>
-          <View style={{backgroundColor: '#cccccc', height: 300, width: "100%", padding: 30}}>
+        <Text style={styles.text}>Tell us your who you are</Text>
+          <View style={{backgroundColor: '#cccccc', 
+                        height: 200, 
+                        width: "100%", 
+                        padding: 30,
+                        justifyContent: 'center',
+                        }}>
             <TextInput 
               placeholder="first name"
               placeholderTextColor="#909090"
@@ -84,11 +98,25 @@ render(){
               stye={styles.input}
               value={this.state.lastName}
             />
+          </View>
+        </>
+        )
+    }
+    else if(this.state.currentForm == 2) {
+      form = (
+        <>
+        <Text style={styles.text}>Email and Password</Text>
+          <View style={{backgroundColor: '#cccccc', 
+                        height: 200, 
+                        width: "100%", 
+                        padding: 30,
+                        justifyContent: 'center',
+                        }}>
             <TextInput 
               placeholder="email"
               placeholderTextColor="#909090"
               textAlign={'center'} 
-              onChangeText={(email) => this.setState({email})}
+              onChangeText={(firstName) => this.setState({email})}
               stye={styles.input}
               value={this.state.email}
             />
@@ -96,40 +124,64 @@ render(){
               placeholder="password"
               placeholderTextColor="#909090"
               textAlign={'center'} 
-              onChangeText={(password) => this.setState({password})}
+              onChangeText={(lastName) => this.setState({password})}
               stye={styles.input}
               value={this.state.password}
             />
             <TextInput 
-              placeholder="password confirmation"
+              placeholder="confirmPassword"
               placeholderTextColor="#909090"
               textAlign={'center'} 
-              onChangeText={(passwordConfirmation) => this.setState({passwordConfirmation})}
+              onChangeText={(lastName) => this.setState({confirmPassword})}
               stye={styles.input}
-              value={this.state.passwordConfirmation}
+              value={this.state.confirmPassword}
             />
           </View>
         </>
-        )
-    }
-    else if(this.state.currentForm == 2) {
-      form = (
-        <Text style={styles.text}>You are at currentForm 2!</Text>
       )
     }
     else if(this.state.currentForm == 3) {
       form = (
-        <Text style={styles.text}>You are at currentForm 3!</Text>
+        <>
+        <Text style={styles.text}>Tell us your who you are</Text>
+          <View style={{backgroundColor: '#cccccc', 
+                        height: 200, 
+                        width: "100%", 
+                        padding: 30,
+                        justifyContent: 'center',
+                        }}>
+          </View>
+        </>
       )
     }
     if(this.state.currentForm == 4){
       form = (
-        <Text style={styles.text}>You are at currentForm 4!</Text>
+        <>
+        <Text style={styles.text}>Provide photo for your banner</Text>
+          <View style={{backgroundColor: '#cccccc', 
+                        height: 200, 
+                        width: "100%", 
+                        padding: 30,
+                        justifyContent: 'center',
+                        }}>
+            
+          </View>
+        </>
       )
       }
     if(this.state.currentForm == 5){
       form = (
-        <Text style={styles.text}>You are at currentForm 5!</Text>
+        <>
+        <Text style={styles.text}>Start a shift!</Text>
+          <View style={{backgroundColor: '#cccccc', 
+                          height: 200, 
+                          width: "100%", 
+                          padding: 30,
+                          justifyContent: 'center',
+                          }}>
+              
+            </View>
+        </>
       )
       }
 
@@ -160,6 +212,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
+
   text: {
     color: 'black',
     fontSize: 24,
@@ -168,6 +221,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     backgroundColor: 'white',
   },
+  
 });
 
 export default SignUp;
