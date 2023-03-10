@@ -15,35 +15,13 @@ import { Button as ThemeButton } from '@rneui/themed';
 class SignUp extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {currentForm: 0,
-                  selectedValue: '8',
-                  sameShift: false
-               };
-
+    this.state = {
+      currentForm: 0,
+      firstName: ''
+    
+    };
   }
-  handleDateConfirm = (date) => {
-    console.log("A date has been picked: ", date);
-    this.pageForward();
-  };
-
-  setRadioButtonsVertical = (data) => {
-    console.log(data);
-  };
-
-
-  handleTimeConfirm = (time) => {
-    console.log("A Time has been picked: ", time);
-    this.pageForward();
-  };
-
-  toggleSameShift() {
-    const newState = !this.state.sameShift;
-    this.setState({ sameShift: newState })
-  }
-
-  selectHours = (hours) => {
-    this.setState({ selectedValue: hours })
-  }
+  
 
   pageForward = () => {
     const newState = this.state.currentForm + 1;
@@ -58,20 +36,80 @@ class SignUp extends React.Component {
 render(){
   let form;
 
+  let radioButtonsVertical = [
+    {
+      id: "1",
+      label: "Bartender",
+      selected: true,
+      layout: "column",
+    },
+    {
+      id: "2",
+      label: "Drinker",
+      color: "#f84",
+      layout: "column",
+    }]
+
   if(this.state.currentForm == 0){
     form = (
-          <>
-          <Text style={styles.text}>First Time User? Please Register</Text>
-            <View style={{backgroundColor: 'grey', height: 200, width: "100%", padding: 30}}>
-              {/* need to pass method as props to this component to pass state up */}
-              <GooglePlacesInput />
-            </View>
-          </>
+      <>
+        <Text style={styles.text}>Who are you?</Text>
+        <View style={{backgroundColor: 'white', height: 200, width: "100%", padding: 30}}>
+          <RadioGroup
+            radioButtons={radioButtonsVertical}
+            onPress={this.setRadioButtonsVertical}
+          />
+        </View>
+      </>
           )
     }
     else if(this.state.currentForm == 1) {
       form = (
-          <Text style={styles.text}>You are at currentForm 1!</Text>
+        <>
+        <Text style={styles.text}>First Time User? Please Register</Text>
+          <View style={{backgroundColor: '#cccccc', height: 300, width: "100%", padding: 30}}>
+            <TextInput 
+              placeholder="first name"
+              placeholderTextColor="#909090"
+              textAlign={'center'} 
+              onChangeText={(firstName) => this.setState({firstName})}
+              stye={styles.input}
+              value={this.state.firstName}
+            />
+            <TextInput 
+              placeholder="last name"
+              placeholderTextColor="#909090"
+              textAlign={'center'} 
+              onChangeText={(lastName) => this.setState({lastName})}
+              stye={styles.input}
+              value={this.state.lastName}
+            />
+            <TextInput 
+              placeholder="email"
+              placeholderTextColor="#909090"
+              textAlign={'center'} 
+              onChangeText={(email) => this.setState({email})}
+              stye={styles.input}
+              value={this.state.email}
+            />
+            <TextInput 
+              placeholder="password"
+              placeholderTextColor="#909090"
+              textAlign={'center'} 
+              onChangeText={(password) => this.setState({password})}
+              stye={styles.input}
+              value={this.state.password}
+            />
+            <TextInput 
+              placeholder="password confirmation"
+              placeholderTextColor="#909090"
+              textAlign={'center'} 
+              onChangeText={(passwordConfirmation) => this.setState({passwordConfirmation})}
+              stye={styles.input}
+              value={this.state.passwordConfirmation}
+            />
+          </View>
+        </>
         )
     }
     else if(this.state.currentForm == 2) {
@@ -105,7 +143,6 @@ render(){
         {form}
         <Button
           title="Next"
-          style={styles.text}
           onPress={this.pageForward}
         />
         </View>
@@ -123,36 +160,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
-  textInput: {
-    // color: 'white',
-    fontSize: 42,
-    lineHeight: 42,
-    // fontWeight: 'bold',
-    textAlign: 'center',
-    backgroundColor: 'white',
-  },
   text: {
-    // color: 'white',
+    color: 'black',
     fontSize: 24,
     lineHeight: 42,
     fontWeight: 'bold',
     textAlign: 'center',
     backgroundColor: 'white',
-  },
-  input: {
-    height: 60,
-    margin: 12,
-    width: 300,
-    borderWidth: 1,
-    padding: 10,
-  },
-  row: {
-    flexDirection: "row",
-  },
-  label: {
-    flex: 1,
-    paddingRight: 150,
-    paddingLeft: 20,
   },
 });
 

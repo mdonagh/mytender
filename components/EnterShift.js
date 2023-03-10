@@ -58,19 +58,19 @@ class EnterShift extends React.Component {
 render(){
   let form;
 
-let radioButtonsVertical = [
-                    {
-                      id: "1",
-                      label: "I don't normally work at this time",
-                      layout: "column",
-                    },
-                    {
-                      id: "2",
-                      label: "This is when I normally work",
-                      selected: true,
-                      color: "#f84",
-                      layout: "column",
-                    }]
+  let radioButtonsVertical = [
+                      {
+                        id: "1",
+                        label: "I don't normally work at this time",
+                        layout: "column",
+                      },
+                      {
+                        id: "2",
+                        label: "This is when I normally work",
+                        selected: true,
+                        color: "#f84",
+                        layout: "column",
+                      }]
   if(this.state.currentForm == 0){
     form = (
           <>
