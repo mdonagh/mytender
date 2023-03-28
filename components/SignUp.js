@@ -14,7 +14,6 @@ class SignUp extends React.Component {
     };
   }
   
-
   pageForward = () => {
     const newState = this.state.currentForm + 1;
     this.setState({ currentForm: newState })
@@ -79,7 +78,7 @@ render(){
               placeholderTextColor="#909090"
               textAlign={'center'} 
               onChangeText={(firstName) => this.setState({firstName})}
-              stye={styles.input}
+              style={styles.input}
               value={this.state.firstName}
             />
             <TextInput 
@@ -87,7 +86,7 @@ render(){
               placeholderTextColor="#909090"
               textAlign={'center'} 
               onChangeText={(lastName) => this.setState({lastName})}
-              stye={styles.input}
+              style={styles.input}
               value={this.state.lastName}
             />
           </View>
@@ -109,7 +108,7 @@ render(){
               placeholderTextColor="#909090"
               textAlign={'center'} 
               onChangeText={(firstName) => this.setState({email})}
-              stye={styles.input}
+              style={styles.input}
               value={this.state.email}
             />
             <TextInput 
@@ -117,7 +116,7 @@ render(){
               placeholderTextColor="#909090"
               textAlign={'center'} 
               onChangeText={(lastName) => this.setState({password})}
-              stye={styles.input}
+              style={styles.input}
               value={this.state.password}
             />
             <TextInput 
@@ -125,7 +124,7 @@ render(){
               placeholderTextColor="#909090"
               textAlign={'center'} 
               onChangeText={(lastName) => this.setState({confirmPassword})}
-              stye={styles.input}
+              style={styles.input}
               value={this.state.confirmPassword}
             />
           </View>
@@ -204,8 +203,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
+input: {
+  borderWidth: 1,
+  height: 40,
+  marginBottom: 10,
+  borderRadius: 40,
+},
 
-  text: {
+  text: { 
     color: 'black',
     fontSize: 24,
     lineHeight: 42,
