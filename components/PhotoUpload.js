@@ -4,7 +4,6 @@ import {
   View,
   Text,
 } from 'react-native';
-import { Image } from "react-native-image-crop-picker"
 
 class PhotoUpload extends React.Component{
   constructor(props) {
@@ -14,7 +13,7 @@ class PhotoUpload extends React.Component{
 render(){
 return(
   <>
-  <text>woof</text>
+  <Text>woof</Text>
   </>
   );
 }
