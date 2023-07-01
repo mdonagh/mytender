@@ -29,6 +29,11 @@ class Menu extends React.Component{
             <ListItem.Title>List Nearby Bartenders</ListItem.Title>
         </ListItem.Content>
       </ListItem>
+      <ListItem bottomDivider onPress={() => this.props.navigation.navigate('Add Photos')}>
+        <ListItem.Content>
+          <ListItem.Title>Add Photos</ListItem.Title>
+        </ListItem.Content>
+      </ListItem>
       <ListItem>
         <ListItem.Content>
           <ListItem.Title>Edit Profile</ListItem.Title>

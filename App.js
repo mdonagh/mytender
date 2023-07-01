@@ -9,6 +9,9 @@ import ListBartender from './components/ListBartender';
 import EnterShift from './components/EnterShift';
 import ListShift from './components/ListShift';
 
+import PhotoUpload from './components/PhotoUpload';
+
+
 const Stack = createNativeStackNavigator();
 
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
@@ -16,7 +19,7 @@ import { setContext } from '@apollo/client/link/context';
 import * as SecureStore from 'expo-secure-store';
 
 const httpLink = createHttpLink({
-  uri: 'https://4ceb-98-237-187-98.ngrok.io/graphql',
+  uri: 'https://c47b-24-17-149-35.ngrok.io/graphql',
 });
 
 const authLink = setContext(async (_, { headers }) => {
@@ -49,6 +52,8 @@ function App() {
         <Stack.Screen name="List Bartenders" component={ListBartender} />
         <Stack.Screen name="Enter Shift" component={EnterShift} />
         <Stack.Screen name="List Shifts" component={ListShift} />
+        <Stack.Screen name="Add Photos" component={PhotoUpload} />
+
         <Stack.Screen
           name="Map" 
           options={{headerShown: false}}

@@ -24,7 +24,7 @@ const Login = (props) => {
   const [signIn, { data, loading, error }] = useMutation(SIGN_IN);
 
 const loginUser = () => {
-  signIn({variables: {email: email, password: password}}).catch(error => console.log("An error", error));;
+  signIn({variables: {email: email, password: password}}).catch(error => console.log("An error", error));
  }
 
 useEffect(() => {
