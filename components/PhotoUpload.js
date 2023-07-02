@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 
 import { Buffer } from 'buffer'
-import RNFS from 'react-native-fs'
 
 import * as ImagePicker from 'expo-image-picker';
 function PhotoUpload() {
