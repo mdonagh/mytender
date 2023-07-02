@@ -13,6 +13,9 @@ import { CREATE_PHOTO } from "../gql/createPhoto";
 import { withApollo } from '@apollo/client/react/hoc';
 import { Buffer } from 'buffer'
 
+import * as CryptoJS from 'crypto-js';
+
+
 class PhotoUpload extends React.Component {
   constructor(props) {
     super(props);
@@ -23,12 +26,11 @@ class PhotoUpload extends React.Component {
 
   uploadImage = (url, picture, headers) => {
     console.log("got here")
+    console.log()
     fetch(url, {
       method: 'PUT',
       body: picture,
-      headers: {
-        'Content-Type': headers['contentType']
-      },
+      headers: headers,
     }).then(response => {
       console.log(JSON.stringify(response["_bodyBlob"]["_data"]["__collector"]))
       console.log('response')
@@ -70,14 +72,33 @@ class PhotoUpload extends React.Component {
       let picture = await fetch(imagePath);
       picture = await picture.blob();
 
-      const imageData = new File([picture], `photo.${imageExt}`);
+      let checksum = md5(picture)
+      console.log(checksum)
 
+      const imageData = new File([picture], `photo.${imageExt}`);
+      checksum = md5(imageData)
+      console.log(checksum)
+      checksum = new Buffer(checksum).toString("base64");
+      console.log(checksum)
+
+      var hash1 = CryptoJS.MD5(imageData);
+      console.log(hash1)
+      var digestResult = hash1.toString(CryptoJS.enc.Base64);
+      checksum = digestResult
+      console.log('alpha')
+      console.log(checksum)
+
+      console.log('meow')
       let byteSize = picture["_data"]["size"]
       let filename = picture["_data"]["name"]
       let contentType = picture["_data"]["type"]
 
-      let checksum = md5(picture)
 
+
+      console.log(checksum)
+      checksum = new Buffer(checksum).toString("base64");
+
+      console.log(checksum)
       this.props.client.mutate({
         mutation: CREATE_PHOTO,
         variables: {
@@ -89,9 +110,10 @@ class PhotoUpload extends React.Component {
       }).then(result => {
         console.log(JSON.stringify(result))
         let url = result["data"]["createPhoto"]["presigned"]["url"]
+        let headers = result["data"]["createPhoto"]["presigned"]["headers"]
         this.uploadImage(url,
                          picture,
-                         {contentType: contentType, checksum: checksum})
+                         headers)
     }).catch(error => {
       console.log("An error", error)
     });
