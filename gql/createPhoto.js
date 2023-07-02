@@ -1,27 +1,18 @@
 import { gql, useMutation } from '@apollo/client';
 
 export const CREATE_SHIFT = gql`
-mutation EnterShift($notes: String!,
-                     $address: String!,
-                     $recurring: Boolean!,
-                     $duration: Int!,
-                     $startTime: ISO8601DateTime!,
-                     $latitude: Float!,
-                     $longitude: Float!) {
-createShift(notes: $notes,
-            address: $address,
-            recurring: $recurring,
-            duration: $duration,
-            startTime: $startTime,
-            latitude: $latitude,
-            longitude: $longitude) {
-    shift {
-      id
-      notes
-      address
-      startTime
-      latitude
-      longitude
+mutation EnterShift($filename: String!,
+                     $byteSize: Int!,
+                     $checksum: String!,
+                     $contentType: String!) {
+createShift(filename: $filename,
+            byteSize: $byteSize,
+            checksum: $checksum,
+            contentType: $contentType) {
+    presigned {
+      url
+      headers
+      signed_id
     }
   }
 }

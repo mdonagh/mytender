@@ -10,32 +10,17 @@ import {
 import { Buffer } from 'buffer'
 
 import * as FileSystem from 'expo-file-system';
-import * as ImagePicker from 'expo-image-picker';
 import md5 from 'md5';
+import { CREATE_PHOTO } from "../gql/createPhoto";
+import { withApollo } from '@apollo/client/react/hoc';
 
-function PhotoUpload() {
-  const [image, setImage] = useState(null);
-
-myImageHashFunction = async (imageUri) => {
-  let fsInfo = await FileSystem.readAsStringAsync(imageUri, [{ md5: true }] )
-  console.log(fsInfo)
-}
-
-const getMethods = (obj) => {
-  let properties = new Set()
-  let currentObj = obj
-  do {
-    Object.getOwnPropertyNames(currentObj).map(item => properties.add(item))
-  } while ((currentObj = Object.getPrototypeOf(currentObj)))
-  return [...properties.keys()].filter(item => typeof obj[item] === 'function')
-}
-
-  const uploadImage = async (imageData, imageExt) => {
+class PhotoUpload extends React.Component {
+  uploadImage = async (imageData, imageExt) => {
     console.log(md5(imageData))
 
   }
 
-  const pickImage = async () => {
+  pickImage = async () => {
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -58,14 +43,27 @@ const getMethods = (obj) => {
 
       const imageData = new File([picture], `photo.${imageExt}`);
 
-      let byte_size = picture["_data"]["size"]
+      let byteSize = picture["_data"]["size"]
       let filename = picture["_data"]["name"]
-      let content_type = picture["_data"]["type"]
+      let contentType = picture["_data"]["type"]
       let checksum = md5(imageData)
+      this.props.client.mutate({
+        mutation: CREATE_PHOTO,
+        variables: {
+          filename: filename,
+          byteSize: byteSize,
+          checksum: checksum,
+          contentType: contentType
+        },
+      }).catch(error => console.log("An error", error));
 
       await uploadImage(imageData, imageExt)
     }
   }
+
+render(){
+  const image = this.state.image;
+  const setImage = (params) => this.setState({image: params});
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -75,4 +73,6 @@ const getMethods = (obj) => {
   );
 }
 
-export default PhotoUpload;
+}
+
+export default withApollo(PhotoUpload);
