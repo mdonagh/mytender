@@ -27,6 +27,7 @@
     "expo-secure-store": "~12.0.0",
     "expo-status-bar": "~1.4.2",
     "graphql": "^15.8.0",
+    "md5": "^2.3.0",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-hook-form": "^7.42.0",
