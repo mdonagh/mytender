@@ -1,11 +1,9 @@
 import { gql, useMutation } from '@apollo/client';
 
 export const CREATE_PHOTO = gql`
-mutation createPhoto($kind: String!, $bytes: Int!) {
+mutation createPhoto($kind: Kind!, $bytes: Int!) {
 createPhoto(kind: $kind, bytes: $bytes) {
-    presigned {
       url
-    }
   }
 }
 `;

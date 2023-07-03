@@ -15,6 +15,8 @@ import Martini from '../assets/martini.jpg'
 import MapView, {Marker, Callout} from 'react-native-maps';
 // @ts-ignore
 
+import * as Location from 'expo-location';
+
 const {width, height} = Dimensions.get('window');
 
 function radiansToDegrees(angle) {
@@ -66,6 +68,9 @@ class MarkerDisplay extends React.Component{
   }
 
 render(){
+  const [status, requestPermission] = Location.useForegroundPermissions();
+  console.log(status)
+  console.log(requestPermission);
 return(
   <>
   <Marker

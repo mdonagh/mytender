@@ -46,6 +46,14 @@ class PhotoUpload extends React.Component {
 
   setImage = (params) => this.setState({image: params});
 
+  pickBanner = () => {
+    this.pickImage('BANNER')
+  }
+
+  pickHeadshot = () => {
+    this.pickImage('HEADSHOT')
+  }
+
   pickImage = async (photoKind) => {
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -54,8 +62,6 @@ class PhotoUpload extends React.Component {
       aspect: [4, 3],
       quality: 1,
     });
-
-    console.log(result);
 
     if (!result.canceled) {
       let uri = result.assets[0].uri
@@ -72,7 +78,6 @@ class PhotoUpload extends React.Component {
       let byteSize = picture["_data"]["size"]
       let contentType = picture["_data"]["type"]
 
-
       this.props.client.mutate({
         mutation: CREATE_PHOTO,
         variables: {
@@ -81,7 +86,7 @@ class PhotoUpload extends React.Component {
         },
       }).then(result => {
         console.log(JSON.stringify(result))
-        let url = result["data"]["createPhoto"]["presigned"]["url"]
+        let url = result["data"]["createPhoto"]["url"]
         this.uploadImage(url,
                          picture,
                          contentType)
@@ -95,9 +100,8 @@ class PhotoUpload extends React.Component {
   render(){
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Button title="Upload a headshot" onPress={this.pickImage('HEADSHOT')} />
-        <Button title="Upload a banner photo" onPress={this.pickImage('BANNER')} />
-        {/* {this.state.image && <Image source={{ uri: this.state.image }} style={{ width: 200, height: 200 }} />} */}
+        <Button title="Upload a headshot" onPress={this.pickHeadshot} />
+        <Button title="Upload a banner photo" onPress={this.pickBanner} />
       </View>
     );
   }

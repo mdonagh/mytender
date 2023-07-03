@@ -14,6 +14,11 @@ class Menu extends React.Component{
   render() {
     return (
     <>
+      <ListItem onPress={() => this.props.navigation.navigate('Map')} bottomDivider>
+        <ListItem.Content>
+          <ListItem.Title>View Map</ListItem.Title>
+        </ListItem.Content>
+      </ListItem>
       <ListItem onPress={() => this.props.navigation.navigate('Enter Shift')} bottomDivider>
         <ListItem.Content>
           <ListItem.Title>Enter Work Schedule</ListItem.Title>
