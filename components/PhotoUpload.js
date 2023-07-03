@@ -8,10 +8,8 @@ import {
 } from 'react-native';
 
 import * as ImagePicker from 'expo-image-picker';
-import md5 from 'md5';
 import { CREATE_PHOTO } from "../gql/createPhoto";
 import { withApollo } from '@apollo/client/react/hoc';
-import { Buffer } from 'buffer'
 
 class PhotoUpload extends React.Component {
   constructor(props) {
@@ -21,13 +19,12 @@ class PhotoUpload extends React.Component {
     }
   }
 
-  uploadImage = (url, picture, headers) => {
-    console.log("got here")
+  uploadImage = (url, picture, contentType) => {
     fetch(url, {
       method: 'PUT',
       body: picture,
       headers: {
-        'Content-Type': headers['contentType']
+        'Content-Type': contentType
       },
     }).then(response => {
       console.log(JSON.stringify(response["_bodyBlob"]["_data"]["__collector"]))
@@ -49,7 +46,7 @@ class PhotoUpload extends React.Component {
 
   setImage = (params) => this.setState({image: params});
 
-  pickImage = async () => {
+  pickImage = async (photoKind) => {
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -66,32 +63,28 @@ class PhotoUpload extends React.Component {
 
       const imagePath = uri;
       const imageExt = uri.split('.').pop();
-      const imageMime = `image/${imageExt}`;
+
       let picture = await fetch(imagePath);
       picture = await picture.blob();
 
       const imageData = new File([picture], `photo.${imageExt}`);
 
       let byteSize = picture["_data"]["size"]
-      let filename = picture["_data"]["name"]
       let contentType = picture["_data"]["type"]
 
-      let checksum = md5(picture)
 
       this.props.client.mutate({
         mutation: CREATE_PHOTO,
         variables: {
-          filename: filename,
-          byteSize: byteSize,
-          checksum: checksum,
-          contentType: contentType
+          bytes: byteSize,
+          kind: photoKind
         },
       }).then(result => {
         console.log(JSON.stringify(result))
         let url = result["data"]["createPhoto"]["presigned"]["url"]
         this.uploadImage(url,
                          picture,
-                         {contentType: contentType, checksum: checksum})
+                         contentType)
     }).catch(error => {
       console.log("An error", error)
     });
@@ -99,15 +92,15 @@ class PhotoUpload extends React.Component {
     }
   }
 
-render(){
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button title="Pick an image from camera roll" onPress={this.pickImage} />
-      {this.state.image && <Image source={{ uri: this.state.image }} style={{ width: 200, height: 200 }} />}
-    </View>
-  );
-}
-
+  render(){
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Button title="Upload a headshot" onPress={this.pickImage('HEADSHOT')} />
+        <Button title="Upload a banner photo" onPress={this.pickImage('BANNER')} />
+        {/* {this.state.image && <Image source={{ uri: this.state.image }} style={{ width: 200, height: 200 }} />} */}
+      </View>
+    );
+  }
 }
 
 export default withApollo(PhotoUpload);
