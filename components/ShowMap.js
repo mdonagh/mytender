@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -7,6 +7,7 @@ import {
   Image,
   Pressable
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import { Avatar } from '@rneui/themed';
 
@@ -42,13 +43,13 @@ function longitudesToKM(longitudes, atLatitude) {
 function kMToLongitudes(km, atLatitude) {
   return km * 0.0089831 / Math.cos(degreesToRadians(atLatitude));
 }
-
-const ASPECT_RATIO = width / height;
-const LATITUDE = 32.71146432849882;
-const LONGITUDE = -117.15467612584527;
-const LATITUDE_DELTA = 0.0000001;
-const LONGITUDE_DELTA = kMToLongitudes(1.5, 47.61105551203619);
-let id = 0;
+// 
+// const ASPECT_RATIO = width / height;
+// const LATITUDE = 32.71146432849882;
+// const LONGITUDE = -117.15467612584527;
+// const LATITUDE_DELTA = 0.0000001;
+// const LONGITUDE_DELTA = kMToLongitudes(1.5, 47.61105551203619);
+// let id = 0;
 
 const markerStyles = StyleSheet.create({
   container: {
@@ -68,60 +69,63 @@ class MarkerDisplay extends React.Component{
   }
 
 render(){
-  // const [status, requestPermission] = Location.useForegroundPermissions();
-  // console.log(status)
-  // console.log(requestPermission);
-return(
-  <>
-  <Marker
-    key="Tender"
-    coordinate={{latitude: 32.71146432849884, longitude: -117.15467612584527}}
-    onPress={() => this.props.navigation.navigate('Show Bartender')}
-  >
-  <View style={{ height: 64, width: 64}} >
-      <Image
-        style={markerStyles.stretch}
-        source={{uri: 'https://avatars.githubusercontent.com/u/7103655?v=4'}}
-      />
-    </View>
-  </Marker>
-  <Marker
-    key="Tender2"
-    coordinate={{latitude: 32.70756699800065, longitude: -117.15705293106377}}
-    onPress={() => this.props.navigation.navigate('Show Bartender')}
-  >
-  <View style={{ height: 64, width: 64}} >
-      <Image
-        style={markerStyles.stretch}
-        source={{uri: 'https://randomuser.me/api/portraits/men/30.jpg'}}
-      />
-    </View>
-  </Marker>
-  </>
+  return(
+    <>
+    <Marker
+      key="Tender"
+      coordinate={{latitude: 32.71146432849884, longitude: -117.15467612584527}}
+      onPress={() => this.props.navigation.navigate('Show Bartender')}
+    >
+    <View style={{ height: 64, width: 64}} >
+        <Image
+          style={markerStyles.stretch}
+          source={{uri: 'https://avatars.githubusercontent.com/u/7103655?v=4'}}
+        />
+      </View>
+    </Marker>
+    <Marker
+      key="Tender2"
+      coordinate={{latitude: 32.70756699800065, longitude: -117.15705293106377}}
+      onPress={() => this.props.navigation.navigate('Show Bartender')}
+    >
+    <View style={{ height: 64, width: 64}} >
+        <Image
+          style={markerStyles.stretch}
+          source={{uri: 'https://randomuser.me/api/portraits/men/30.jpg'}}
+        />
+      </View>
+    </Marker>
+    </>
   );
 }
 }
 
-class ShowMap extends React.Component{
+class TenderMap extends React.Component{
+  kMToLongitudes = (km, atLatitude) => {
+    return km * 0.0089831 / Math.cos(degreesToRadians(atLatitude));
+  }
+
   constructor(props) {
     super(props);
+    const LATITUDE_DELTA = 0.0000001;
 
     this.state = {
       region: {
-        latitude: LATITUDE,
-        longitude: LONGITUDE,
+        latitude: props.coordinates['latitude'],
+        longitude: props.coordinates['longitude'],
         latitudeDelta: LATITUDE_DELTA,
-        longitudeDelta: LONGITUDE_DELTA,
+        longitudeDelta: this.kMToLongitudes(1.5, props.coordinates['latitude']),
       },
       markers: [],
     };
+
+    console.log(this.state)
   }
 
   render() {
     return (
       <View style={styles.container}>
         <MapView
-          provider={this.props.provider}
           style={styles.map}
           initialRegion={this.state.region}
           >
@@ -140,6 +144,37 @@ class ShowMap extends React.Component{
       </View>
     );
   }
+}
+
+const ShowMap = () => {
+  const navigation = useNavigation();
+  const [coordinates, setCoordinates] = useState(false);
+
+  // const [status, requestPermission] = Location.useForegroundPermissions();
+  // console.log(status)
+//   let granted = status["granted"]
+// 
+//   if(!granted){
+//     Location.requestForegroundPermissionsAsync()
+//   }
+
+  if(!coordinates){
+    Location.getLastKnownPositionAsync().then(response => {
+        console.log(response)
+        setCoordinates(response["coords"])
+      });
+  }
+
+    if(coordinates){
+      return(
+        <TenderMap navigation={navigation} coordinates={coordinates} />
+        )
+    } else {
+      return(
+        <Text>Loading</Text>
+        )
+    }
+
 }
 
 const styles = StyleSheet.create({
