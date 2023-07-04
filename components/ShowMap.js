@@ -68,9 +68,9 @@ class MarkerDisplay extends React.Component{
   }
 
 render(){
-  const [status, requestPermission] = Location.useForegroundPermissions();
-  console.log(status)
-  console.log(requestPermission);
+  // const [status, requestPermission] = Location.useForegroundPermissions();
+  // console.log(status)
+  // console.log(requestPermission);
 return(
   <>
   <Marker
