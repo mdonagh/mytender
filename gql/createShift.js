@@ -1,7 +1,7 @@
-import { gql, useMutation } from '@apollo/client';
+import { gql, useQuery } from '@apollo/client';
 
 export const CREATE_SHIFT = gql`
-mutation EnterShift($notes: String!,
+query EnterShift($notes: String!,
                      $address: String!,
                      $recurring: Boolean!,
                      $duration: Int!,

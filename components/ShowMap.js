@@ -20,6 +20,7 @@ import * as Location from 'expo-location';
 
 const {width, height} = Dimensions.get('window');
 
+
 function radiansToDegrees(angle) {
   return angle * (180 / Math.PI);
 }
@@ -68,6 +69,14 @@ class MarkerDisplay extends React.Component{
     super(props);
   }
 
+  static getDerivedStateFromProps(props, state) {
+    console.log(props['coordinates'])
+    console.log("woof");
+    // Return null to indicate no change to state.
+    return null;
+  }
+
+
 render(){
   return(
     <>
@@ -110,6 +119,10 @@ class TenderMap extends React.Component{
     const LATITUDE_DELTA = 0.0000001;
 
     this.state = {
+      coordinates: {
+        latitude: props.coordinates['latitude'],
+        longitude: props.coordinates['longitude']
+      },
       region: {
         latitude: props.coordinates['latitude'],
         longitude: props.coordinates['longitude'],
@@ -122,14 +135,24 @@ class TenderMap extends React.Component{
     console.log(this.state)
   }
 
+  onRegionChange = (region) => {
+    this.setState({ coordinates: { latitude: region['latitude'], longitude: region['longitude'] } });
+    console.log(this.state.coordinates)
+    console.log(region);
+  };
+
   render() {
     return (
       <View style={styles.container}>
         <MapView
           style={styles.map}
           initialRegion={this.state.region}
+          onRegionChangeComplete={this.onRegionChange}
           >
-          <MarkerDisplay navigation={this.props.navigation} />
+          <MarkerDisplay
+            navigation={this.props.navigation}
+            coordinates={this.state.coordinates}
+          />
         </MapView>
         <Pressable 
           style={{alignSelf: 'flex-start'}}
