@@ -13,44 +13,12 @@ import { Avatar } from '@rneui/themed';
 
 import Martini from '../assets/martini.jpg'
 
-import MapView, {Marker, Callout} from 'react-native-maps';
-// @ts-ignore
+import MapView, {Marker} from 'react-native-maps';
 
 import * as Location from 'expo-location';
+import { gql, useQuery } from '@apollo/client';
 
-const {width, height} = Dimensions.get('window');
-
-
-function radiansToDegrees(angle) {
-  return angle * (180 / Math.PI);
-}
-
-function degreesToRadians(angle) {
-  return angle * (Math.PI / 180);
-}
-
-function latitudesToKM(latitudes) {
-  return latitudes * 110.574;
-}
-
-function kMToLatitudes(km) {
-  return km / 110.574;
-}
-
-function longitudesToKM(longitudes, atLatitude) {
-  return longitudes * 111.32 * Math.cos(degreesToRadians(atLatitude));
-}
-
-function kMToLongitudes(km, atLatitude) {
-  return km * 0.0089831 / Math.cos(degreesToRadians(atLatitude));
-}
-// 
-// const ASPECT_RATIO = width / height;
-// const LATITUDE = 32.71146432849882;
-// const LONGITUDE = -117.15467612584527;
-// const LATITUDE_DELTA = 0.0000001;
-// const LONGITUDE_DELTA = kMToLongitudes(1.5, 47.61105551203619);
-// let id = 0;
+import { NEARBY_SHIFTS } from "../gql/nearbyShifts";
 
 const markerStyles = StyleSheet.create({
   container: {
@@ -64,54 +32,58 @@ const markerStyles = StyleSheet.create({
   },
 });
 
-class MarkerDisplay extends React.Component{
-  constructor(props) {
-    super(props);
-  }
 
-  static getDerivedStateFromProps(props, state) {
+const MarkerDisplay = (props) => {
+  console.log('woof');
+  console.log(props);
+  const { loading, error, data } = useQuery(NEARBY_SHIFTS, {
+    variables:  props['coordinates'],
+  });
+
+  if(loading){
+    return;
+  }
+  else {
     console.log(props['coordinates'])
-    console.log("woof");
-    // Return null to indicate no change to state.
-    return null;
+    console.log(error);
+    console.log(data);
+    console.log(JSON.stringify(data["nearbyShifts"]["nodes"]));
+
+
+    const shiftMarkers = data["nearbyShifts"]["nodes"].map(function(node, i){
+      return(
+      <Marker
+        key={i}
+        coordinate={{latitude: Number(node["latitude"]), longitude: Number(node["longitude"])}}
+        onPress={() => this.props.navigation.navigate('Show Bartender')}
+
+      >
+      <View style={{ height: 64, width: 64}} >
+          <Image
+            style={markerStyles.stretch}
+            source={{uri: 'https://avatars.githubusercontent.com/u/7103655?v=4'}}
+          />
+        </View>
+      </Marker>
+      ) 
+    })
+    console.log(shiftMarkers);
+    return(
+      <>
+      {shiftMarkers}
+      </>
+      )
   }
-
-
-render(){
-  return(
-    <>
-    <Marker
-      key="Tender"
-      coordinate={{latitude: 32.71146432849884, longitude: -117.15467612584527}}
-      onPress={() => this.props.navigation.navigate('Show Bartender')}
-    >
-    <View style={{ height: 64, width: 64}} >
-        <Image
-          style={markerStyles.stretch}
-          source={{uri: 'https://avatars.githubusercontent.com/u/7103655?v=4'}}
-        />
-      </View>
-    </Marker>
-    <Marker
-      key="Tender2"
-      coordinate={{latitude: 32.70756699800065, longitude: -117.15705293106377}}
-      onPress={() => this.props.navigation.navigate('Show Bartender')}
-    >
-    <View style={{ height: 64, width: 64}} >
-        <Image
-          style={markerStyles.stretch}
-          source={{uri: 'https://randomuser.me/api/portraits/men/30.jpg'}}
-        />
-      </View>
-    </Marker>
-    </>
-  );
 }
-}
+
 
 class TenderMap extends React.Component{
+  degreesToRadians = (angle) => {
+    return angle * (Math.PI / 180);
+  }
+
   kMToLongitudes = (km, atLatitude) => {
-    return km * 0.0089831 / Math.cos(degreesToRadians(atLatitude));
+    return km * 0.0089831 / Math.cos(this.degreesToRadians(atLatitude));
   }
 
   constructor(props) {

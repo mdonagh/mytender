@@ -1,18 +1,15 @@
-import { gql, useMutation } from '@apollo/client';
+import { gql, useQuery } from '@apollo/client';
 
 export const NEARBY_SHIFTS = gql`
-mutation NearbyShifts($latitude: Float!,
+query NearbyShifts($latitude: Float!,
                      $longitude: Float!) {
-createShift(latitude: $latitude,
-            longitude: $longitude,
-            recurring: $recurring) {
-    shifts {
+nearbyShifts(latitude: $latitude,
+            longitude: $longitude) {
       nodes {
         id
         latitude
         longitude
       }
     }
-  }
 }
 `;
