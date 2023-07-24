@@ -12,7 +12,23 @@ import { View,
 import Content from './bartender/Content.js'
 
 function ShowBartender({ route, navigation }) {
-  let bartenderId = route.params.id
+  let shiftId = route.params.id
+  let bannerUrl = route.params.bannerUrl
+
+  console.log(route.params);
+//   The problem is that I'm not really collecting much data on bartender currently
+//   Like, what prevents this page from being good is that I don't have bartender name, I don't have bartender
+//   intro sentence
+// 
+//   I don't have the bartender signup actually
+//   So I have to just display the photo on this page, and then return to this page later
+//   Also, I wonder if the load time would be faster if I were to pass the bannerUrl as a param to this page as well
+//   Surely it would, right?
+
+  console.log(bannerUrl);
+  console.log(shiftId);
+  console.log('nyah');
+  console.log('fdsfdsfds');
 
   const {width, height} = Dimensions.get('window');
 
@@ -36,7 +52,7 @@ function ShowBartender({ route, navigation }) {
                       borderBottomColor: 'black',
                       borderBottomWidth: StyleSheet.hairlineWidth, 
                       width: width }}
-        source={require('../assets/bartender.jpeg')}
+        source={{uri: bannerUrl}}
       />
       <View style={{ flex: 1,
                      alignItems: 'center',

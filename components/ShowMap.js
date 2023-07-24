@@ -55,7 +55,7 @@ const MarkerDisplay = (props) => {
       <Marker
         key={i}
         coordinate={{latitude: Number(node["latitude"]), longitude: Number(node["longitude"])}}
-        onPress={() => props.navigation.navigate('Show Bartender', {id: node["id"]})}
+        onPress={() => props.navigation.navigate('Show Bartender',{id: node["id"], bannerUrl: node['user']['bannerUrl']})}
 
       >
       <View style={{ height: 64, width: 64}} >
