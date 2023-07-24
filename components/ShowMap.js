@@ -55,13 +55,13 @@ const MarkerDisplay = (props) => {
       <Marker
         key={i}
         coordinate={{latitude: Number(node["latitude"]), longitude: Number(node["longitude"])}}
-        onPress={() => this.props.navigation.navigate('Show Bartender')}
+        onPress={() => props.navigation.navigate('Show Bartender', {id: node["id"]})}
 
       >
       <View style={{ height: 64, width: 64}} >
           <Image
             style={markerStyles.stretch}
-            source={{uri: 'https://avatars.githubusercontent.com/u/7103655?v=4'}}
+            source={{uri: node['user']['headshotUrl'] || 'https://avatars.githubusercontent.com/u/7103655?v=4'}}
           />
         </View>
       </Marker>

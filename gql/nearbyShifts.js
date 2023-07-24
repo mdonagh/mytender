@@ -9,6 +9,10 @@ nearbyShifts(latitude: $latitude,
         id
         latitude
         longitude
+        user {
+          bannerUrl
+          headshotUrl
+        }
       }
     }
 }

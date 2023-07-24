@@ -11,7 +11,8 @@ import { View,
 
 import Content from './bartender/Content.js'
 
-function ShowBartender() {
+function ShowBartender({ route, navigation }) {
+  let bartenderId = route.params.id
 
   const {width, height} = Dimensions.get('window');
 
