@@ -179,7 +179,8 @@ let radioButtonsVertical = [
           recurring: this.state.regularShift
 
         },
-      }).catch(error => console.log("An error", error));
+      }).then(data => console.log("data", data))
+      .catch(error => console.log("An error", error));
 
       return this.props.navigation.reset({
         index: 2,

@@ -2,6 +2,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Login from './components/Login';
+import Register from './components/Register';
+
 import ShowBartender from './components/ShowBartender';
 import ShowMap from './components/ShowMap';
 import Menu from './components/Menu';
@@ -19,13 +21,14 @@ import { setContext } from '@apollo/client/link/context';
 import * as SecureStore from 'expo-secure-store';
 
 const httpLink = createHttpLink({
-  uri: 'https://bae9-24-17-149-35.ngrok.io/graphql',
+  uri: 'https://fbfe-24-17-149-35.ngrok.io/graphql',
 });
 
 const authLink = setContext(async (_, { headers }) => {
   // get the authentication token from local storage if it exists
   let token = false
   token = await SecureStore.getItemAsync('token');
+  console.log(token);
   return {
     headers: {
       ...headers,
@@ -45,8 +48,11 @@ function App() {
     <ApolloProvider client={client}>
     <NavigationContainer>
     {/* change initialRoute back to Login */}
-      <Stack.Navigator initialRouteName="Menu"> 
+      <Stack.Navigator initialRouteName="Login"> 
         <Stack.Screen name="Login" component={Login}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen name="Register" component={Register}
           options={{headerShown: false}}
         />
         <Stack.Screen name="Show Bartender" component={ShowBartender} />

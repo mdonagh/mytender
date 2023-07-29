@@ -17,7 +17,7 @@ import * as SecureStore from 'expo-secure-store';
 import { useMutation } from "@apollo/client";
 import { SIGN_IN } from "../gql/signIn";
 
-const Login = (props) => {
+const Register = (props) => {
   const [email, onChangeEmail] = React.useState('');
   const [password, onChangePassword] = React.useState('');
 
@@ -45,6 +45,7 @@ if (error){
         source={Bartender}
         resizeMode="cover"
         style={styles.image}>
+
       <Image source={Logo} style={{height: 250, width: 400}} />
       <TextInput
         style={styles.input}
@@ -63,6 +64,12 @@ if (error){
       <Button
         title="Login"
         onPress={() => loginUser()}
+      />
+      </View>
+      <View style={styles.button} >
+      <Button
+        title="Register"
+        onPress={() => props.navigation.navigate('Register')}
       />
       </View>
       </ImageBackground>
@@ -92,4 +99,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+export default Register;
