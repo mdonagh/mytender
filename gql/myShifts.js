@@ -1,7 +1,8 @@
 import { gql, useQuery } from '@apollo/client';
 
 export const MY_SHIFTS = gql`
-query Shifts(personal: true) {
+query shifts($personal: Boolean) {
+  shifts(personal: $personal){
       nodes {
         id
         notes
@@ -9,4 +10,5 @@ query Shifts(personal: true) {
         startTime
       }
     }
+  }
 `;
