@@ -195,7 +195,7 @@ let radioButtonsVertical = [
         resizeMode="cover"
         style={styles.image}>
       <View style={{backgroundColor: 'white', margin: 10, borderRadius: 40, overflow: 'hidden'}}>
-      {form}
+      {form};
       <Button
         title="Next"
         style={styles.text}

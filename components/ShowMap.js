@@ -5,7 +5,8 @@ import {
   Text,
   Dimensions,
   Image,
-  Pressable
+  Pressable,
+  ImageBackground
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -143,30 +144,41 @@ class TenderMap extends React.Component{
 
 const ShowMap = () => {
   const navigation = useNavigation();
+
+  const [status, requestPermission] = Location.useForegroundPermissions();
   const [coordinates, setCoordinates] = useState(false);
 
-  // const [status, requestPermission] = Location.useForegroundPermissions();
-  // console.log(status)
-//   let granted = status["granted"]
-// 
-//   if(!granted){
-//     Location.requestForegroundPermissionsAsync()
-//   }
+  console.log(status)
+  let granted = status ? status["granted"] : false
 
-  if(!coordinates){
+  if(!granted){
+    Location.requestForegroundPermissionsAsync()
+  }
+
+  if(!coordinates && granted){
     Location.getLastKnownPositionAsync().then(response => {
         console.log(response)
         setCoordinates(response["coords"])
       });
   }
 
-    if(coordinates){
+    if(coordinates && granted){
       return(
         <TenderMap navigation={navigation} coordinates={coordinates} />
         )
     } else {
+      // Improve layout here
       return(
-        <Text>Loading</Text>
+        <View style={styles.bigContainer}>
+          <ImageBackground 
+            source={{uri: 'https://cdn.pixabay.com/photo/2014/10/22/17/50/bar-498420_1280.jpg'}}
+            resizeMode="cover"
+            style={styles.backgroundImage}>
+            <View style={{backgroundColor: 'white', margin: 10, borderRadius: 40, overflow: 'hidden'}}>
+            <Text style={styles.warningText}>You must allow this app to access your location</Text>
+            </View>
+          </ImageBackground>
+        </View>
         )
     }
 
@@ -176,10 +188,22 @@ const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
     justifyContent: 'flex-end',
-    alignItems: 'center',
+    alignItems: 'center', 
   },
   map: {
     ...StyleSheet.absoluteFillObject,
+  },
+  backgroundImage: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  bigContainer: {
+    flex: 1,
+  },
+  warningText: {
+    fontSize: 50,
+    textAlign: 'center',
+    marginBottom: 30
   },
   martini: {
     resizeMode: 'stretch',

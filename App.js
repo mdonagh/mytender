@@ -21,7 +21,7 @@ import { setContext } from '@apollo/client/link/context';
 import * as SecureStore from 'expo-secure-store';
 
 const httpLink = createHttpLink({
-  uri: 'https://ecb0-24-17-149-35.ngrok.io/graphql',
+  uri: 'https://1f3d-24-17-149-35.ngrok.io/graphql',
 });
 
 const authLink = setContext(async (_, { headers }) => {
@@ -48,7 +48,7 @@ function App() {
     <ApolloProvider client={client}>
     <NavigationContainer>
     {/* change initialRoute back to Login */}
-      <Stack.Navigator initialRouteName="Login"> 
+      <Stack.Navigator initialRouteName="Map"> 
         <Stack.Screen name="Login" component={Login}
           options={{headerShown: false}}
         />
