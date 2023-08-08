@@ -21,7 +21,7 @@ import { setContext } from '@apollo/client/link/context';
 import * as SecureStore from 'expo-secure-store';
 
 const httpLink = createHttpLink({
-  uri: 'https://1f3d-24-17-149-35.ngrok.io/graphql',
+  uri: 'https://mytender-dc1b2d59a1a2.herokuapp.com/graphql',
 });
 
 const authLink = setContext(async (_, { headers }) => {
@@ -37,9 +37,13 @@ const authLink = setContext(async (_, { headers }) => {
   }
 });
 
+// https://www.apollographql.com/docs/react/data/queries/#setting-a-fetch-policy
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
+  defaultOptions: {
+    fetchPolicy: 'cache-and-network'
+  }
 });
 
 
@@ -48,7 +52,7 @@ function App() {
     <ApolloProvider client={client}>
     <NavigationContainer>
     {/* change initialRoute back to Login */}
-      <Stack.Navigator initialRouteName="Map"> 
+      <Stack.Navigator initialRouteName="Login"> 
         <Stack.Screen name="Login" component={Login}
           options={{headerShown: false}}
         />

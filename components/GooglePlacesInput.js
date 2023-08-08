@@ -19,9 +19,14 @@ render(){
       renderDescription={row => row.description} // custom description render
       onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
         console.log(data, details);
-        this.props.selectLocation({address: details['formatted_address'],
-                                   latitude: details['geometry']['location']['lat'],
-                                   longitude: details['geometry']['location']['lng']})
+        console.log('data');
+    console.log(JSON.stringify(data));
+    console.log('details');
+    console.log(JSON.stringify(details));
+      this.props.selectLocation({barName: data['structured_formatting']['main_text'],
+                                 address: details['formatted_address'],
+                                 latitude: details['geometry']['location']['lat'],
+                                 longitude: details['geometry']['location']['lng']})
       }}
 
       getDefaultValue={() => ''}

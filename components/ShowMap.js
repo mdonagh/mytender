@@ -166,7 +166,7 @@ const ShowMap = () => {
       return(
         <TenderMap navigation={navigation} coordinates={coordinates} />
         )
-    } else {
+    } else if (!granted) {
       // Improve layout here
       return(
         <View style={styles.bigContainer}>
@@ -181,7 +181,9 @@ const ShowMap = () => {
         </View>
         )
     }
-
+      else {
+        return(<></>)
+      }
 }
 
 const styles = StyleSheet.create({

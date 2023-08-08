@@ -6,6 +6,7 @@ query shifts($personal: Boolean) {
       nodes {
         id
         notes
+        barName
         address
         startTime
       }

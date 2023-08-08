@@ -42,8 +42,7 @@ function ListShift() {
         refetch({ personal: true })
       })
       .catch(error => {
-                refetch({ personal: true })
-
+        refetch({ personal: true })
         console.log(JSON.stringify(error));
       })
   }
@@ -61,7 +60,7 @@ if(loading){
       <ListItem bottomDivider key={i}>
         <ListItem.Content>
           <ListItem.Title>{Moment(node['startTime']).format('MMMM Do YYYY, h:mm:ss a')}</ListItem.Title>
-          <ListItem.Subtitle>{node['address']}</ListItem.Subtitle>
+          <ListItem.Subtitle>{node['barName']}</ListItem.Subtitle>
           <ListItem.Subtitle>{node['notes']}</ListItem.Subtitle>
         </ListItem.Content>
         <Feather

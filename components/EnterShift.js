@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, View, TextInput, StyleSheet, ImageBackground } from "react-native";
 import { Text } from '@rneui/themed';
 import { CheckBox, Separator } from "react-native-btr";
@@ -10,6 +10,16 @@ import { RadioGroup } from "react-native-btr";
 import { CREATE_SHIFT } from "../gql/createShift";
 
 import { withApollo } from '@apollo/client/react/hoc';
+
+const LeavePage = (props) => {
+  useEffect(() => {
+    props.navigation.reset({
+        index: 2,
+        routes: [{ name: 'Map' }, { name: 'Menu' }, { name: 'List Shifts' }],
+      });
+    }, []);
+  return(<></>);
+}
 
 class EnterShift extends React.Component {
   constructor(props) {
@@ -171,6 +181,7 @@ let radioButtonsVertical = [
         mutation: CREATE_SHIFT,
         variables: {
           notes: this.state.notes,
+          barName: this.state.location['barName'],
           address: this.state.location['address'],
           duration: parseInt(this.state.hours),
           latitude: this.state.location['latitude'],
@@ -179,13 +190,12 @@ let radioButtonsVertical = [
           recurring: this.state.regularShift
 
         },
-      }).then(data => console.log("data", data))
-      .catch(error => console.log("An error", error));
-
-      return this.props.navigation.reset({
-        index: 2,
-        routes: [{ name: 'Map' }, { name: 'Menu' }, { name: 'List Shifts' }],
-      });
+      }).then(response => {
+        console.log(response)
+      }).catch(response => {
+        console.log(response)
+      })
+      return(<LeavePage navigation={this.props.navigation} />)
     }
 
   return (
@@ -195,7 +205,7 @@ let radioButtonsVertical = [
         resizeMode="cover"
         style={styles.image}>
       <View style={{backgroundColor: 'white', margin: 10, borderRadius: 40, overflow: 'hidden'}}>
-      {form};
+      {form}
       <Button
         title="Next"
         style={styles.text}
