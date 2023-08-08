@@ -152,7 +152,7 @@ const ShowMap = () => {
   let granted = status ? status["granted"] : false
 
   if(!granted){
-    Location.requestForegroundPermissionsAsync()
+    requestPermission()
   }
 
   if(!coordinates && granted){
