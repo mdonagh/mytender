@@ -3,9 +3,19 @@ import { View,
          Image,
          StyleSheet,
          Dimensions} from "react-native";
+import { gql, useQuery } from '@apollo/client';
+
+import { GET_SHIFT } from "../../gql/getShift";
+
 
 function Description(props) {
   const {width, height} = Dimensions.get('window');
+  console.log(props);
+  console.log('in description');
+
+  const { loading, error, data, refetch } = useQuery(GET_SHIFT, {
+    variables:  {id: props.shiftId},
+  });
 
   const styles = StyleSheet.create({
     image: {
@@ -16,6 +26,11 @@ function Description(props) {
     },
   });
 
+  if(loading){
+    return <View style={{flex: 6}}></View>
+  }
+
+  let shift = data["shift"]
   return (
     <View style={{flex: 6}}>
       <Text style={{ flex: 1,
@@ -28,7 +43,7 @@ function Description(props) {
                       padding: 20
                     }}
       >
-        Bridget
+        {shift['barName']}
       </Text>
         
       <Text style={{ flex: 3,
@@ -40,7 +55,7 @@ function Description(props) {
                       fontWeight: 'bold',
                     }}
       >
-        Noble Experiment
+        {shift["address"]}
       </Text>
       <Text style={{ flex: 3,
                       alignItems: 'center',
@@ -50,7 +65,17 @@ function Description(props) {
                       fontWeight: 'bold',
                     }}
       >
-        Half off hot wings!
+        {shift["notes"]}
+      </Text>
+      <Text style={{ flex: 3,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      borderBottomColor: 'black',
+                      borderBottomWidth: StyleSheet.hairlineWidth, 
+                      fontWeight: 'bold',
+                    }}
+      >
+        {shift['user']['description']}
       </Text>
     </View>
     )

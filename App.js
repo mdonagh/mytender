@@ -63,7 +63,7 @@ function App() {
         <Stack.Screen name="Menu" component={Menu} />
         <Stack.Screen name="List Bartenders" component={ListBartender} />
         <Stack.Screen name="Enter Shift" component={EnterShift} />
-        <Stack.Screen name="List Shifts" component={ListShift} />
+        <Stack.Screen name="My Shifts" component={ListShift} />
         <Stack.Screen name="Add Photos" component={PhotoUpload} />
 
         <Stack.Screen

@@ -11,11 +11,13 @@ import { CREATE_SHIFT } from "../gql/createShift";
 
 import { withApollo } from '@apollo/client/react/hoc';
 
+import BarBackground from '../assets/black-white-bar.jpg'
+
 const LeavePage = (props) => {
   useEffect(() => {
     props.navigation.reset({
         index: 2,
-        routes: [{ name: 'Map' }, { name: 'Menu' }, { name: 'List Shifts' }],
+        routes: [{ name: 'Map' }, { name: 'Menu' }, { name: 'My Shifts' }],
       });
     }, []);
   return(<></>);
@@ -201,7 +203,7 @@ let radioButtonsVertical = [
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={{uri: 'https://cdn.pixabay.com/photo/2014/10/22/17/50/bar-498420_1280.jpg'}}
+        source={BarBackground}
         resizeMode="cover"
         style={styles.image}>
       <View style={{backgroundColor: 'white', margin: 10, borderRadius: 40, overflow: 'hidden'}}>

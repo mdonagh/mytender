@@ -11,9 +11,17 @@ import { View,
 
 import Content from './bartender/Content.js'
 
+import { gql, useQuery } from '@apollo/client';
+import { GET_SHIFT } from "../gql/getShift";
+
+
 function ShowBartender({ route, navigation }) {
   let shiftId = route.params.id
   let bannerUrl = route.params.bannerUrl
+
+  const { loading, error, data, refetch } = useQuery(GET_SHIFT, {
+    variables:  {id: shiftId},
+  });
 
   console.log(route.params);
 //   The problem is that I'm not really collecting much data on bartender currently
@@ -78,7 +86,7 @@ function ShowBartender({ route, navigation }) {
           <Image source={require('../assets/taxi.png')} style={styles.image}  />
         </Pressable>
       </View>
-      <Content selected={selected} />
+      <Content selected={selected} shiftId={shiftId} />
     </View>
   );
 }

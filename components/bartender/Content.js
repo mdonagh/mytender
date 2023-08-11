@@ -12,7 +12,7 @@ function Content(props) {
     return <Payment />;
   }
   else{
-    return <Description />
+    return <Description shiftId={props.shiftId} />
   }
 }
 
