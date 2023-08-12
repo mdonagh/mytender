@@ -21,6 +21,7 @@ import { gql, useQuery } from '@apollo/client';
 
 import { NEARBY_SHIFTS } from "../gql/nearbyShifts";
 import Toast from 'react-native-toast-message';
+import BarBackground from '../assets/black-white-bar.jpg'
 
 const markerStyles = StyleSheet.create({
   container: {
@@ -68,10 +69,19 @@ const MarkerDisplay = (props) => {
 
       >
       <View style={{ height: 64, width: 64}} >
-          <Image
-            style={markerStyles.stretch}
-            source={{uri: node['user']['headshotUrl'] || 'https://avatars.githubusercontent.com/u/7103655?v=4'}}
-          />
+
+        { node['user']['headshotUrl'] ?
+            <Image
+              style={markerStyles.stretch}
+              source={{uri: node['user']['headshotUrl']}}
+            />
+            :
+            <Image
+              style={markerStyles.stretch}
+              source={Martini}
+            />
+        }
+
         </View>
       </Marker>
       ) 
@@ -179,7 +189,7 @@ const ShowMap = () => {
       return(
         <View style={styles.bigContainer}>
           <ImageBackground 
-            source={{uri: 'https://cdn.pixabay.com/photo/2014/10/22/17/50/bar-498420_1280.jpg'}}
+            source={BarBackground}
             resizeMode="cover"
             style={styles.backgroundImage}>
             <View style={{backgroundColor: 'white', margin: 10, borderRadius: 40, overflow: 'hidden'}}>
