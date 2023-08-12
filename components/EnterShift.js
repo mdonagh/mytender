@@ -198,7 +198,7 @@ let radioButtonsVertical = [
       }).catch(error => {
         Toast.show({
           type: 'error',
-          text1: error,
+          text1: error.message,
         });
       })
       return(<LeavePage navigation={this.props.navigation} />)

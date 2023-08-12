@@ -39,7 +39,7 @@ if (loading) return <Text>'Loading...'</Text>;
 if (error){
   Toast.show({
     type: 'error',
-    text1: error,
+    text1: error.message,
   });
 }
 

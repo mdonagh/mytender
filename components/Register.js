@@ -28,6 +28,15 @@ class Register extends React.Component {
 
   }
 
+getMethods = (obj) => {
+  let properties = new Set()
+  let currentObj = obj
+  do {
+    Object.getOwnPropertyNames(currentObj).map(item => properties.add(item))
+  } while ((currentObj = Object.getPrototypeOf(currentObj)))
+  return [...properties.keys()].filter(item => typeof obj[item] === 'function')
+}
+
   createUser = () => {
       this.props.client.mutate({
         mutation: CREATE_USER,
@@ -50,7 +59,7 @@ class Register extends React.Component {
       .catch(error => {
         Toast.show({
           type: 'error',
-          text1: error,
+          text1: error.message,
         });
       });
   }

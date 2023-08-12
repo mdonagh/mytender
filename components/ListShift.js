@@ -34,7 +34,7 @@ function ListShift() {
   if (error){
     Toast.show({
       type: 'error',
-      text1: error,
+      text1: error.message,
     });
   }
 
@@ -44,7 +44,7 @@ function ListShift() {
   if (mutationError){
       Toast.show({
         type: 'error',
-        text1: error,
+        text1: mutationError.message,
       });
     }
 

@@ -21,7 +21,7 @@ import { setContext } from '@apollo/client/link/context';
 import * as SecureStore from 'expo-secure-store';
 
 const httpLink = createHttpLink({
-  uri: 'https://mytender-dc1b2d59a1a2.herokuapp.com/graphql',
+  uri: 'https://ede2-24-17-149-35.ngrok.io/graphql',
 });
 
 const authLink = setContext(async (_, { headers }) => {

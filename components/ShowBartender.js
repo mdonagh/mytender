@@ -11,7 +11,6 @@ import { View,
 
 import Content from './bartender/Content.js'
 
-import { gql, useQuery } from '@apollo/client';
 import { GET_SHIFT } from "../gql/getShift";
 
 

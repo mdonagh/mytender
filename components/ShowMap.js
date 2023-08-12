@@ -45,7 +45,7 @@ const MarkerDisplay = (props) => {
   if (error){
       Toast.show({
         type: 'error',
-        text1: error,
+        text1: error.message,
       });
     }
 
