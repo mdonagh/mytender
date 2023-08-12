@@ -1,120 +1,92 @@
+import React, { useState } from 'react';
+
 import { 
          Pressable,
        } from "react-native";
 
 import { ListItem, Avatar } from '@rneui/themed';
 
+import { gql, useQuery } from '@apollo/client';
+
+import { LIST_BARTENDER } from "../gql/listBartender";
+import * as Location from 'expo-location';
+import NeedLocation from './NeedLocation'
+import { useNavigation } from '@react-navigation/native';
+
+
+function Bartenders(props) {
+    const navigation = useNavigation();
+
+    const { loading, error, data } = useQuery(LIST_BARTENDER, {
+      variables:  props.coordinates,
+    });
+
+    if(loading){
+      return(
+        <>
+          {bartenderList}
+        </>
+        )
+    } else {
+      const bartenderList = data["nearbyShifts"]["nodes"].map(function(node, i){
+        return(
+          <ListItem
+            key={i}
+            bottomDivider
+            onPress={() => navigation.navigate('Show Bartender',{id: node["id"], bannerUrl: node['user']['bannerUrl']})}
+          >
+          <Avatar
+            rounded
+            source={{ uri: node['user']['headshotUrl'] }}
+          />
+          <ListItem.Content>
+            <ListItem.Title>{node['barName']}</ListItem.Title>
+            <ListItem.Subtitle>{node['notes']}</ListItem.Subtitle>
+            <ListItem.Subtitle>{node['distance']}</ListItem.Subtitle>
+          </ListItem.Content>
+        </ListItem>
+        ) 
+      })
+
+      return(
+        <>
+          {bartenderList}
+        </>
+        )
+    }
+}
+
 function ListBartender() {
-  return (
-    <>
-      <ListItem bottomDivider>
-        <Avatar
-          rounded
-          source={{ uri: 'https://randomuser.me/api/portraits/men/30.jpg' }}
-        />
-        <ListItem.Content>
-          <ListItem.Title>John Doe</ListItem.Title>
-          <ListItem.Subtitle>TGI Fridays</ListItem.Subtitle>
-          <ListItem.Subtitle>.5 miles away</ListItem.Subtitle>
-        </ListItem.Content>
-      </ListItem>
-      <ListItem bottomDivider>
-        <Avatar
-          rounded
-          icon={{
-            name: 'person-outline',
-            type: 'material',
-            size: 26,
-          }}
-          source={{ uri: 'https://randomuser.me/api/portraits/men/24.jpg' }}
-          containerStyle={{ backgroundColor: '#c2c2c2' }}
-        />
-        <ListItem.Content>
-          <ListItem.Title>Alba King</ListItem.Title>
-          <ListItem.Subtitle>Applebee's</ListItem.Subtitle>
-          <ListItem.Subtitle>10 miles away</ListItem.Subtitle>
-        </ListItem.Content>
-      </ListItem>
-      <ListItem bottomDivider>
-        <Avatar 
-        rounded 
-        title="A" 
-        containerStyle={{ backgroundColor: 'grey' }} 
-       source={{ uri: 'https://randomuser.me/api/portraits/women/19.jpg' }}
-        />
-        <ListItem.Content>
-          <ListItem.Title>Yasmin Freeman</ListItem.Title>
-          <ListItem.Subtitle>Aeroclub Bar</ListItem.Subtitle>
-          <ListItem.Subtitle>20 miles away</ListItem.Subtitle>
-        </ListItem.Content>
-      </ListItem>
-      <ListItem bottomDivider>
-        <Avatar 
-        rounded 
-        title="A" 
-        containerStyle={{ backgroundColor: 'grey' }} 
-       source={{ uri: 'https://randomuser.me/api/portraits/women/25.jpg' }}
-        />
-        <ListItem.Content>
-          <ListItem.Title>Brenda Weaver</ListItem.Title>
-          <ListItem.Subtitle>Polite Provisions</ListItem.Subtitle>
-          <ListItem.Subtitle>20 miles away</ListItem.Subtitle>
-        </ListItem.Content>
-      </ListItem>
-      <ListItem bottomDivider>
-        <Avatar 
-        rounded 
-        title="A" 
-        containerStyle={{ backgroundColor: 'grey' }} 
-       source={{ uri: 'https://randomuser.me/api/portraits/women/26.jpg' }}
-        />
-        <ListItem.Content>
-          <ListItem.Title>Carrie Glover</ListItem.Title>
-          <ListItem.Subtitle>Sycamore Den</ListItem.Subtitle>
-          <ListItem.Subtitle>20 miles away</ListItem.Subtitle>
-        </ListItem.Content>
-      </ListItem>
-      <ListItem bottomDivider>
-        <Avatar 
-        rounded 
-        title="A" 
-        containerStyle={{ backgroundColor: 'grey' }} 
-       source={{ uri: 'https://randomuser.me/api/portraits/women/27.jpg' }}
-        />
-        <ListItem.Content>
-          <ListItem.Title>Mollie Morton</ListItem.Title>
-          <ListItem.Subtitle>Sidecar Bar</ListItem.Subtitle>
-          <ListItem.Subtitle>20 miles away</ListItem.Subtitle>
-        </ListItem.Content>
-      </ListItem>
-      <ListItem bottomDivider>
-        <Avatar 
-        rounded 
-        title="A" 
-        containerStyle={{ backgroundColor: 'grey' }} 
-       source={{ uri: 'https://randomuser.me/api/portraits/women/28.jpg' }}
-        />
-        <ListItem.Content>
-          <ListItem.Title>Aishah Garner</ListItem.Title>
-          <ListItem.Subtitle>False Idol</ListItem.Subtitle>
-          <ListItem.Subtitle>20 miles away</ListItem.Subtitle>
-        </ListItem.Content>
-      </ListItem>
-      <ListItem bottomDivider>
-        <Avatar 
-        rounded 
-        title="A" 
-        containerStyle={{ backgroundColor: 'grey' }} 
-       source={{ uri: 'https://randomuser.me/api/portraits/women/29.jpg' }}
-        />
-        <ListItem.Content>
-          <ListItem.Title>Monica Shannon</ListItem.Title>
-          <ListItem.Subtitle>The Cordova Bar</ListItem.Subtitle>
-          <ListItem.Subtitle>20 miles away</ListItem.Subtitle>
-        </ListItem.Content>
-      </ListItem>
-    </>
-  );
+  const [status, requestPermission] = Location.useForegroundPermissions();
+  const [coordinates, setCoordinates] = useState(false);
+
+  console.log(status)
+  let granted = status ? status["granted"] : false
+
+  if(!granted){
+    requestPermission()
+  }
+
+  if(!coordinates && granted){
+    Location.getLastKnownPositionAsync().then(response => {
+        console.log(response)
+        setCoordinates(response["coords"])
+      });
+  }
+
+    if(granted){
+      return(
+        <Bartenders coordinates={coordinates} />
+    )
+    } else if (!granted) {
+      // Improve layout here
+      return(
+        <NeedLocation />
+        )
+    }
+      else {
+        return(<></>)
+      }
 }
 
 export default ListBartender;

@@ -1,18 +1,19 @@
 import { gql, useQuery } from '@apollo/client';
 
-export const LIST_SHIFTS = gql`
+export const LIST_BARTENDER = gql`
 query NearbyShifts($latitude: Float!,
-                     $longitude: Float!,
-                     $radius: Integer!) {
+                     $longitude: Float!) {
 nearbyShifts(latitude: $latitude,
             longitude: $longitude,
-            $radius: 75) {
+            radius: 75) {
       nodes {
         id
-        latitude
-        longitude
+        notes
+        distance
+        barName
         user {
           headshotUrl
+          bannerUrl
         }
       }
     }

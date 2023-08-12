@@ -25,17 +25,7 @@ class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = { currentForm: 'start' };
-
   }
-
-getMethods = (obj) => {
-  let properties = new Set()
-  let currentObj = obj
-  do {
-    Object.getOwnPropertyNames(currentObj).map(item => properties.add(item))
-  } while ((currentObj = Object.getPrototypeOf(currentObj)))
-  return [...properties.keys()].filter(item => typeof obj[item] === 'function')
-}
 
   createUser = () => {
       this.props.client.mutate({
@@ -57,6 +47,7 @@ getMethods = (obj) => {
         });
       })
       .catch(error => {
+        console.log(error);
         Toast.show({
           type: 'error',
           text1: error.message,

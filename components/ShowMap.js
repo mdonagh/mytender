@@ -23,6 +23,7 @@ import { NEARBY_SHIFTS } from "../gql/nearbyShifts";
 import Toast from 'react-native-toast-message';
 import BarBackground from '../assets/black-white-bar.jpg'
 
+import NeedLocation from './NeedLocation'
 const markerStyles = StyleSheet.create({
   container: {
     paddingTop: 50,
@@ -187,16 +188,7 @@ const ShowMap = () => {
     } else if (!granted) {
       // Improve layout here
       return(
-        <View style={styles.bigContainer}>
-          <ImageBackground 
-            source={BarBackground}
-            resizeMode="cover"
-            style={styles.backgroundImage}>
-            <View style={{backgroundColor: 'white', margin: 10, borderRadius: 40, overflow: 'hidden'}}>
-            <Text style={styles.warningText}>You must allow this app to access your location</Text>
-            </View>
-          </ImageBackground>
-        </View>
+        <NeedLocation />
         )
     }
       else {
