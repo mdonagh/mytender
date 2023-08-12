@@ -21,11 +21,11 @@ import { setContext } from '@apollo/client/link/context';
 import * as SecureStore from 'expo-secure-store';
 
 // const httpLink = createHttpLink({
-//   uri: 'https://mytender-dc1b2d59a1a2.herokuapp.com/graphql',
+//   uri: 'https://mytender2-35cd95c9367d.herokuapp.com/graphql',
 // });
 
 const httpLink = createHttpLink({
-  uri: 'https://5bdc-24-17-149-35.ngrok.io/graphql',
+  uri: 'https://a962-24-17-149-35.ngrok.io/graphql',
 });
 
 const authLink = setContext(async (_, { headers }) => {
@@ -56,7 +56,7 @@ function App() {
     <ApolloProvider client={client}>
     <NavigationContainer>
     {/* change initialRoute back to Login */}
-      <Stack.Navigator initialRouteName="Menu">
+      <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Login" component={Login}
           options={{headerShown: false}}
         />

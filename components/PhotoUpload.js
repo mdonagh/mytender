@@ -27,14 +27,14 @@ class PhotoUpload extends React.Component {
         'Content-Type': contentType
       },
     }).then(response => {
-      console.log(JSON.stringify(response["_bodyBlob"]["_data"]["__collector"]))
-      console.log('response')
-      console.log(response)
-      console.log(response.body)
-      console.log(response.headers)
-      console.log(response.status)
-      console.log(response.statusText)
-      console.log(response.type)
+      // console.log(JSON.stringify(response["_bodyBlob"]["_data"]["__collector"]))
+      // console.log('response')
+      // console.log(response)
+      // console.log(response.body)
+      // console.log(response.headers)
+      // console.log(response.status)
+      // console.log(response.statusText)
+      // console.log(response.type)
         // handle the response
     })
     .catch(error => {
@@ -85,7 +85,6 @@ class PhotoUpload extends React.Component {
           kind: photoKind
         },
       }).then(result => {
-        console.log(JSON.stringify(result))
         let url = result["data"]["createPhoto"]["url"]
         this.uploadImage(url,
                          picture,

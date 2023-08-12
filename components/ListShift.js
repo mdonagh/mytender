@@ -58,6 +58,10 @@ function ListShift() {
       })
       .catch(error => {
         refetch({ personal: true })
+        Toast.show({
+          type: 'error',
+          text1: JSON.stringify(error),
+        });
         console.log(JSON.stringify(error));
       })
   }
