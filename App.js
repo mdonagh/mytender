@@ -12,7 +12,7 @@ import EnterShift from './components/EnterShift';
 import ListShift from './components/ListShift';
 
 import PhotoUpload from './components/PhotoUpload';
-
+import Toast from 'react-native-toast-message';
 
 const Stack = createNativeStackNavigator();
 
@@ -72,6 +72,7 @@ function App() {
           component={ShowMap}
         />
       </Stack.Navigator>
+      <Toast />
     </NavigationContainer>
     </ApolloProvider>
   );

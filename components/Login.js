@@ -16,6 +16,7 @@ import * as SecureStore from 'expo-secure-store';
 
 import { useMutation } from "@apollo/client";
 import { SIGN_IN } from "../gql/signIn";
+import Toast from 'react-native-toast-message';
 
 const Register = (props) => {
   const [email, onChangeEmail] = React.useState('');
@@ -36,7 +37,10 @@ useEffect(() => {
 
 if (loading) return <Text>'Loading...'</Text>;
 if (error){
-  console.log(error)
+  Toast.show({
+    type: 'error',
+    text1: error,
+  });
 }
 
   return (

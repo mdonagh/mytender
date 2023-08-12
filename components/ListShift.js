@@ -16,10 +16,10 @@ import { gql, useQuery } from '@apollo/client';
 
 import { useMutation } from "@apollo/client";
 
-
 import { MY_SHIFTS } from "../gql/myShifts";
 
 import { DELETE_SHIFT } from "../gql/deleteShift";
+import Toast from 'react-native-toast-message';
 
 
 import Moment from 'moment';
@@ -31,7 +31,22 @@ function ListShift() {
     variables:  {personal: true},
   });
 
+  if (error){
+    Toast.show({
+      type: 'error',
+      text1: error,
+    });
+  }
+
+
   const [deleteShift, { mutationData, mutationLoading, mutationError }] = useMutation(DELETE_SHIFT);
+
+  if (mutationError){
+      Toast.show({
+        type: 'error',
+        text1: error,
+      });
+    }
 
   const shiftDelete = (id) => {
     console.log(id);

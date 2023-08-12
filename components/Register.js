@@ -18,6 +18,7 @@ import { useMutation } from "@apollo/client";
 import { CREATE_USER } from "../gql/createUser";
 
 import { withApollo } from '@apollo/client/react/hoc';
+import Toast from 'react-native-toast-message';
 
 class Register extends React.Component {
 
@@ -46,7 +47,12 @@ class Register extends React.Component {
           routes: [{ name: 'Menu' }],
         });
       })
-      .catch(error => console.log("An error", error));
+      .catch(error => {
+        Toast.show({
+          type: 'error',
+          text1: error,
+        });
+      });
   }
 
   render(){

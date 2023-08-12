@@ -20,6 +20,7 @@ import * as Location from 'expo-location';
 import { gql, useQuery } from '@apollo/client';
 
 import { NEARBY_SHIFTS } from "../gql/nearbyShifts";
+import Toast from 'react-native-toast-message';
 
 const markerStyles = StyleSheet.create({
   container: {
@@ -40,6 +41,13 @@ const MarkerDisplay = (props) => {
   const { loading, error, data } = useQuery(NEARBY_SHIFTS, {
     variables:  props['coordinates'],
   });
+
+  if (error){
+      Toast.show({
+        type: 'error',
+        text1: error,
+      });
+    }
 
   if(loading){
     return;
