@@ -21,7 +21,6 @@ import { MY_SHIFTS } from "../gql/myShifts";
 import { DELETE_SHIFT } from "../gql/deleteShift";
 import Toast from 'react-native-toast-message';
 
-
 import Moment from 'moment';
 
 function ListShift() {
