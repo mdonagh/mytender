@@ -24,7 +24,6 @@ function Bartenders(props) {
     if(loading){
       return(
         <>
-          {bartenderList}
         </>
         )
     } else {

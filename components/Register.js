@@ -38,10 +38,8 @@ class Register extends React.Component {
         },
       })
       .then(response => {
-        console.log("response");
-        console.log(response);
         SecureStore.setItemAsync('token', response["data"]["createUser"]["token"]);
-        SecureStore.setItemAsync('role', this.state.kind);
+        SecureStore.setItemAsync('role', response["data"]["createUser"]["user"]["kind"]);
         this.props.navigation.reset({
           index: 2,
           routes: [{ name: 'Menu' }],

@@ -37,6 +37,7 @@ const loginUser = () => {
 useEffect(() => {
   if (data){
     SecureStore.setItemAsync('token', data["signInUser"]["token"]);
+    SecureStore.setItemAsync('role', data["signInUser"]["user"]["kind"]);
     props.navigation.navigate('Map')
   }
 })
