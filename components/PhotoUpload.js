@@ -8,18 +8,28 @@ import {
 } from 'react-native';
 
 import * as ImagePicker from 'expo-image-picker';
-import { CREATE_PHOTO } from "../gql/createPhoto";
-import { withApollo } from '@apollo/client/react/hoc';
 
-class PhotoUpload extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      image: false
-    }
+import { gql, useQuery, useMutation } from '@apollo/client';
+
+import { CREATE_PHOTO } from "../gql/createPhoto";
+import { CURRENT_PHOTOS } from "../gql/currentPhotos";
+
+import MissingPerson from '../assets/missing-person.png'
+
+
+function PhotoUpload() {
+  const { loading, error, data, refetch } = useQuery(CURRENT_PHOTOS);
+  const [createPhoto, { mutationData, mutationLoading, mutationError }] = useMutation(CREATE_PHOTO);
+
+  const pickBanner = () => {
+    pickImage('BANNER')
   }
 
-  uploadImage = (url, picture, contentType) => {
+  const pickHeadshot = () => {
+    pickImage('HEADSHOT')
+  }
+
+  const uploadImage = (url, picture, contentType) => {
     fetch(url, {
       method: 'PUT',
       body: picture,
@@ -27,15 +37,8 @@ class PhotoUpload extends React.Component {
         'Content-Type': contentType
       },
     }).then(response => {
-      // console.log(JSON.stringify(response["_bodyBlob"]["_data"]["__collector"]))
-      // console.log('response')
-      // console.log(response)
-      // console.log(response.body)
-      // console.log(response.headers)
-      // console.log(response.status)
-      // console.log(response.statusText)
-      // console.log(response.type)
-        // handle the response
+      console.log(response);
+      refetch();
     })
     .catch(error => {
       console.log('error')
@@ -44,17 +47,7 @@ class PhotoUpload extends React.Component {
     });
   }
 
-  setImage = (params) => this.setState({image: params});
-
-  pickBanner = () => {
-    this.pickImage('BANNER')
-  }
-
-  pickHeadshot = () => {
-    this.pickImage('HEADSHOT')
-  }
-
-  pickImage = async (photoKind) => {
+  const pickImage = async (photoKind) => {
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -64,46 +57,75 @@ class PhotoUpload extends React.Component {
     });
 
     if (!result.canceled) {
-      let uri = result.assets[0].uri
-      this.setImage(result.assets[0].uri);
-
-      const imagePath = uri;
-      const imageExt = uri.split('.').pop();
+      const imagePath = result.assets[0].uri
 
       let picture = await fetch(imagePath);
       picture = await picture.blob();
 
-      const imageData = new File([picture], `photo.${imageExt}`);
+      const byteSize = picture["_data"]["size"]
+      const contentType = picture["_data"]["type"]
 
-      let byteSize = picture["_data"]["size"]
-      let contentType = picture["_data"]["type"]
-
-      this.props.client.mutate({
-        mutation: CREATE_PHOTO,
-        variables: {
-          bytes: byteSize,
-          kind: photoKind
-        },
-      }).then(result => {
-        let url = result["data"]["createPhoto"]["url"]
-        this.uploadImage(url,
-                         picture,
-                         contentType)
-    }).catch(error => {
-      console.log("An error", error)
-    });
-
+      createPhoto({
+            variables: {
+              bytes: byteSize,
+              kind: photoKind
+            },
+          }).then(result => {
+            const url = result["data"]["createPhoto"]["url"]
+            uploadImage(url,
+                        picture,
+                        contentType)
+        }).catch(error => {
+          console.log("An error", error)
+        });
+      }
     }
-  }
 
-  render(){
-    return (
+    console.log(JSON.stringify(data));
+
+    const headshotUrl = data["user"]["headshotUrl"]
+    const bannerUrl = data["user"]["bannerUrl"]
+
+    if(loading){
+      return(<></>)
+    }
+
+  const styles = StyleSheet.create({
+    image: {
+      height: 150,
+      width: 150,
+      justifyContent: 'center'
+    },
+  });
+
+  return(
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Button title="Upload a headshot" onPress={this.pickHeadshot} />
-        <Button title="Upload a banner photo" onPress={this.pickBanner} />
+       { headshotUrl ?
+            <Image
+              style={styles.image}
+              source={{uri: headshotUrl}}
+            />
+            :
+            <Image
+              style={styles.image}
+              source={MissingPerson}
+            />
+        }
+        <Button title="Upload a new headshot" onPress={pickHeadshot} />
+       { bannerUrl ?
+            <Image
+              style={styles.image}
+              source={{uri: bannerUrl}}
+            />
+            :
+            <Image
+              style={styles.image}
+              source={MissingPerson}
+            />
+        }
+        <Button title="Upload a new banner photo" onPress={pickBanner} />
       </View>
-    );
-  }
+    )
 }
 
-export default withApollo(PhotoUpload);
+export default PhotoUpload;

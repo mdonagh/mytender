@@ -32,8 +32,6 @@ const loginUser = () => {
     })
     console.log("An error", error);
   });
-
-
  }
 
 useEffect(() => {
