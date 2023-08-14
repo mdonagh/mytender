@@ -6,7 +6,7 @@ function Content(props) {
   const selected = props.selected;
 
   if (selected == 'rideshare') {
-    return <Rideshare />;
+    return <Rideshare shiftId={props.shiftId} />;
   } 
   else if (selected == 'payment'){
     return <Payment />;

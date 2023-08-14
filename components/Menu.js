@@ -18,7 +18,7 @@ const Menu = () => {
   }, [])
 
   useEffect(() => {
-    fetchData()
+    getBartender()
       // make sure to catch any error
       .catch(console.error);
   }, [getBartender])
