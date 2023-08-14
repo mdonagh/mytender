@@ -5,6 +5,8 @@ import { View,
          Image,
          StyleSheet,
          Pressable,
+         Linking,
+         TouchableOpacity,
          Dimensions} from "react-native";
 
 import { ListItem, Avatar } from '@rneui/themed';
@@ -16,6 +18,10 @@ import NeedLocation from '../NeedLocation'
 
 import { RIDESHARE } from "../../gql/rideshare";
 
+import LyftIcon from '../../assets/lyft.png'
+import UberIcon from '../../assets/uber.png'
+
+
 function RideShareLinks(props) {
   const {width, height} = Dimensions.get('window');
 
@@ -24,6 +30,12 @@ function RideShareLinks(props) {
         flex: 1,
         width: null,
         height: null,
+        resizeMode: 'contain'
+    },
+    rideshareButton: {
+        flex: 1,
+        width: 44,
+        height: 96,
         resizeMode: 'contain'
     },
   });
@@ -47,7 +59,11 @@ console.log('ggg');
         )
     } else {
       console.log(data);
+      console.log(error);
+
+
       return(
+        <>
       <Text style={{ flex: 1,
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -58,8 +74,36 @@ console.log('ggg');
                       padding: 20
                     }}
       >
-        RideShare
+        Tap the buttons below to get a rideshare to meet this bartender
       </Text>
+      <View style={{ flex: 2,
+                     alignItems: 'center',
+                     justifyContent: 'flex-start',
+                     flexDirection: 'row',
+                     flexWrap: 'wrap',
+                     padding: 10
+                    }}>
+        <TouchableOpacity
+          style={{flex: 1}}
+          onPress={() => Linking.openURL(data['rideshare']['lyft'])}
+        >
+          <Image 
+            source={LyftIcon}
+            style={styles.image}
+          />
+        </TouchableOpacity>
+        <View style={{flex: 1}}  />
+        <TouchableOpacity 
+          style={{flex: 1}} 
+          onPress={() => Linking.openURL(data['rideshare']['uber'])}
+         >
+          <Image
+            source={UberIcon}
+            style={styles.image}
+          />
+        </TouchableOpacity>
+      </View>
+      </>
         )
     }
 }
