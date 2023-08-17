@@ -20,13 +20,13 @@ import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@ap
 import { setContext } from '@apollo/client/link/context';
 import * as SecureStore from 'expo-secure-store';
 
-const httpLink = createHttpLink({
-  uri: 'https://c03b-24-17-149-35.ngrok.io/graphql',
-});
-
 // const httpLink = createHttpLink({
-//   uri: 'https://580d-24-17-149-35.ngrok.io/graphql',
+//   uri: 'https://mytender-dc1b2d59a1a2.herokuapp.com/graphql',
 // });
+
+const httpLink = createHttpLink({
+  uri: 'https://64d8-24-17-149-35.ngrok.io/graphql',
+});
 
 const authLink = setContext(async (_, { headers }) => {
   // get the authentication token from local storage if it exists

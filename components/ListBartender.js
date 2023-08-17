@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { 
          Pressable,
+         ScrollView,
        } from "react-native";
 
 import { ListItem, Avatar } from '@rneui/themed';
@@ -48,9 +49,9 @@ function Bartenders(props) {
       })
 
       return(
-        <>
+        <ScrollView>
           {bartenderList}
-        </>
+        </ScrollView>
         )
     }
 }
