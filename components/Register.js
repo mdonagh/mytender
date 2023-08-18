@@ -40,10 +40,18 @@ class Register extends React.Component {
       .then(response => {
         SecureStore.setItemAsync('token', response["data"]["createUser"]["token"]);
         SecureStore.setItemAsync('role', response["data"]["createUser"]["user"]["kind"]);
-        this.props.navigation.reset({
-          index: 2,
-          routes: [{ name: 'Menu' }],
-        });
+
+        if(this.state.kind == "DRINKER"){
+          this.props.navigation.reset({
+            index: 2,
+            routes: [{ name: 'Payment' }],
+          });
+        } else {
+          this.props.navigation.reset({
+            index: 2,
+            routes: [{ name: 'Menu' }],
+          });
+        }
       })
       .catch(error => {
         console.log(error);

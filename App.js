@@ -10,11 +10,15 @@ import Menu from './components/Menu';
 import ListBartender from './components/ListBartender';
 import EnterShift from './components/EnterShift';
 import ListShift from './components/ListShift';
+import Payment from './components/Payment';
+
 
 import PhotoUpload from './components/PhotoUpload';
 import Toast from 'react-native-toast-message';
 
 const Stack = createNativeStackNavigator();
+
+import { StripeProvider } from '@stripe/stripe-react-native';
 
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
@@ -25,7 +29,7 @@ import * as SecureStore from 'expo-secure-store';
 // });
 
 const httpLink = createHttpLink({
-  uri: 'https://64d8-24-17-149-35.ngrok.io/graphql',
+  uri: 'https://a2b3-24-17-149-35.ngrok.io/graphql',
 });
 
 const authLink = setContext(async (_, { headers }) => {
@@ -54,30 +58,41 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-    <NavigationContainer>
-    {/* change initialRoute back to Login */}
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={Login}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen name="Register" component={Register}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen name="Show Bartender" component={ShowBartender} />
-        <Stack.Screen name="Menu" component={Menu} />
-        <Stack.Screen name="List Bartenders" component={ListBartender} />
-        <Stack.Screen name="Enter Shift" component={EnterShift} />
-        <Stack.Screen name="My Shifts" component={ListShift} />
-        <Stack.Screen name="Add Photos" component={PhotoUpload} />
+    <StripeProvider
+      publishableKey="pk_test_TYooMQauvdEDq54NiTphI7jx"
+      urlScheme="mytender" // required for 3D Secure and bank redirects
+      merchantIdentifier="merchant.com.mytender"
+    >
+      <NavigationContainer>
+      {/* change initialRoute back to Login */}
+        <Stack.Navigator initialRouteName="Map">
+          <Stack.Screen name="Login" component={Login}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen name="Register" component={Register}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen name="Payment" component={Payment} 
+            options={{headerShown: false}}
+          />
 
-        <Stack.Screen
-          name="Map"
-          options={{headerShown: false}}
-          component={ShowMap}
-        />
-      </Stack.Navigator>
-      <Toast />
-    </NavigationContainer>
+          <Stack.Screen name="Show Bartender" component={ShowBartender} />
+          <Stack.Screen name="Menu" component={Menu} />
+          <Stack.Screen name="List Bartenders" component={ListBartender} />
+          <Stack.Screen name="Enter Shift" component={EnterShift} />
+          <Stack.Screen name="My Shifts" component={ListShift} />
+          <Stack.Screen name="Add Photos" component={PhotoUpload} />
+
+          <Stack.Screen
+            name="Map"
+            options={{headerShown: false}}
+            component={ShowMap}
+          />
+        </Stack.Navigator>
+        <Toast />
+      </NavigationContainer>
+    </StripeProvider>
+
     </ApolloProvider>
   );
 }
