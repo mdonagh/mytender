@@ -1,19 +1,24 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 
 import { 
          Pressable,
          StyleSheet,
+        TextInput,
+        Button,
+        View,
+        Text
        } from "react-native";
 
 import { ListItem } from '@rneui/themed';
 import { useNavigation } from '@react-navigation/native';
 import { useMutation } from "@apollo/client";
 import Toast from 'react-native-toast-message';
+import { CANCEL_SUBSCRIPTION } from "../gql/cancelSubscription";
 
 const CancelSubscription = () => {
   const [reason, setReason] = useState(null)
 
-  const [cancelSubscription, { data, loading, error }] = useMutation(SIGN_IN);
+  const [cancelSubscription, { data, loading, error }] = useMutation(CANCEL_SUBSCRIPTION);
 
   const navigation = useNavigation();
 
@@ -34,7 +39,9 @@ const CancelSubscription = () => {
 
   return (
     <>
-      <Text style={styles.whiteText}>Reason for cancelling</Text>
+      <View style={{backgroundColor: 'grey'}}>
+        <Text style={styles.whiteText}>Reason for cancelling</Text>
+      </View>
         <TextInput
           multiline={true}
           style={styles.textarea}

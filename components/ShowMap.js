@@ -38,8 +38,6 @@ const markerStyles = StyleSheet.create({
 
 
 const MarkerDisplay = (props) => {
-  console.log('woof');
-  console.log(props);
   const { loading, error, data } = useQuery(NEARBY_SHIFTS, {
     variables:  props['coordinates'],
   });
