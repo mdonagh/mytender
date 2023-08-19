@@ -67,11 +67,15 @@ const Menu = () => {
       <></>
       }
 
-      {/* <ListItem> */}
-      {/*   <ListItem.Content> */}
-      {/*     <ListItem.Title>Edit Profile</ListItem.Title> */}
-      {/*   </ListItem.Content> */}
-      {/* </ListItem> */}
+      { role && role == 'drinker' ?
+      <ListItem bottomDivider onPress={() => navigation.navigate('Account Settings')}>
+        <ListItem.Content>
+          <ListItem.Title>Account Settings</ListItem.Title>
+        </ListItem.Content>
+      </ListItem>
+      :
+      <></>
+      }
     </>
     );
 }

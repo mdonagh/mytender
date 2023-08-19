@@ -18,7 +18,7 @@ export default function Payment() {
 
   const fetchPaymentSheetParams = async () => {
     let token = await SecureStore.getItemAsync('token');
-    const response = await fetch("https://4855-24-17-149-35.ngrok.io/payment-sheet", {
+    const response = await fetch("https://03c9-24-17-149-35.ngrok.io/payment-sheet", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

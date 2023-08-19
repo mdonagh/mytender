@@ -11,7 +11,8 @@ import ListBartender from './components/ListBartender';
 import EnterShift from './components/EnterShift';
 import ListShift from './components/ListShift';
 import Payment from './components/Payment';
-
+import AccountSettings from './components/AccountSettings';
+import CancelSubscription from './components/CancelSubscription';
 
 import PhotoUpload from './components/PhotoUpload';
 import Toast from 'react-native-toast-message';
@@ -29,7 +30,7 @@ import * as SecureStore from 'expo-secure-store';
 // });
 
 const httpLink = createHttpLink({
-  uri: 'https://4855-24-17-149-35.ngrok.io/graphql',
+  uri: 'https://03c9-24-17-149-35.ngrok.io/graphql',
 });
 
 const authLink = setContext(async (_, { headers }) => {
@@ -82,6 +83,8 @@ function App() {
           <Stack.Screen name="Enter Shift" component={EnterShift} />
           <Stack.Screen name="My Shifts" component={ListShift} />
           <Stack.Screen name="Add Photos" component={PhotoUpload} />
+          <Stack.Screen name="Account Settings" component={AccountSettings} />
+          <Stack.Screen name="Cancel Subscription" component={CancelSubscription} />
 
           <Stack.Screen
             name="Map"

@@ -166,26 +166,26 @@ class Register extends React.Component {
     else if(this.state.currentForm == 'register') {
       form = (
       <>
-      <TextInput
-        style={styles.input}
-        onChangeText={(text) => this.setState({ email: text })}
-        placeholder="email"
-        value={this.state.email}
-      />
-      <TextInput
-        style={styles.input}
-        onChangeText={(text) => this.setState({ password: text })}
-        secureTextEntry={true}
-        placeholder="password"
-        value={this.state.password}
-      />
-      <View style={styles.button} >
-      <Button
-        title="Register"
-        onPress={() => this.createUser()}
-      />
-      </View>
-        </>
+        <TextInput
+          style={styles.input}
+          onChangeText={(text) => this.setState({ email: text })}
+          placeholder="email"
+          value={this.state.email}
+        />
+        <TextInput
+          style={styles.input}
+          onChangeText={(text) => this.setState({ password: text })}
+          secureTextEntry={true}
+          placeholder="password"
+          value={this.state.password}
+        />
+        <View style={styles.button} >
+        <Button
+          title="Register"
+          onPress={() => this.createUser()}
+        />
+        </View>
+      </>
       )
     }
     else if(this.state.currentForm == 'drinker1') {
