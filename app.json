@@ -2,6 +2,7 @@
   "expo": {
     "name": "mytender",
     "slug": "mytender",
+    "scheme": "mytender",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/martini.jpg",

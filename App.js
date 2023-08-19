@@ -29,7 +29,7 @@ import * as SecureStore from 'expo-secure-store';
 // });
 
 const httpLink = createHttpLink({
-  uri: 'https://9924-24-17-149-35.ngrok.io/graphql',
+  uri: 'https://4855-24-17-149-35.ngrok.io/graphql',
 });
 
 const authLink = setContext(async (_, { headers }) => {
@@ -61,7 +61,7 @@ function App() {
     <StripeProvider
       publishableKey="pk_test_51Ng6T9FkuyPevR8MA9bhsHnJIGkbKihsHVmPK3Ps6zC3A8NKZPAnefhskAEhIckIZamAsnYSJW0uaK3V4sFm2HSS00lDuL6j1H"
       urlScheme="mytender" // required for 3D Secure and bank redirects
-      merchantIdentifier="merchant.com.mytender"
+      // merchantIdentifier="merchant.com.mytender"
     >
       <NavigationContainer>
       {/* change initialRoute back to Login */}

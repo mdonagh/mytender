@@ -10,15 +10,17 @@ import { View,
        } from "react-native";
 
 import Content from './bartender/Content.js'
+import BarBackground from '../assets/empty-bar.jpg'
+
 
 function ShowBartender({ route, navigation }) {
   let shiftId = route.params.id
   let bannerUrl = route.params.bannerUrl
-
   const {width, height} = Dimensions.get('window');
 
   const [selected, setSelected] = useState('description')
   const [liked, setLiked] = useState(false)
+
 
   const styles = StyleSheet.create({
     image: {
@@ -37,7 +39,7 @@ function ShowBartender({ route, navigation }) {
                       borderBottomColor: 'black',
                       borderBottomWidth: StyleSheet.hairlineWidth, 
                       width: width }}
-        source={{uri: bannerUrl}}
+        source={bannerUrl ? {uri: bannerUrl} : BarBackground}
       />
       <View style={{ flex: 1,
                      alignItems: 'center',
