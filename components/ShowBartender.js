@@ -11,7 +11,8 @@ import { View,
 
 import Content from './bartender/Content.js'
 import BarBackground from '../assets/empty-bar.jpg'
-
+import { GET_SHIFT } from "../gql/getShift";
+import { gql, useQuery } from '@apollo/client';
 
 function ShowBartender({ route, navigation }) {
   let shiftId = route.params.id
@@ -21,7 +22,6 @@ function ShowBartender({ route, navigation }) {
   const [selected, setSelected] = useState('description')
   const [liked, setLiked] = useState(false)
 
-
   const styles = StyleSheet.create({
     image: {
       flex: 1,
@@ -29,6 +29,10 @@ function ShowBartender({ route, navigation }) {
       height: null,
       resizeMode: 'contain'
     },
+  });
+
+  const { loading, error, data } = useQuery(GET_SHIFT, {
+    variables:  {id: shiftId},
   });
 
   return (
@@ -57,8 +61,29 @@ function ShowBartender({ route, navigation }) {
         <Pressable style={{flex: 1}} onPress={() => setSelected('rideshare')}>
           <Image source={require('../assets/taxi.png')} style={styles.image}  />
         </Pressable>
+      {
+        !loading && data && data['shift']['user']['instagram'] ? 
+                            <Pressable 
+                              style={{flex: 1}} 
+                              onPress={() => Linking.openURL(`https://instagram.com/${data['shift']['user']['instagram']}`)}
+                              >
+                             <Image
+                               source={require('../assets/instagram.png')}
+                               style={styles.image}
+                             />
+                           </Pressable>
+                              :
+                              <></>
+      }
       </View>
-      <Content selected={selected} shiftId={shiftId} />
+      {
+        !loading && data ? <Content
+                              selected={selected}
+                              shiftId={shiftId}
+                              data={data} 
+                              /> :
+                              <></>
+      }
     </View>
   );
 }

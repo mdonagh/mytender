@@ -9,10 +9,13 @@ function Content(props) {
     return <Rideshare shiftId={props.shiftId} />;
   } 
   else if (selected == 'payment'){
-    return <Payment />;
+    return <Payment data={props.data} />;
   }
   else{
-    return <Description shiftId={props.shiftId} />
+    return <Description
+              shiftId={props.shiftId}
+              data={props.data}
+            />
   }
 }
 

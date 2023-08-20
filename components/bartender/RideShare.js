@@ -21,7 +21,6 @@ import { RIDESHARE } from "../../gql/rideshare";
 import LyftIcon from '../../assets/lyft.png'
 import UberIcon from '../../assets/uber.png'
 
-
 function RideShareLinks(props) {
   const {width, height} = Dimensions.get('window');
 
@@ -62,7 +61,6 @@ console.log('ggg');
       console.log(data);
       console.log(error);
       console.log('meow');
-
 
       return(
         <>

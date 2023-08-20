@@ -9,6 +9,9 @@ query shift($id: ID!) {
       startTime
       user {
         description
+        venmo
+        cashapp
+        instagram
       }
     }
   }

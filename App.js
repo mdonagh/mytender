@@ -30,7 +30,7 @@ import * as SecureStore from 'expo-secure-store';
 // });
 
 const httpLink = createHttpLink({
-  uri: 'https://03c9-24-17-149-35.ngrok.io/graphql',
+  uri: 'https://6c5c-24-17-149-35.ngrok.io/graphql',
 });
 
 const authLink = setContext(async (_, { headers }) => {

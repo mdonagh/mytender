@@ -24,7 +24,10 @@ class Register extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { currentForm: 'start' };
+    this.state = { currentForm: 'start',
+                   instagram: '',
+                   cashapp: '',
+                   venmo: '' };
   }
 
   createUser = () => {
@@ -34,7 +37,10 @@ class Register extends React.Component {
           email: this.state.email,
           password: this.state.password,
           kind: this.state.kind,
-          description: this.state.description
+          description: this.state.description,
+          venmo: this.state.venmo,
+          cashapp: this.state.cashapp,
+          instagram: this.state.instagram,
         },
       })
       .then(response => {
@@ -125,20 +131,54 @@ class Register extends React.Component {
           <Text style={styles.whiteText}>Sharing your work schedule in MyTender will help you to build relationships with your regulars, pack your bar, and make more money!.</Text>
             <View style={styles.button} >
             <Button
-              title="Back"
-              onPress={() => this.setState({ currentForm: 'start' })}
+              title="Next"
+              onPress={() => this.setState({ currentForm: 'bartender2' })}
             />
             </View>
             <View style={styles.button} >
             <Button
-              title="Next"
-              onPress={() => this.setState({ currentForm: 'bartender2' })}
+              title="Back"
+              onPress={() => this.setState({ currentForm: 'start' })}
             />
             </View>
         </>
       )
     }
     else if(this.state.currentForm == 'bartender2') {
+      form = (
+        <>
+          <Text style={styles.whiteText}>Get private tips through cash apps and share your instagram</Text>
+            <TextInput
+                style={styles.input}
+                onChangeText={(text) => this.setState({ instagram: text })}
+                placeholder="instagram ID (optional)"
+                value={this.state.instagram}/>
+            <TextInput
+                style={styles.input}
+                onChangeText={(text) => this.setState({ venmo: text })}
+                placeholder="venmo ID (optional)"
+                value={this.state.venmo}/>
+            <TextInput
+                style={styles.input}
+                onChangeText={(text) => this.setState({ cashapp: text })}
+                placeholder="cashapp ID (optional)"
+                value={this.state.cashapp}/>
+            <View style={styles.button} >
+            <Button
+              title="Next"
+              onPress={() => this.setState({ currentForm: 'bartender3' })}
+            />
+            </View>
+            <View style={styles.button} >
+            <Button
+              title="Back"
+              onPress={() => this.setState({ currentForm: 'start' })}
+            />
+            </View>
+        </>
+      )
+    }
+    else if(this.state.currentForm == 'bartender3') {
       form = (
         <>
           <Text style={styles.whiteText}>About you - this will be shown to people viewing your profile</Text>
@@ -150,14 +190,14 @@ class Register extends React.Component {
                 value={this.state.aboutMe}/>
             <View style={styles.button} >
             <Button
-              title="Back"
-              onPress={() => this.setState({ currentForm: 'start' })}
+              title="Next"
+              onPress={() => this.setState({ currentForm: 'register' })}
             />
             </View>
             <View style={styles.button} >
             <Button
-              title="Next"
-              onPress={() => this.setState({ currentForm: 'register' })}
+              title="Back"
+              onPress={() => this.setState({ currentForm: 'bartender2' })}
             />
             </View>
         </>
@@ -194,14 +234,14 @@ class Register extends React.Component {
           <Text style={styles.whiteText}>MyTender will show you who's working and the best places to go out.</Text>
             <View style={styles.button} >
             <Button
-              title="Back"
-              onPress={() => this.setState({ currentForm: 'start' })}
+              title="Next"
+              onPress={() => this.setState({ currentForm: 'register' })}
             />
             </View>
             <View style={styles.button} >
             <Button
-              title="Next"
-              onPress={() => this.setState({ currentForm: 'register' })}
+              title="Back"
+              onPress={() => this.setState({ currentForm: 'start' })}
             />
             </View>
         </>

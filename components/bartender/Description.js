@@ -3,19 +3,12 @@ import { View,
          Image,
          StyleSheet,
          Dimensions} from "react-native";
-import { gql, useQuery } from '@apollo/client';
-
-import { GET_SHIFT } from "../../gql/getShift";
-
 
 function Description(props) {
   const {width, height} = Dimensions.get('window');
+  console.log('props below');
   console.log(props);
   console.log('in description');
-
-  const { loading, error, data, refetch } = useQuery(GET_SHIFT, {
-    variables:  {id: props.shiftId},
-  });
 
   const styles = StyleSheet.create({
     image: {
@@ -26,11 +19,8 @@ function Description(props) {
     },
   });
 
-  if(loading){
-    return <View style={{flex: 6}}></View>
-  }
+  const shift = props['data']["shift"]
 
-  let shift = data["shift"]
   return (
     <View style={{flex: 6}}>
       <Text style={{ flex: 1,
@@ -79,8 +69,6 @@ function Description(props) {
       </Text>
     </View>
     )
-
-
 }
 
 export default Description;
