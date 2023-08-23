@@ -18,8 +18,8 @@ import NeedLocation from '../NeedLocation'
 
 import { RIDESHARE } from "../../gql/rideshare";
 
-import LyftIcon from '../../assets/lyft.png'
-import UberIcon from '../../assets/uber.png'
+import LyftIcon from '../../assets/lyft.jpg'
+import UberIcon from '../../assets/uber.jpg'
 
 function RideShareLinks(props) {
   const {width, height} = Dimensions.get('window');

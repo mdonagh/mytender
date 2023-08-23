@@ -14,7 +14,7 @@ import { gql, useQuery, useMutation } from '@apollo/client';
 import { CREATE_PHOTO } from "../gql/createPhoto";
 import { CURRENT_PHOTOS } from "../gql/currentPhotos";
 
-import MissingPerson from '../assets/missing-person.png'
+import MissingPerson from '../assets/missing-person.jpg'
 
 
 function PhotoUpload() {
