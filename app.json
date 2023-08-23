@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "mybartender",
-    "slug": "mybartender",
-    "scheme": "mybartender",
+    "name": "myregulars",
+    "slug": "myregulars",
+    "scheme": "myregulars",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/martini-icon.jpg",
@@ -20,14 +20,14 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.laquintadude.mybartender"
+      "bundleIdentifier": "com.laquintadude.myregulars"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/martini-icon.jpg",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.laquintadude.mybartender"
+      "package": "com.laquintadude.myregulars"
     },
     "web": {
       "favicon": "./assets/martini-icon.jpg"
