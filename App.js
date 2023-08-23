@@ -66,7 +66,7 @@ function App() {
     >
       <NavigationContainer>
       {/* change initialRoute back to Login */}
-        <Stack.Navigator initialRouteName="Enter Shift">
+        <Stack.Navigator initialRouteName="Login">
           <Stack.Screen name="Login" component={Login}
             options={{headerShown: false}}
           />
