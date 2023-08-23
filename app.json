@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "mytender",
-    "slug": "mytender",
-    "scheme": "mytender",
+    "name": "mybartender",
+    "slug": "mybartender",
+    "scheme": "mybartender",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/martini.jpg",
@@ -20,22 +20,23 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.laquintadude.mytender"
+      "bundleIdentifier": "com.laquintadude.mybartender"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/martini.jpg",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.laquintadude.mybartender"
     },
     "web": {
       "favicon": "./assets/martini.jpg"
     },
+    "owner": "laquintadude",
     "extra": {
       "eas": {
-        "projectId": "5d425f88-9fe6-4392-888b-8329d92bb978"
+        "projectId": "fe4c527c-47a9-411d-99fd-61c34339bafa"
       }
-    },
-    "owner": "laquintadude"
+    }
   }
 }

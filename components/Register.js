@@ -109,7 +109,7 @@ class Register extends React.Component {
   if(this.state.currentForm == 'start'){
     form = (
           <>
-            <Text style={styles.whiteText}>MyTender is an app where bartenders can let their regulars know where they're working and what's going on at their bar.</Text>
+            <Text style={styles.whiteText}>mybartender is an app where bartenders can let their regulars know where they're working and what's going on at their bar.</Text>
             <View style={styles.button} >
             <Button
               title="I'm a bartender"
@@ -128,7 +128,7 @@ class Register extends React.Component {
     else if(this.state.currentForm == 'bartender1') {
       form = (
         <>
-          <Text style={styles.whiteText}>Sharing your work schedule in MyTender will help you to build relationships with your regulars, pack your bar, and make more money!.</Text>
+          <Text style={styles.whiteText}>Sharing your work schedule in mybartender will help you to build relationships with your regulars, pack your bar, and make more money!.</Text>
             <View style={styles.button} >
             <Button
               title="Next"
@@ -231,7 +231,7 @@ class Register extends React.Component {
     else if(this.state.currentForm == 'drinker1') {
       form = (
         <>
-          <Text style={styles.whiteText}>MyTender will show you who's working and the best places to go out.</Text>
+          <Text style={styles.whiteText}>mybartender will show you who's working and the best places to go out.</Text>
             <View style={styles.button} >
             <Button
               title="Next"
