@@ -19,7 +19,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.laquintadude.mytender"
     },
     "android": {
       "adaptiveIcon": {
@@ -29,6 +30,12 @@
     },
     "web": {
       "favicon": "./assets/martini.jpg"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "5d425f88-9fe6-4392-888b-8329d92bb978"
+      }
+    },
+    "owner": "laquintadude"
   }
 }
