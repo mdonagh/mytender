@@ -10,7 +10,7 @@ import {
   ImageBackground
 } from 'react-native';
 
-import BarBackground from '../assets/black-white-bar.jpg'
+import BarBackground from '../assets/black-white-bar.png'
 
 function NeedLocation() {
   return(

@@ -10,7 +10,7 @@ import { View,
        } from "react-native";
 
 import Content from './bartender/Content.js'
-import BarBackground from '../assets/empty-bar.jpg'
+import BarBackground from '../assets/empty-bar.png'
 import { GET_SHIFT } from "../gql/getShift";
 import { gql, useQuery } from '@apollo/client';
 
@@ -53,13 +53,13 @@ function ShowBartender({ route, navigation }) {
                      padding: 10
                     }}>
         <Pressable style={{flex: 1}} onPress={() => setSelected('description')}>
-          <Image source={require('../assets/question-mark.jpg')} style={styles.image}  />
+          <Image source={require('../assets/question-mark.png')} style={styles.image}  />
         </Pressable>
         <Pressable style={{flex: 1}} onPress={() => setSelected('payment')}>
-          <Image source={require('../assets/money.jpg')} style={styles.image}  />
+          <Image source={require('../assets/money.png')} style={styles.image}  />
         </Pressable>
         <Pressable style={{flex: 1}} onPress={() => setSelected('rideshare')}>
-          <Image source={require('../assets/taxi.jpg')} style={styles.image}  />
+          <Image source={require('../assets/taxi.png')} style={styles.image}  />
         </Pressable>
       {
         !loading && data && data['shift']['user']['instagram'] ? 
@@ -68,7 +68,7 @@ function ShowBartender({ route, navigation }) {
                               onPress={() => Linking.openURL(`https://instagram.com/${data['shift']['user']['instagram']}`)}
                               >
                              <Image
-                               source={require('../assets/instagram.jpg')}
+                               source={require('../assets/instagram.png')}
                                style={styles.image}
                              />
                            </Pressable>

@@ -9,8 +9,8 @@ import {SafeAreaView,
         Pressable,
         Text,
         ImageBackground} from 'react-native';
-import Bartender from '../assets/bartender2.jpg'
-import Logo from '../assets/logo.jpg'
+import Bartender from '../assets/bartender2.png'
+import Logo from '../assets/logo.png'
 
 import * as SecureStore from 'expo-secure-store';
 

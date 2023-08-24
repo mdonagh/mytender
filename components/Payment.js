@@ -11,7 +11,7 @@ import { View,
        } from "react-native";
 
 import * as SecureStore from 'expo-secure-store';
-import BarBackground from '../assets/bartender2.jpg'
+import BarBackground from '../assets/bartender2.png'
 import Toast from 'react-native-toast-message';
 import { useNavigation } from '@react-navigation/native';
 

@@ -9,8 +9,8 @@ import { View,
          TouchableOpacity,
          Dimensions} from "react-native";
 
-import VenmoIcon from '../../assets/venmo.jpg'
-import CashAppIcon from '../../assets/cashapp.jpg'
+import VenmoIcon from '../../assets/venmo.png'
+import CashAppIcon from '../../assets/cashapp.png'
 
 function Payment(props) {
 console.log(props);

@@ -12,7 +12,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { Avatar } from '@rneui/themed';
 
-import Martini from '../assets/martini.jpg'
+import Martini from '../assets/martini.png'
 
 import MapView, {Marker} from 'react-native-maps';
 
@@ -21,7 +21,7 @@ import { gql, useQuery } from '@apollo/client';
 
 import { NEARBY_SHIFTS } from "../gql/nearbyShifts";
 import Toast from 'react-native-toast-message';
-import BarBackground from '../assets/black-white-bar.jpg'
+import BarBackground from '../assets/black-white-bar.png'
 
 import NeedLocation from './NeedLocation'
 const markerStyles = StyleSheet.create({

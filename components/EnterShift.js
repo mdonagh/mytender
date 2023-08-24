@@ -11,7 +11,7 @@ import { CREATE_SHIFT } from "../gql/createShift";
 
 import { withApollo } from '@apollo/client/react/hoc';
 
-import BarBackground from '../assets/black-white-bar.jpg'
+import BarBackground from '../assets/black-white-bar.png'
 import Toast from 'react-native-toast-message';
 
 const LeavePage = (props) => {
