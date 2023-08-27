@@ -16,6 +16,14 @@ import { CURRENT_PHOTOS } from "../gql/currentPhotos";
 
 import MissingPerson from '../assets/missing-person.png'
 
+const styles = StyleSheet.create({
+  image: {
+    height: 150,
+    width: 150,
+    justifyContent: 'center'
+  },
+});
+
 
 function PhotoUpload() {
   const { loading, error, data, refetch } = useQuery(CURRENT_PHOTOS);
@@ -83,20 +91,12 @@ function PhotoUpload() {
 
     console.log(JSON.stringify(data));
 
-    const headshotUrl = data["user"]["headshotUrl"]
-    const bannerUrl = data["user"]["bannerUrl"]
-
     if(loading){
       return(<></>)
     }
 
-  const styles = StyleSheet.create({
-    image: {
-      height: 150,
-      width: 150,
-      justifyContent: 'center'
-    },
-  });
+    const headshotUrl = data["user"]["headshotUrl"]
+    const bannerUrl = data["user"]["bannerUrl"]
 
   return(
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
