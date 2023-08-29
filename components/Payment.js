@@ -22,7 +22,7 @@ export default function Payment() {
 
   const fetchPaymentSheetParams = async () => {
     let token = await SecureStore.getItemAsync('token');
-    const response = await fetch("https://e2e0-24-17-149-35.ngrok.io/payment-sheet", {
+    const response = await fetch("https://mytender-dc1b2d59a1a2.herokuapp.com/payment-sheet", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
 });
-throw new Error('My first Sentry error!');
+
 return (
   <View style={styles.container}>
     <ImageBackground

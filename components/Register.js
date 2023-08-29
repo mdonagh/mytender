@@ -8,6 +8,8 @@ import {SafeAreaView,
         FlatList,
         Pressable,
         Text,
+        TouchableWithoutFeedback,
+        Keyboard,
         ImageBackground} from 'react-native';
 import Bartender from '../assets/bartender2.png'
 import Logo from '../assets/logo.png'
@@ -249,14 +251,16 @@ class Register extends React.Component {
     }
 
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={Bartender}
-        resizeMode="cover"
-        style={styles.image}>
-        {form}
-      </ImageBackground>
-    </View>
+  <TouchableWithoutFeedback onPress={ () => { Keyboard.dismiss() } }>
+      <View style={styles.container}>
+        <ImageBackground
+          source={Bartender}
+          resizeMode="cover"
+          style={styles.image}>
+          {form}
+        </ImageBackground>
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 };
