@@ -1,18 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import {
-  View,
-  Text,
   Image,
-  StyleSheet,
-  Pressable,
   Linking,
+  StyleSheet,
+  Text,
   TouchableOpacity,
-  Dimensions,
+  View,
 } from 'react-native';
 
-import VenmoIcon from '../../assets/venmo.png';
 import CashAppIcon from '../../assets/cashapp.png';
+import VenmoIcon from '../../assets/venmo.png';
 
 function Payment(props) {
   console.log(props);

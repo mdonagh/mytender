@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 
-import { Pressable, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 
-import { ListItem, Avatar } from '@rneui/themed';
+import { Avatar, ListItem } from '@rneui/themed';
 
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 
-import { LIST_BARTENDER } from '../gql/listBartender';
-import * as Location from 'expo-location';
-import NeedLocation from './NeedLocation';
 import { useNavigation } from '@react-navigation/native';
+import * as Location from 'expo-location';
+import { LIST_BARTENDER } from '../gql/listBartender';
+import NeedLocation from './NeedLocation';
 
 function Bartenders(props) {
   const navigation = useNavigation();

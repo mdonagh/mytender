@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Text, Button, Image } from 'react-native';
+import React from 'react';
+import { Button, Image, StyleSheet, View } from 'react-native';
 
 import * as ImagePicker from 'expo-image-picker';
 
-import { gql, useQuery, useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 
 import { CREATE_PHOTO } from '../gql/createPhoto';
 import { CURRENT_PHOTOS } from '../gql/currentPhotos';

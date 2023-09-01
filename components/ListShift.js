@@ -1,20 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import { Pressable, Text, View, StyleSheet } from 'react-native';
+import { ListItem } from '@rneui/themed';
 
-import { ListItem, Avatar } from '@rneui/themed';
-import Ionicons from '@expo/vector-icons/Ionicons';
-
-import { AntDesign } from '@expo/vector-icons';
+import { useQuery } from '@apollo/client';
 import { Feather } from '@expo/vector-icons';
-import { gql, useQuery } from '@apollo/client';
 
 import { useMutation } from '@apollo/client';
 
 import { MY_SHIFTS } from '../gql/myShifts';
 
-import { DELETE_SHIFT } from '../gql/deleteShift';
 import Toast from 'react-native-toast-message';
+import { DELETE_SHIFT } from '../gql/deleteShift';
 
 import Moment from 'moment';
 

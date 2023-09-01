@@ -1,19 +1,11 @@
 import React, { useState } from 'react';
 
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  Dimensions,
-  Button,
-  Pressable,
-} from 'react-native';
+import { Dimensions, Image, Pressable, StyleSheet, View } from 'react-native';
 
-import Content from './bartender/Content.js';
+import { useQuery } from '@apollo/client';
 import BarBackground from '../assets/empty-bar.png';
 import { GET_SHIFT } from '../gql/getShift';
-import { gql, useQuery } from '@apollo/client';
+import Content from './bartender/Content.js';
 
 function ShowBartender({ route, navigation }) {
   let shiftId = route.params.id;
@@ -86,7 +78,7 @@ function ShowBartender({ route, navigation }) {
             style={{ flex: 1 }}
             onPress={() =>
               Linking.openURL(
-                `https://instagram.com/${data['shift']['user']['instagram']}`
+                `https://instagram.com/${data['shift']['user']['instagram']}`,
               )
             }
           >

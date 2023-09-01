@@ -1,9 +1,7 @@
-import React, { useEffect, useCallback } from 'react';
+import React from 'react';
 
-import { Pressable } from 'react-native';
-
-import { ListItem } from '@rneui/themed';
 import { useNavigation } from '@react-navigation/native';
+import { ListItem } from '@rneui/themed';
 
 const AccountSettings = () => {
   const navigation = useNavigation();

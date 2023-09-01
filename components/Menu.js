@@ -1,10 +1,8 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 
-import { Pressable } from 'react-native';
-
+import { useNavigation } from '@react-navigation/native';
 import { ListItem } from '@rneui/themed';
 import * as SecureStore from 'expo-secure-store';
-import { useNavigation } from '@react-navigation/native';
 
 const Menu = () => {
   const navigation = useNavigation();

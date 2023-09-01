@@ -1,27 +1,16 @@
-import React, { useState } from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  Dimensions,
-  Image,
-  Pressable,
-  ImageBackground,
-} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
-import { Avatar } from '@rneui/themed';
+import React, { useState } from 'react';
+import { Image, Pressable, StyleSheet, View } from 'react-native';
 
 import Martini from '../assets/martini.png';
 
 import MapView, { Marker } from 'react-native-maps';
 
+import { useQuery } from '@apollo/client';
 import * as Location from 'expo-location';
-import { gql, useQuery } from '@apollo/client';
 
-import { NEARBY_SHIFTS } from '../gql/nearbyShifts';
 import Toast from 'react-native-toast-message';
-import BarBackground from '../assets/black-white-bar.png';
+import { NEARBY_SHIFTS } from '../gql/nearbyShifts';
 
 import NeedLocation from './NeedLocation';
 const markerStyles = StyleSheet.create({

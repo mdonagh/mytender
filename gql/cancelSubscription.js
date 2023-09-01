@@ -1,4 +1,4 @@
-import { gql, mutation } from '@apollo/client';
+import { gql } from '@apollo/client';
 
 export const CANCEL_SUBSCRIPTION = gql`
   mutation cancelSubscription($reason: String!) {

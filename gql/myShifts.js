@@ -1,4 +1,4 @@
-import { gql, useQuery } from '@apollo/client';
+import { gql } from '@apollo/client';
 
 export const MY_SHIFTS = gql`
   query shifts($personal: Boolean) {

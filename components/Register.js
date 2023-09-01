@@ -1,24 +1,18 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
-  SafeAreaView,
-  StyleSheet,
-  TextInput,
   Button,
-  View,
-  Image,
-  FlatList,
-  Pressable,
-  Text,
-  TouchableWithoutFeedback,
-  Keyboard,
   ImageBackground,
+  Keyboard,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableWithoutFeedback,
+  View,
 } from 'react-native';
 import Bartender from '../assets/bartender2.png';
-import Logo from '../assets/logo.png';
 
 import * as SecureStore from 'expo-secure-store';
 
-import { useMutation } from '@apollo/client';
 import { CREATE_USER } from '../gql/createUser';
 
 import { withApollo } from '@apollo/client/react/hoc';
@@ -52,11 +46,11 @@ class Register extends React.Component {
       .then((response) => {
         SecureStore.setItemAsync(
           'token',
-          response['data']['createUser']['token']
+          response['data']['createUser']['token'],
         );
         SecureStore.setItemAsync(
           'role',
-          response['data']['createUser']['user']['kind']
+          response['data']['createUser']['user']['kind'],
         );
 
         if (this.state.kind == 'DRINKER') {

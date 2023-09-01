@@ -15,9 +15,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.laquintadude.myregulars"
@@ -38,7 +36,6 @@
         "projectId": "4902382b-3e60-43ce-a9d4-53c031273fea"
       }
     },
-    "plugins": [
-    ]
+    "plugins": []
   }
 }

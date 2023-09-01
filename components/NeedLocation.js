@@ -1,14 +1,6 @@
 import React from 'react';
 
-import {
-  StyleSheet,
-  View,
-  Text,
-  Dimensions,
-  Image,
-  Pressable,
-  ImageBackground,
-} from 'react-native';
+import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 
 import BarBackground from '../assets/black-white-bar.png';
 

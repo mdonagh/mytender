@@ -1,4 +1,4 @@
-import { gql, useQuery } from '@apollo/client';
+import { gql } from '@apollo/client';
 
 export const LIST_BARTENDER = gql`
   query NearbyShifts($latitude: Float!, $longitude: Float!) {

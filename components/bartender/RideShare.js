@@ -1,19 +1,16 @@
 import React, { useState } from 'react';
 
 import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  Pressable,
-  Linking,
-  TouchableOpacity,
   Dimensions,
+  Image,
+  Linking,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 
-import { ListItem, Avatar } from '@rneui/themed';
-
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 
 import * as Location from 'expo-location';
 import NeedLocation from '../NeedLocation';

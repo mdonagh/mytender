@@ -1,15 +1,12 @@
 import React, { useEffect } from 'react';
 import {
-  SafeAreaView,
-  StyleSheet,
-  TextInput,
   Button,
-  View,
   Image,
-  FlatList,
-  Pressable,
-  Text,
   ImageBackground,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
 } from 'react-native';
 import Bartender from '../assets/bartender2.png';
 import Logo from '../assets/logo.png';
@@ -17,8 +14,8 @@ import Logo from '../assets/logo.png';
 import * as SecureStore from 'expo-secure-store';
 
 import { useMutation } from '@apollo/client';
-import { SIGN_IN } from '../gql/signIn';
 import Toast from 'react-native-toast-message';
+import { SIGN_IN } from '../gql/signIn';
 
 const Register = (props) => {
   const [email, onChangeEmail] = React.useState('');
@@ -34,7 +31,7 @@ const Register = (props) => {
           text1: JSON.stringify(error),
         });
         console.log('An error', error);
-      }
+      },
     );
   };
 

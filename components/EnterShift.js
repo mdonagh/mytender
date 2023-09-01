@@ -1,24 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import { Picker } from '@react-native-picker/picker';
+import { Text } from '@rneui/themed';
+import React, { useEffect } from 'react';
 import {
   Button,
-  View,
-  TextInput,
-  StyleSheet,
   ImageBackground,
+  StyleSheet,
+  TextInput,
+  View,
 } from 'react-native';
-import { Text } from '@rneui/themed';
-import { CheckBox, Separator } from 'react-native-btr';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import GooglePlacesInput from './GooglePlacesInput';
-import { Picker } from '@react-native-picker/picker';
-import { RadioGroup } from 'react-native-btr';
 
 import { CREATE_SHIFT } from '../gql/createShift';
 
 import { withApollo } from '@apollo/client/react/hoc';
 
-import BarBackground from '../assets/black-white-bar.png';
 import Toast from 'react-native-toast-message';
+import BarBackground from '../assets/black-white-bar.png';
 
 const LeavePage = (props) => {
   useEffect(() => {

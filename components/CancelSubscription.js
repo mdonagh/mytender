@@ -1,17 +1,9 @@
-import React, { useEffect, useCallback, useState } from 'react';
+import React, { useState } from 'react';
 
-import {
-  Pressable,
-  StyleSheet,
-  TextInput,
-  Button,
-  View,
-  Text,
-} from 'react-native';
+import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 
-import { ListItem } from '@rneui/themed';
-import { useNavigation } from '@react-navigation/native';
 import { useMutation } from '@apollo/client';
+import { useNavigation } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
 import { CANCEL_SUBSCRIPTION } from '../gql/cancelSubscription';
 

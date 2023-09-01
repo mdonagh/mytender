@@ -1,20 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { useStripe, presentPaymentSheet } from '@stripe/stripe-react-native';
+import { useStripe } from '@stripe/stripe-react-native';
 
-import {
-  View,
-  Button,
-  ImageBackground,
-  StyleSheet,
-  Alert,
-  Text,
-} from 'react-native';
+import { Button, ImageBackground, StyleSheet, Text, View } from 'react-native';
 
-import * as SecureStore from 'expo-secure-store';
-import BarBackground from '../assets/bartender2.png';
-import Toast from 'react-native-toast-message';
 import { useNavigation } from '@react-navigation/native';
+import * as SecureStore from 'expo-secure-store';
+import Toast from 'react-native-toast-message';
+import BarBackground from '../assets/bartender2.png';
 
 export default function Payment() {
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
@@ -31,7 +24,7 @@ export default function Payment() {
           'Content-Type': 'application/json',
           Authorization: `Basic ${token}`,
         },
-      }
+      },
     );
 
     const { paymentIntent, ephemeralKey, customer, publishableKey } =

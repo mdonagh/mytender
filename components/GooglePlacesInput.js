@@ -1,5 +1,4 @@
 import React from 'react';
-import { View, Image, Text } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
 class GooglePlacesInput extends React.Component {

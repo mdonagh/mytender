@@ -4,18 +4,18 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from './components/Login';
 import Register from './components/Register';
 
-import ShowBartender from './components/ShowBartender';
-import ShowMap from './components/ShowMap';
-import Menu from './components/Menu';
-import ListBartender from './components/ListBartender';
-import EnterShift from './components/EnterShift';
-import ListShift from './components/ListShift';
-import Payment from './components/Payment';
 import AccountSettings from './components/AccountSettings';
 import CancelSubscription from './components/CancelSubscription';
+import EnterShift from './components/EnterShift';
+import ListBartender from './components/ListBartender';
+import ListShift from './components/ListShift';
+import Menu from './components/Menu';
+import Payment from './components/Payment';
+import ShowBartender from './components/ShowBartender';
+import ShowMap from './components/ShowMap';
 
-import PhotoUpload from './components/PhotoUpload';
 import Toast from 'react-native-toast-message';
+import PhotoUpload from './components/PhotoUpload';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,8 +23,8 @@ import { StripeProvider } from '@stripe/stripe-react-native';
 
 import {
   ApolloClient,
-  InMemoryCache,
   ApolloProvider,
+  InMemoryCache,
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
