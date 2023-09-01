@@ -1,11 +1,11 @@
 import { gql, useQuery } from '@apollo/client';
 
 export const CURRENT_PHOTOS = gql`
-query {
+  query {
     user {
       id
       bannerUrl
       headshotUrl
     }
-}
+  }
 `;

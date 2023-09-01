@@ -1,21 +1,23 @@
 import React, { useEffect } from 'react';
-import {SafeAreaView,
-        StyleSheet,
-        TextInput,
-        Button,
-        View,
-        Image,
-        FlatList,
-        Pressable,
-        Text,
-        ImageBackground} from 'react-native';
-import Bartender from '../assets/bartender2.png'
-import Logo from '../assets/logo.png'
+import {
+  SafeAreaView,
+  StyleSheet,
+  TextInput,
+  Button,
+  View,
+  Image,
+  FlatList,
+  Pressable,
+  Text,
+  ImageBackground,
+} from 'react-native';
+import Bartender from '../assets/bartender2.png';
+import Logo from '../assets/logo.png';
 
 import * as SecureStore from 'expo-secure-store';
 
-import { useMutation } from "@apollo/client";
-import { SIGN_IN } from "../gql/signIn";
+import { useMutation } from '@apollo/client';
+import { SIGN_IN } from '../gql/signIn';
 import Toast from 'react-native-toast-message';
 
 const Register = (props) => {
@@ -24,65 +26,64 @@ const Register = (props) => {
 
   const [signIn, { data, loading, error }] = useMutation(SIGN_IN);
 
-const loginUser = () => {
-  signIn({variables: {email: email, password: password}}).catch(error => {
+  const loginUser = () => {
+    signIn({ variables: { email: email, password: password } }).catch(
+      (error) => {
+        Toast.show({
+          type: 'error',
+          text1: JSON.stringify(error),
+        });
+        console.log('An error', error);
+      }
+    );
+  };
+
+  useEffect(() => {
+    if (data) {
+      SecureStore.setItemAsync('token', data['signInUser']['token']);
+      SecureStore.setItemAsync('role', data['signInUser']['user']['kind']);
+      props.navigation.navigate('Map');
+    }
+  });
+
+  if (loading) return <Text>'Loading...'</Text>;
+  if (error) {
     Toast.show({
       type: 'error',
-      text1: JSON.stringify(error),
-    })
-    console.log("An error", error);
-  });
- }
-
-useEffect(() => {
-  if (data){
-    SecureStore.setItemAsync('token', data["signInUser"]["token"]);
-    SecureStore.setItemAsync('role', data["signInUser"]["user"]["kind"]);
-    props.navigation.navigate('Map')
+      text1: error.message,
+    });
   }
-})
-
-if (loading) return <Text>'Loading...'</Text>;
-if (error){
-  Toast.show({
-    type: 'error',
-    text1: error.message,
-  });
-}
 
   return (
     <View style={styles.container}>
       <ImageBackground
         source={Bartender}
         resizeMode="cover"
-        style={styles.image}>
-
-      <Image source={Logo} style={{height: 250, width: 400}} />
-      <TextInput
-        style={styles.input}
-        onChangeText={onChangeEmail}
-        placeholder="email"
-        value={email}
-      />
-      <TextInput
-        style={styles.input}
-        onChangeText={onChangePassword}
-        secureTextEntry={true}
-        placeholder="password"
-        value={password}
-      />
-      <View style={styles.button} >
-      <Button
-        title="Login"
-        onPress={() => loginUser()}
-      />
-      </View>
-      <View style={styles.button} >
-      <Button
-        title="Register"
-        onPress={() => props.navigation.navigate('Register')}
-      />
-      </View>
+        style={styles.image}
+      >
+        <Image source={Logo} style={{ height: 250, width: 400 }} />
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeEmail}
+          placeholder="email"
+          value={email}
+        />
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangePassword}
+          secureTextEntry={true}
+          placeholder="password"
+          value={password}
+        />
+        <View style={styles.button}>
+          <Button title="Login" onPress={() => loginUser()} />
+        </View>
+        <View style={styles.button}>
+          <Button
+            title="Register"
+            onPress={() => props.navigation.navigate('Register')}
+          />
+        </View>
       </ImageBackground>
     </View>
   );
@@ -94,12 +95,12 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: 10,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   button: {
     marginHorizontal: 50,
     marginTop: 20,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   container: {
     flex: 1,

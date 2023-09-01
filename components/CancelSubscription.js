@@ -1,63 +1,62 @@
 import React, { useEffect, useCallback, useState } from 'react';
 
-import { 
-         Pressable,
-         StyleSheet,
-        TextInput,
-        Button,
-        View,
-        Text
-       } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  TextInput,
+  Button,
+  View,
+  Text,
+} from 'react-native';
 
 import { ListItem } from '@rneui/themed';
 import { useNavigation } from '@react-navigation/native';
-import { useMutation } from "@apollo/client";
+import { useMutation } from '@apollo/client';
 import Toast from 'react-native-toast-message';
-import { CANCEL_SUBSCRIPTION } from "../gql/cancelSubscription";
+import { CANCEL_SUBSCRIPTION } from '../gql/cancelSubscription';
 
 const CancelSubscription = () => {
-  const [reason, setReason] = useState(null)
+  const [reason, setReason] = useState(null);
 
-  const [cancelSubscription, { data, loading, error }] = useMutation(CANCEL_SUBSCRIPTION);
+  const [cancelSubscription, { data, loading, error }] =
+    useMutation(CANCEL_SUBSCRIPTION);
 
   const navigation = useNavigation();
 
   const cancel = () => {
     cancelSubscription({
-        variables: {
-          reason: reason
-        },
-      }).then(result => {
+      variables: {
+        reason: reason,
+      },
+    })
+      .then((result) => {
         Toast.show({
           type: 'success',
-          text1: 'Your subscription has been cancelled!'
+          text1: 'Your subscription has been cancelled!',
         });
-    }).catch(error => {
-      console.log("An error", error)
-    });
-  }
+      })
+      .catch((error) => {
+        console.log('An error', error);
+      });
+  };
 
   return (
     <>
-      <View style={{backgroundColor: 'grey'}}>
+      <View style={{ backgroundColor: 'grey' }}>
         <Text style={styles.whiteText}>Reason for cancelling</Text>
       </View>
-        <TextInput
-          multiline={true}
-          style={styles.textarea}
-          numberOfLines={4}
-          onChangeText={(text) => setReason(text)}
-         />
-        <View style={styles.button} >
-          <Button
-            title="Cancel"
-            onPress={() => cancel()}
-            disabled={!reason}
-          />
-        </View>
+      <TextInput
+        multiline={true}
+        style={styles.textarea}
+        numberOfLines={4}
+        onChangeText={(text) => setReason(text)}
+      />
+      <View style={styles.button}>
+        <Button title="Cancel" onPress={() => cancel()} disabled={!reason} />
+      </View>
     </>
   );
-}
+};
 
 const styles = StyleSheet.create({
   input: {
@@ -65,25 +64,25 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: 10,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   textarea: {
     height: 70,
     margin: 12,
     borderWidth: 1,
     padding: 10,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   button: {
     marginHorizontal: 50,
     marginTop: 20,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   whiteText: {
     color: 'white',
     fontSize: 20,
     textAlign: 'center',
-    marginBottom: 30
+    marginBottom: 30,
   },
   container: {
     flex: 1,

@@ -1,8 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 
-import { 
-         Pressable,
-       } from "react-native";
+import { Pressable } from 'react-native';
 
 import { ListItem } from '@rneui/themed';
 import { useNavigation } from '@react-navigation/native';
@@ -10,15 +8,18 @@ import { useNavigation } from '@react-navigation/native';
 const AccountSettings = () => {
   const navigation = useNavigation();
 
-    return (
+  return (
     <>
-      <ListItem onPress={() => navigation.navigate('Cancel Subscription')} bottomDivider>
+      <ListItem
+        onPress={() => navigation.navigate('Cancel Subscription')}
+        bottomDivider
+      >
         <ListItem.Content>
           <ListItem.Title>Cancel Subscription</ListItem.Title>
         </ListItem.Content>
       </ListItem>
     </>
-    );
-}
+  );
+};
 
 export default AccountSettings;

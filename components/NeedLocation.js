@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 import {
   StyleSheet,
@@ -7,31 +7,41 @@ import {
   Dimensions,
   Image,
   Pressable,
-  ImageBackground
+  ImageBackground,
 } from 'react-native';
 
-import BarBackground from '../assets/black-white-bar.png'
+import BarBackground from '../assets/black-white-bar.png';
 
 function NeedLocation() {
-  return(
+  return (
     <View style={styles.bigContainer}>
-      <ImageBackground 
+      <ImageBackground
         source={BarBackground}
         resizeMode="cover"
-        style={styles.backgroundImage}>
-        <View style={{backgroundColor: 'white', margin: 10, borderRadius: 40, overflow: 'hidden'}}>
-        <Text style={styles.warningText}>You must allow this app to access your location</Text>
+        style={styles.backgroundImage}
+      >
+        <View
+          style={{
+            backgroundColor: 'white',
+            margin: 10,
+            borderRadius: 40,
+            overflow: 'hidden',
+          }}
+        >
+          <Text style={styles.warningText}>
+            You must allow this app to access your location
+          </Text>
         </View>
       </ImageBackground>
     </View>
-    )
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
     justifyContent: 'flex-end',
-    alignItems: 'center', 
+    alignItems: 'center',
   },
   backgroundImage: {
     flex: 1,
@@ -43,7 +53,7 @@ const styles = StyleSheet.create({
   warningText: {
     fontSize: 50,
     textAlign: 'center',
-    marginBottom: 30
+    marginBottom: 30,
   },
   martini: {
     resizeMode: 'stretch',

@@ -21,7 +21,12 @@ const Stack = createNativeStackNavigator();
 
 import { StripeProvider } from '@stripe/stripe-react-native';
 
-import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import * as SecureStore from 'expo-secure-store';
 
@@ -35,15 +40,15 @@ const httpLink = createHttpLink({
 
 const authLink = setContext(async (_, { headers }) => {
   // get the authentication token from local storage if it exists
-  let token = false
+  let token = false;
   token = await SecureStore.getItemAsync('token');
   console.log(token);
   return {
     headers: {
       ...headers,
-      Authorization: token ? `Basic ${token}` : ""
-    }
-  }
+      Authorization: token ? `Basic ${token}` : '',
+    },
+  };
 });
 
 // https://www.apollographql.com/docs/react/data/queries/#setting-a-fetch-policy
@@ -51,54 +56,60 @@ const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
   defaultOptions: {
-    fetchPolicy: 'cache-and-network'
-  }
+    fetchPolicy: 'cache-and-network',
+  },
 });
-
 
 function App() {
   return (
     <ApolloProvider client={client}>
-    <StripeProvider
-      publishableKey="pk_test_51Ng6T9FkuyPevR8MA9bhsHnJIGkbKihsHVmPK3Ps6zC3A8NKZPAnefhskAEhIckIZamAsnYSJW0uaK3V4sFm2HSS00lDuL6j1H"
-      urlScheme="myregulars" // required for 3D Secure and bank redirects
-      // merchantIdentifier="merchant.com.mytender"
-    >
-      <NavigationContainer>
-      {/* change initialRoute back to Login */}
-        <Stack.Navigator initialRouteName="Login">
-          <Stack.Screen name="Login" component={Login}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen name="Register" component={Register}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen name="Payment" component={Payment} 
-            options={{headerShown: false}}
-          />
+      <StripeProvider
+        publishableKey="pk_test_51Ng6T9FkuyPevR8MA9bhsHnJIGkbKihsHVmPK3Ps6zC3A8NKZPAnefhskAEhIckIZamAsnYSJW0uaK3V4sFm2HSS00lDuL6j1H"
+        urlScheme="myregulars" // required for 3D Secure and bank redirects
+        // merchantIdentifier="merchant.com.mytender"
+      >
+        <NavigationContainer>
+          {/* change initialRoute back to Login */}
+          <Stack.Navigator initialRouteName="Login">
+            <Stack.Screen
+              name="Login"
+              component={Login}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Register"
+              component={Register}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Payment"
+              component={Payment}
+              options={{ headerShown: false }}
+            />
 
-          <Stack.Screen name="Show Bartender" component={ShowBartender} />
-          <Stack.Screen name="Menu" component={Menu} />
-          <Stack.Screen name="List Bartenders" component={ListBartender} />
-          <Stack.Screen name="Enter Shift" component={EnterShift} />
-          <Stack.Screen name="My Shifts" component={ListShift} />
-          <Stack.Screen name="Add Photos" component={PhotoUpload} />
-          <Stack.Screen name="Account Settings" component={AccountSettings} />
-          <Stack.Screen name="Cancel Subscription" component={CancelSubscription} />
+            <Stack.Screen name="Show Bartender" component={ShowBartender} />
+            <Stack.Screen name="Menu" component={Menu} />
+            <Stack.Screen name="List Bartenders" component={ListBartender} />
+            <Stack.Screen name="Enter Shift" component={EnterShift} />
+            <Stack.Screen name="My Shifts" component={ListShift} />
+            <Stack.Screen name="Add Photos" component={PhotoUpload} />
+            <Stack.Screen name="Account Settings" component={AccountSettings} />
+            <Stack.Screen
+              name="Cancel Subscription"
+              component={CancelSubscription}
+            />
 
-          <Stack.Screen
-            name="Map"
-            options={{headerShown: false}}
-            component={ShowMap}
-          />
-        </Stack.Navigator>
-        <Toast />
-      </NavigationContainer>
-    </StripeProvider>
-
+            <Stack.Screen
+              name="Map"
+              options={{ headerShown: false }}
+              component={ShowMap}
+            />
+          </Stack.Navigator>
+          <Toast />
+        </NavigationContainer>
+      </StripeProvider>
     </ApolloProvider>
   );
 }
 
 export default App;
-
