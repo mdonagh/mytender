@@ -42,7 +42,6 @@ function ShowBartender({ route, navigation }) {
           flex: 6,
           alignItems: 'center',
           justifyContent: 'center',
-          borderBottomColor: 'black',
           borderBottomWidth: StyleSheet.hairlineWidth,
           width: width,
         }}

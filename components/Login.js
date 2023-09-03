@@ -93,11 +93,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     backgroundColor: 'white',
+    borderRadius: 8,
   },
   button: {
     marginHorizontal: 50,
     marginTop: 20,
     backgroundColor: 'white',
+    borderRadius: 8,
   },
   container: {
     flex: 1,

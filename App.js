@@ -1,68 +1,62 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-import Login from './components/Login';
-import Register from './components/Register';
-
+import { StripeProvider } from '@stripe/stripe-react-native';
+import * as SecureStore from 'expo-secure-store';
+import { useEffect, useState } from 'react';
+import Toast from 'react-native-toast-message';
 import AccountSettings from './components/AccountSettings';
 import CancelSubscription from './components/CancelSubscription';
 import EnterShift from './components/EnterShift';
 import ListBartender from './components/ListBartender';
 import ListShift from './components/ListShift';
+import Login from './components/Login';
 import Menu from './components/Menu';
 import Payment from './components/Payment';
+import PhotoUpload from './components/PhotoUpload';
+import Register from './components/Register';
 import ShowBartender from './components/ShowBartender';
 import ShowMap from './components/ShowMap';
-
-import Toast from 'react-native-toast-message';
-import PhotoUpload from './components/PhotoUpload';
+import { ApolloProvider } from './providers/ApolloProvider';
 
 const Stack = createNativeStackNavigator();
 
-import { StripeProvider } from '@stripe/stripe-react-native';
+const App = () => {
+  const [isLoginLoading, setIsLoginLoading] = useState(true);
+  const [initialRoute, setInitialRoute] = useState(null);
 
-import {
-  ApolloClient,
-  ApolloProvider,
-  InMemoryCache,
-  createHttpLink,
-} from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
-import * as SecureStore from 'expo-secure-store';
+  useEffect(() => {
+    let mounted = true;
+    const checkLogin = async () => {
+      const token = await SecureStore.getItemAsync('token');
+      const role = await SecureStore.getItemAsync('role');
 
-const httpLink = createHttpLink({
-  uri: 'https://mytender-dc1b2d59a1a2.herokuapp.com/graphql',
-});
+      console.log('ROLE:', role);
 
-// const httpLink = createHttpLink({
-//   uri: 'https://6c5c-24-17-149-35.ngrok.io/graphql',
-// });
+      if (token && mounted) {
+        setIsLoginLoading(false);
+        if (role === 'bartender') {
+          setInitialRoute('Map');
+        } else {
+          setInitialRoute('Menu');
+        }
+      } else {
+        setInitialRoute('Login');
+        setIsLoginLoading(false);
+      }
+    };
+    checkLogin();
 
-const authLink = setContext(async (_, { headers }) => {
-  // get the authentication token from local storage if it exists
-  let token = false;
-  token = await SecureStore.getItemAsync('token');
-  console.log(token);
-  return {
-    headers: {
-      ...headers,
-      Authorization: token ? `Basic ${token}` : '',
-    },
-  };
-});
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
-// https://www.apollographql.com/docs/react/data/queries/#setting-a-fetch-policy
-const client = new ApolloClient({
-  link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
-  defaultOptions: {
-    fetchPolicy: 'cache-and-network',
-  },
-});
+  if (isLoginLoading || !initialRoute) {
+    return null;
+  }
 
-function App() {
   return (
-    <ApolloProvider client={client}>
+    <ApolloProvider>
       <StripeProvider
         publishableKey="pk_test_51Ng6T9FkuyPevR8MA9bhsHnJIGkbKihsHVmPK3Ps6zC3A8NKZPAnefhskAEhIckIZamAsnYSJW0uaK3V4sFm2HSS00lDuL6j1H"
         urlScheme="myregulars" // required for 3D Secure and bank redirects
@@ -70,7 +64,7 @@ function App() {
       >
         <NavigationContainer>
           {/* change initialRoute back to Login */}
-          <Stack.Navigator initialRouteName="Login">
+          <Stack.Navigator initialRouteName={initialRoute}>
             <Stack.Screen
               name="Login"
               component={Login}
@@ -110,6 +104,6 @@ function App() {
       </StripeProvider>
     </ApolloProvider>
   );
-}
+};
 
 export default App;
