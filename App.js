@@ -1,8 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StripeProvider } from '@stripe/stripe-react-native';
-import * as SecureStore from 'expo-secure-store';
-import { useEffect, useState } from 'react';
 import Toast from 'react-native-toast-message';
 import AccountSettings from './components/AccountSettings';
 import CancelSubscription from './components/CancelSubscription';
@@ -21,40 +19,6 @@ import { ApolloProvider } from './providers/ApolloProvider';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
-  const [isLoginLoading, setIsLoginLoading] = useState(true);
-  const [initialRoute, setInitialRoute] = useState(null);
-
-  useEffect(() => {
-    let mounted = true;
-    const checkLogin = async () => {
-      const token = await SecureStore.getItemAsync('token');
-      const role = await SecureStore.getItemAsync('role');
-
-      console.log('ROLE:', role);
-
-      if (token && mounted) {
-        setIsLoginLoading(false);
-        if (role === 'bartender') {
-          setInitialRoute('Map');
-        } else {
-          setInitialRoute('Menu');
-        }
-      } else {
-        setInitialRoute('Login');
-        setIsLoginLoading(false);
-      }
-    };
-    checkLogin();
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
-
-  if (isLoginLoading || !initialRoute) {
-    return null;
-  }
-
   return (
     <ApolloProvider>
       <StripeProvider
@@ -64,7 +28,7 @@ const App = () => {
       >
         <NavigationContainer>
           {/* change initialRoute back to Login */}
-          <Stack.Navigator initialRouteName={initialRoute}>
+          <Stack.Navigator initialRouteName={'Login'}>
             <Stack.Screen
               name="Login"
               component={Login}
