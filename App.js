@@ -7,14 +7,16 @@ import CancelSubscription from './components/CancelSubscription';
 import EnterShift from './components/EnterShift';
 import ListBartender from './components/ListBartender';
 import ListShift from './components/ListShift';
-import Login from './components/Login';
 import Menu from './components/Menu';
 import Payment from './components/Payment';
 import PhotoUpload from './components/PhotoUpload';
-import Register from './components/Register';
 import ShowBartender from './components/ShowBartender';
 import ShowMap from './components/ShowMap';
 import { ApolloProvider } from './providers/ApolloProvider';
+import Dashboard from './screens/Dashboard';
+import Login from './screens/Login';
+import Register from './screens/Register';
+import Welcome from './screens/Welcome';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,7 +30,12 @@ const App = () => {
       >
         <NavigationContainer>
           {/* change initialRoute back to Login */}
-          <Stack.Navigator initialRouteName={'Login'}>
+          <Stack.Navigator initialRouteName={'Welcome'}>
+            <Stack.Screen
+              name="Welcome"
+              component={Welcome}
+              options={{ headerShown: false }}
+            />
             <Stack.Screen
               name="Login"
               component={Login}
@@ -42,6 +49,12 @@ const App = () => {
             <Stack.Screen
               name="Payment"
               component={Payment}
+              options={{ headerShown: false }}
+            />
+
+            <Stack.Screen
+              name="Dashboard"
+              component={Dashboard}
               options={{ headerShown: false }}
             />
 

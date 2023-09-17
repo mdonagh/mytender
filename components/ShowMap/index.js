@@ -3,6 +3,7 @@ import * as Location from 'expo-location';
 import React, { useState } from 'react';
 import NeedLocation from '../NeedLocation';
 import { TenderMap } from './components/TenderMap';
+import ScreenLayout from '../ScreenLayout';
 
 const ShowMap = () => {
   const navigation = useNavigation();
@@ -23,10 +24,14 @@ const ShowMap = () => {
   }
 
   if (coordinates && granted) {
-    return <TenderMap navigation={navigation} coordinates={coordinates} />;
+    return (
+      <ScreenLayout title="Explore View">
+        <TenderMap navigation={navigation} coordinates={coordinates} />
+      </ScreenLayout>
+    );
   } else if (!granted) {
     // Improve layout here
-    return <NeedLocation />;
+    return <NeedLocation title="Explore View" />;
   } else {
     return null;
   }
