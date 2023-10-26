@@ -53,6 +53,16 @@ export class TenderMap extends Component {
             navigation={this.props.navigation}
             coordinates={this.state.coordinates}
           />
+        <Pressable 
+          style={{alignSelf: 'flex-start'}}
+          onPress={() => this.props.navigation.navigate('Menu')}
+        >
+        <Image
+          rounded
+          source={Martini}
+          style={styles.martini}
+        />
+        </Pressable>
         </MapView>
       </View>
     );
