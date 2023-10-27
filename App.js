@@ -25,7 +25,7 @@ const App = () => {
     <ApolloProvider>
       <StripeProvider
         publishableKey="pk_test_51Ng6T9FkuyPevR8MA9bhsHnJIGkbKihsHVmPK3Ps6zC3A8NKZPAnefhskAEhIckIZamAsnYSJW0uaK3V4sFm2HSS00lDuL6j1H"
-        urlScheme="myregulars" // required for 3D Secure and bank redirects
+        urlScheme="mytender" // required for 3D Secure and bank redirects
         // merchantIdentifier="merchant.com.mytender"
       >
         <NavigationContainer>
