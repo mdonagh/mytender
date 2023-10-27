@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "myregulars",
-    "slug": "myregulars",
-    "scheme": "myregulars",
+    "name": "mytender",
+    "slug": "mytender",
+    "scheme": "mytender",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/martini-icon.png",
@@ -18,14 +18,14 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.laquintadude.myregulars"
+      "bundleIdentifier": "com.laquintadude.mytender"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/martini-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.laquintadude.myregulars"
+      "package": "com.laquintadude.mytender"
     },
     "web": {
       "favicon": "./assets/martini-icon.png"
