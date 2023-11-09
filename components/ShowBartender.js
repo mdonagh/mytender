@@ -66,9 +66,14 @@ function ShowBartender({ route, navigation }) {
             style={styles.image}
           />
         </Pressable>
-        <Pressable style={{ flex: 1 }} onPress={() => setSelected('payment')}>
-          <Image source={require('../assets/money.png')} style={styles.image} />
-        </Pressable>
+
+        {!loading && data && (data['shift']['user']['venmo'] || data['shift']['user']['cashapp']) ? (
+          <Pressable style={{ flex: 1 }} onPress={() => setSelected('payment')}>
+            <Image source={require('../assets/money.png')} style={styles.image} />
+          </Pressable>
+        ): (
+          <></>
+        )}
         <Pressable style={{ flex: 1 }} onPress={() => setSelected('rideshare')}>
           <Image source={require('../assets/taxi.png')} style={styles.image} />
         </Pressable>

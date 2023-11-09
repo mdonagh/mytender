@@ -11,6 +11,7 @@ import {
 
 import CashAppIcon from '../../assets/cashapp.png';
 import VenmoIcon from '../../assets/venmo.png';
+import { Platform } from 'react-native';
 
 function Payment(props) {
   console.log(props);
@@ -31,9 +32,23 @@ function Payment(props) {
   });
 
   const user = props['data']['shift']['user'];
+
+if (Platform.OS === 'ios') {
   const venmoDeepLink = `venmo://paycharge?txn=pay&recipients=${
     user['venmo'] || ''
   }&amount=20`;
+} else if (Platform.OS === 'android') {
+    const venmoDeepLink = `intent://user?user_id=${user['venmo'] || ''}#Intent;package=com.venmo;scheme=venmo;end`;
+    
+
+  // other thing for android
+} else if (Platform.OS === 'web') {
+  // it's on web!
+} else {
+  // you probably won't end up here unless you support another platform!
+}
+
+
   const cashappDeeplink = `https://cash.app/${user['cashapp'] || ''}/20.00`;
 
   return (
