@@ -2,6 +2,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StripeProvider } from '@stripe/stripe-react-native';
 import Toast from 'react-native-toast-message';
+import * as SplashScreen from 'expo-splash-screen';
+
+
 import AccountSettings from './components/AccountSettings';
 import CancelSubscription from './components/CancelSubscription';
 import EnterShift from './components/EnterShift';
@@ -19,6 +22,7 @@ import Register from './screens/Register';
 import Welcome from './screens/Welcome';
 
 const Stack = createNativeStackNavigator();
+
 
 const App = () => {
   return (

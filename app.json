@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "mytender",
-    "slug": "mytender",
-    "scheme": "mytender",
+    "name": "mytenders",
+    "slug": "mytenders",
+    "scheme": "mytenders",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/martini-icon.png",
@@ -15,27 +15,29 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.laquintadude.mytender"
+      "bundleIdentifier": "com.laquintadude.mytenders"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/martini-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.laquintadude.mytender"
+      "package": "com.laquintadude.mytenders"
     },
     "web": {
       "favicon": "./assets/martini-icon.png"
     },
     "owner": "laquintadude",
+    "plugins": [],
     "extra": {
       "eas": {
-        "projectId": "4902382b-3e60-43ce-a9d4-53c031273fea"
+        "projectId": "f48b8110-a01c-4a6e-910d-188890baaae9"
       }
-    },
-    "plugins": []
+    }
   }
 }

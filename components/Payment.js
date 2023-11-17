@@ -8,6 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 import * as SecureStore from 'expo-secure-store';
 import Toast from 'react-native-toast-message';
 import BarBackground from '../assets/bartender2.png';
+import RegisterCard from '../screens/Register/components/RegisterCard'
 
 export default function Payment() {
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
@@ -112,21 +113,23 @@ export default function Payment() {
           You're almost there! $6.99 after a one-month FREE trial
         </Text>
 
-        <View
-          style={{
-            backgroundColor: 'white',
-            margin: 10,
-            borderRadius: 40,
-            overflow: 'hidden',
-          }}
-        >
-          <Button
-            title="Add Payment"
-            style={styles.text}
-            disabled={!loading}
-            onPress={openPaymentSheet}
+<>
+          <RegisterCard
+            description={
+              "You're almost there! $6.99 after a one-month FREE trial"
+            }
+            buttons={
+              <>
+                <Button
+                  title="Add Payment"
+                  disabled={!loading}
+                  mode="contained"
+                  onPress={() => openPaymentSheet}
+                />
+              </>
+            }
           />
-        </View>
+        </>
       </ImageBackground>
     </View>
   );

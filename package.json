@@ -47,7 +47,9 @@
     "react-native-screens": "~3.20.0",
     "react-native-toast-message": "^2.1.6",
     "react-native-web": "~0.18.9",
-    "watchman": "^1.0.0"
+    "watchman": "^1.0.0",
+    "expo-dev-client": "~2.2.1",
+    "expo-splash-screen": "~0.18.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

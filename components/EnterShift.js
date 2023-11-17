@@ -130,11 +130,25 @@ class EnterShift extends React.Component {
       form = (
         <>
           <Text style={styles.text}>How many hours is your shift?</Text>
-          <TextInput
-            keyboardType="numeric"
-            value={this.state.hours}
-            onChangeText={(text) => this.selectHours(text)}
-          />
+          <Picker
+            selectedValue={this.state.hours}
+            style={{ height: 300, width: '100%' }}
+            onValueChange={(itemValue, itemIndex) =>
+              this.selectHours(itemValue)
+            }
+          >
+            <Picker.Item label="4" value="4" />
+            <Picker.Item label="5" value="5" />
+            <Picker.Item label="6" value="6" />
+            <Picker.Item label="7" value="7" />
+            <Picker.Item label="8" value="8" />
+            <Picker.Item label="9" value="9" />
+            <Picker.Item label="10" value="10" />
+            <Picker.Item label="11" value="11" />
+            <Picker.Item label="11" value="11" />
+            <Picker.Item label="12" value="12" />
+            <Picker.Item label="13" value="13" />
+          </Picker>
         </>
       );
     } else if (this.state.currentForm == 4) {
