@@ -21,6 +21,11 @@ const Menu = () => {
 
   return (
     <>
+      <ListItem onPress={() => navigation.navigate('Map')} bottomDivider>
+        <ListItem.Content>
+          <ListItem.Title>View Map</ListItem.Title>
+        </ListItem.Content>
+      </ListItem>
       {role && role == 'bartender' ? (
         <ListItem
           onPress={() => navigation.navigate('Enter Shift')}

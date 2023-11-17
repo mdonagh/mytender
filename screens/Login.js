@@ -5,7 +5,7 @@ import React, { useEffect } from 'react';
 import { ImageBackground, StyleSheet, View } from 'react-native';
 import { Appbar, Button, Card, Text, TextInput } from 'react-native-paper';
 import Toast from 'react-native-toast-message';
-import Bartender from '../assets/bartender2.png';
+import Bartender from '../assets/gregs-friend.jpg';
 import { SIGN_IN } from '../gql/signIn';
 
 const Login = () => {
@@ -39,7 +39,14 @@ const Login = () => {
     if (data) {
       SecureStore.setItemAsync('token', data['signInUser']['token']);
       SecureStore.setItemAsync('role', data['signInUser']['user']['kind']);
-      navigation.navigate('Dashboard');
+
+      let role = data['signInUser']['user']['kind']
+
+      if(role == 'drinker'){
+        navigation.navigate('Map');
+      } else {
+        navigation.navigate('Menu');
+      }
     }
   });
 
@@ -62,7 +69,6 @@ const Login = () => {
         source={Bartender}
         resizeMode="cover"
         style={styles.background}
-        blurRadius={5}
       >
         <View style={styles.overlay} />
 
@@ -101,11 +107,9 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    flexDirection: 'row',
   },
   overlay: {
     flex: 1,
-    position: 'absolute',
     left: 0,
     top: 0,
     backgroundColor: 'rgba(0,0,0,0.2)',

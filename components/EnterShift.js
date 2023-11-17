@@ -132,7 +132,7 @@ class EnterShift extends React.Component {
           <Text style={styles.text}>How many hours is your shift?</Text>
           <TextInput
             keyboardType="numeric"
-            value={value}
+            value={this.state.hours}
             onChangeText={(text) => this.selectHours(text)}
           />
         </>
