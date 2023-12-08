@@ -109,14 +109,10 @@ export default function Payment() {
         resizeMode="cover"
         style={styles.image}
       >
-        <Text style={styles.whiteText}>
-          You're almost there! $6.99 after a one-month FREE trial
-        </Text>
-
-<>
+        <>
           <RegisterCard
             description={
-              "You're almost there! $6.99 after a one-month FREE trial"
+              "You're almost there! MyTender costs $6.99/month after a FREE one-month trial"
             }
             buttons={
               <>
@@ -124,7 +120,7 @@ export default function Payment() {
                   title="Add Payment"
                   disabled={!loading}
                   mode="contained"
-                  onPress={() => openPaymentSheet}
+                  onPress={openPaymentSheet}
                 />
               </>
             }
