@@ -17,6 +17,10 @@ import { withApollo } from '@apollo/client/react/hoc';
 
 import Toast from 'react-native-toast-message';
 import BarBackground from '../assets/black-white-bar.png';
+import { Card } from 'react-native-paper';
+import { Text as PaperText } from 'react-native-paper';
+import RegisterCard from '../screens/Register/components/RegisterCard'
+
 
 const LeavePage = (props) => {
   useEffect(() => {
@@ -94,18 +98,48 @@ class EnterShift extends React.Component {
     if (this.state.currentForm == 0) {
       form = (
         <>
-          <Text style={styles.text}>Where are you bartending?</Text>
+        <View
+            style={{
+            flex: 2,
+          }}
+          />
           <View
             style={{
-              backgroundColor: 'grey',
-              height: 200,
-              width: '100%',
-              padding: 30,
-            }}
+            flex: 1,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center', 
+          }}
           >
-            {/* need to pass method as props to this component to pass state up */}
-            <GooglePlacesInput selectLocation={this.selectLocation} />
+            <Card
+              style={{
+                width: '80%',
+              }}
+            >
+              <Card.Content
+                style={{
+                  gap: 16,
+                }}
+              >
+                <PaperText>Where are you bartending?</PaperText>
+                <Button
+                  title="Next"
+                  style={styles.text}
+                  onPress={this.pageForward}
+                />
+              </Card.Content>
+            </Card>
           </View>
+          <View 
+            style={{
+            flex: 3,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center', 
+          }}
+          >
+              <GooglePlacesInput selectLocation={this.selectLocation} />
+              </View>
         </>
       );
     } else if (this.state.currentForm == 1) {
@@ -129,85 +163,62 @@ class EnterShift extends React.Component {
     } else if (this.state.currentForm == 3) {
       form = (
         <>
-          <Text style={styles.text}>How many hours is your shift?</Text>
-          <Picker
-            selectedValue={this.state.hours}
-            style={{ height: 300, width: '100%' }}
-            onValueChange={(itemValue, itemIndex) =>
-              this.selectHours(itemValue)
+          <RegisterCard
+            description={
+              "Any specials or events?"
             }
-          >
-            <Picker.Item label="4" value="4" />
-            <Picker.Item label="5" value="5" />
-            <Picker.Item label="6" value="6" />
-            <Picker.Item label="7" value="7" />
-            <Picker.Item label="8" value="8" />
-            <Picker.Item label="9" value="9" />
-            <Picker.Item label="10" value="10" />
-            <Picker.Item label="11" value="11" />
-            <Picker.Item label="11" value="11" />
-            <Picker.Item label="12" value="12" />
-            <Picker.Item label="13" value="13" />
-          </Picker>
-        </>
-      );
-    } else if (this.state.currentForm == 4) {
-      form = (
-        <>
-          <Text style={styles.text}>Any specials or events?</Text>
-          <View
-            style={{
-              backgroundColor: 'grey',
-              height: 200,
-              width: '100%',
-              padding: 30,
-            }}
-          >
+            inputs={
+              <>
             <TextInput
               multiline={true}
-              style={{
-                backgroundColor: 'white',
-                height: 100,
-                width: '100%',
-                padding: 8,
-              }}
+              // style={{
+              //   backgroundColor: 'white',
+              //   height: 100,
+              //   width: '100%',
+              //   padding: 8,
+              // }}
               numberOfLines={4}
               placeholder="Beer Pong out back! Half off hot wings!"
               onChangeText={(text) => this.setState({ notes: text })}
               value={this.state.notes}
             />
-          </View>
+              </>
+            }
+            buttons={
+              <>
+                <Button
+                  title="Next"
+                  style={styles.text}
+                  onPress={this.pageForward}
+                />
+              </>
+            }
+          />
         </>
+      );
+    }
+    if (this.state.currentForm == 4) {
+      form = (
+          <RegisterCard
+            description={
+              "Will you have the same shift each week?"
+            }
+            buttons={
+              <>
+                <Button
+                  title="I don't normally work at this time"
+                  onPress={this.specialShift}
+                />
+                <Button
+                  title="This is when I normally work"
+                  onPress={this.regularShift}
+                />
+              </>
+            }
+          />
       );
     }
     if (this.state.currentForm == 5) {
-      form = (
-        <>
-          <Text style={styles.text}>
-            Will you have the same shift each week?
-          </Text>
-          <View
-            style={{
-              backgroundColor: 'white',
-              height: 200,
-              width: '100%',
-              padding: 30,
-            }}
-          >
-            <Button
-              title="I don't normally work at this time"
-              onPress={this.specialShift}
-            />
-            <Button
-              title="This is when I normally work"
-              onPress={this.regularShift}
-            />
-          </View>
-        </>
-      );
-    }
-    if (this.state.currentForm == 6) {
-      console.log(this.state);
       this.props.client
         .mutate({
           mutation: CREATE_SHIFT,
@@ -215,7 +226,7 @@ class EnterShift extends React.Component {
             notes: this.state.notes,
             barName: this.state.location['barName'],
             address: this.state.location['address'],
-            duration: parseInt(this.state.hours),
+            duration: 8,
             latitude: this.state.location['latitude'],
             longitude: this.state.location['longitude'],
             startTime: this.state.startTime,
@@ -241,21 +252,7 @@ class EnterShift extends React.Component {
           resizeMode="cover"
           style={styles.image}
         >
-          <View
-            style={{
-              backgroundColor: 'white',
-              margin: 10,
-              borderRadius: 40,
-              overflow: 'hidden',
-            }}
-          >
             {form}
-            <Button
-              title="Next"
-              style={styles.text}
-              onPress={this.pageForward}
-            />
-          </View>
         </ImageBackground>
       </View>
     );

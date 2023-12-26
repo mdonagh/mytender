@@ -40,7 +40,10 @@ class GooglePlacesInput extends React.Component {
         }}
         styles={{
           textInputContainer: {
-            width: 300,
+            width: '80%'
+          },
+          textInput: {
+            width: '80%'
           },
           description: {
             fontWeight: 'bold',
